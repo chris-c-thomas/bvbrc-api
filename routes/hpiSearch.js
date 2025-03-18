@@ -1,144 +1,36 @@
 /**
  * @swagger
- * /your-endpoint:
+ * /hpi/search:
  *   get:
- *     summary: Short description of the endpoint
- *     description: Longer explanation of what this endpoint does
+ *     summary: Search HPI data
+ *     description: Fetches data from the HPI search API using a search term.
  *     parameters:
  *       - in: query
- *         name: param1
+ *         name: term
  *         required: false
- *         description: Description of param1
+ *         description: Search term for querying HPI data.
  *         schema:
  *           type: string
  *     responses:
  *       200:
- *         description: Successfully retrieved data
+ *         description: Successfully retrieved HPI search results
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 message:
- *                   type: string
- *                   example: "Success"
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: "12345"
+ *                       name:
+ *                         type: string
+ *                         example: "Example HPI Entry"
  */
-
-/**
- * @swagger
- * /your-endpoint:
- *   post:
- *     summary: Short description of the endpoint
- *     description: Handles new data submissions
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               field1:
- *                 type: string
- *                 example: "Example value"
- *               field2:
- *                 type: number
- *                 example: 42
- *     responses:
- *       201:
- *         description: Successfully created
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: string
- *                   example: "12345"
- */
-
-/**
- * @swagger
- * /your-endpoint/{id}:
- *   put:
- *     summary: Update a specific record
- *     description: Updates a record by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The ID of the record to update
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               field1:
- *                 type: string
- *                 example: "Updated value"
- *     responses:
- *       200:
- *         description: Successfully updated
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Update successful"
- */
-
-/**
- * @swagger
- * /your-endpoint/{id}:
- *   delete:
- *     summary: Delete a specific record
- *     description: Deletes a record by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The ID of the record to delete
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Successfully deleted
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Delete successful"
- */
-/*
-
-Host-Pathogen Interaction (HPI) Search APIs
-
-Use-Case: Given a defined list of host genes/pathways/GO terms/etc, find the
-experiments (transcriptional regulation studies / genetic or small molecule
-screens / population-level evolutionary analysis /etc) supported by other BRCs
-might be of interest (i.e. yield a similar set of results)
-
-GETs
-curl 'http://localhost:3001/hpi/search'
-curl 'http://localhost:3001/hpi/search/experiment'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731/id-list/100000211'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731/id-list/100000211/ids'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731/id-list/100000211/ids?includeOrthologs='human''
-curl 'http://localhost:3001/hpi/search/api'
-
-POST
-curl -H 'Content-Type: application/json' -X POST 'http://localhost:3001/hpi/search' -d '{ "type": "gene", "idSource": "alt_locus_tag", "ids": ["NP_031402.3", "XP_011246971.1"], "threshold": 0.5, "thresholdType": "percent_matched", "organism": "Mus musculus", "additionalFlags": { "useOrthology": "false" } }'
-
-*/
 
 // import dependencies
 var express = require('express')
