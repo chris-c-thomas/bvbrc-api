@@ -1,3 +1,13 @@
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: API home
+ *     description: Returns general information about the API.
+ *     responses:
+ *       200:
+ *         description: API is running
+ */
 var express = require('express')
 var router = express.Router()
 var pkg = require('../package.json')

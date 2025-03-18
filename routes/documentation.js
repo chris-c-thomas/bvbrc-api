@@ -1,3 +1,13 @@
+/**
+ * @swagger
+ * /doc:
+ *   get:
+ *     summary: Retrieve API documentation
+ *     description: Serves API documentation in JSON format.
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved documentation
+ */
 var express = require('express')
 var router = express.Router()
 const config = require('../config')

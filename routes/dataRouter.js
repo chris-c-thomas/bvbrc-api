@@ -1,3 +1,28 @@
+/**
+ * @swagger
+ * /data:
+ *   post:
+ *     summary: Add a new dataset entry
+ *     description: Creates a new dataset entry in the API.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "New dataset"
+ *               type:
+ *                 type: string
+ *                 example: "genome"
+ *     responses:
+ *       201:
+ *         description: Successfully created dataset
+ *       400:
+ *         description: Invalid data format
+ */
 const express = require('express')
 const config = require('../config')
 const bodyParser = require('body-parser')

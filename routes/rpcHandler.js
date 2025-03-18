@@ -1,3 +1,26 @@
+/**
+ * @swagger
+ * /rpc:
+ *   post:
+ *     summary: Execute an RPC request
+ *     description: Handles remote procedure calls (RPC) for various API functions.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               method:
+ *                 type: string
+ *               params:
+ *                 type: object
+ *     responses:
+ *       200:
+ *         description: Successfully executed RPC call
+ *       400:
+ *         description: Invalid request format
+ */
 const BodyParser = require('body-parser')
 const RpcMethods = require('../rpc')
 const debug = require('debug')('p3api-server:route/rpcHandler')

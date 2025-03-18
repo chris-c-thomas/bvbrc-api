@@ -1,3 +1,31 @@
+/**
+ * @swagger
+ * /query/multi:
+ *   post:
+ *     summary: Execute multiple queries
+ *     description: Submits multiple queries to the API and returns combined results.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               queries:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     query:
+ *                       type: string
+ *                     filters:
+ *                       type: object
+ *     responses:
+ *       200:
+ *         description: Successfully executed queries
+ *       400:
+ *         description: Invalid query format
+ */
 const Express = require('express')
 const Router = Express.Router({ strict: true, mergeParams: true })
 const BodyParser = require('body-parser')

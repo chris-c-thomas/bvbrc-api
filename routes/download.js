@@ -1,3 +1,22 @@
+/**
+ * @swagger
+ * /download:
+ *   get:
+ *     summary: Download a file
+ *     description: Allows downloading files from the API using a file ID.
+ *     parameters:
+ *       - in: query
+ *         name: fileId
+ *         required: true
+ *         description: ID of the file to download
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: File downloaded successfully
+ *       404:
+ *         description: File not found
+ */
 const Express = require('express')
 const Router = Express.Router({ strict: true, mergeParams: true })
 const BodyParser = require('body-parser')

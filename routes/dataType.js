@@ -1,3 +1,20 @@
+/**
+ * @swagger
+ * /data/type:
+ *   get:
+ *     summary: Retrieve available data types
+ *     description: Returns a list of all data types available in the API.
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved data types
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ *                 example: "genome"
+ */
 var express = require('express')
 var router = express.Router({ strict: true, mergeParams: true })
 var RQLQueryParser = require('../middleware/RQLQueryParser')

@@ -1,3 +1,15 @@
+/**
+ * @swagger
+ * /indexer:
+ *   post:
+ *     summary: Trigger data indexing
+ *     description: Initiates the indexing process for the API database.
+ *     responses:
+ *       200:
+ *         description: Indexing started successfully
+ *       500:
+ *         description: Error starting indexing
+ */
 const Express = require('express')
 const Router = Express.Router({
   strict: true,

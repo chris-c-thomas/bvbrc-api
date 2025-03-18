@@ -1,3 +1,20 @@
+/**
+ * @swagger
+ * /jbrowse:
+ *   get:
+ *     summary: Retrieve JBrowse data
+ *     description: Fetches genomic visualization data for JBrowse.
+ *     parameters:
+ *       - in: query
+ *         name: genomeId
+ *         required: true
+ *         description: Genome ID for JBrowse
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved JBrowse data
+ */
 var express = require('express')
 var router = express.Router({ strict: true, mergeParams: true })
 var config = require('../config')

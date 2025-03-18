@@ -1,3 +1,22 @@
+/**
+ * @swagger
+ * /content/{id}:
+ *   get:
+ *     summary: Retrieve content by ID
+ *     description: Fetches content details based on a given ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the content
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved content
+ *       404:
+ *         description: Content not found
+ */
 const Express = require('express')
 const Router = Express.Router({ strict: true, mergeParams: true })
 const Config = require('../config')

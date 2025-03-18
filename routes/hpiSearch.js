@@ -1,25 +1,36 @@
-/*
-
-Host-Pathogen Interaction (HPI) Search APIs
-
-Use-Case: Given a defined list of host genes/pathways/GO terms/etc, find the
-experiments (transcriptional regulation studies / genetic or small molecule
-screens / population-level evolutionary analysis /etc) supported by other BRCs
-might be of interest (i.e. yield a similar set of results)
-
-GETs
-curl 'http://localhost:3001/hpi/search'
-curl 'http://localhost:3001/hpi/search/experiment'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731/id-list/100000211'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731/id-list/100000211/ids'
-curl 'http://localhost:3001/hpi/search/experiment/GSE79731/id-list/100000211/ids?includeOrthologs='human''
-curl 'http://localhost:3001/hpi/search/api'
-
-POST
-curl -H 'Content-Type: application/json' -X POST 'http://localhost:3001/hpi/search' -d '{ "type": "gene", "idSource": "alt_locus_tag", "ids": ["NP_031402.3", "XP_011246971.1"], "threshold": 0.5, "thresholdType": "percent_matched", "organism": "Mus musculus", "additionalFlags": { "useOrthology": "false" } }'
-
-*/
+/**
+ * @swagger
+ * /hpi/search:
+ *   get:
+ *     summary: Search HPI data
+ *     description: Fetches data from the HPI search API using a search term.
+ *     parameters:
+ *       - in: query
+ *         name: term
+ *         required: false
+ *         description: Search term for querying HPI data.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved HPI search results
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: "12345"
+ *                       name:
+ *                         type: string
+ *                         example: "Example HPI Entry"
+ */
 
 // import dependencies
 var express = require('express')

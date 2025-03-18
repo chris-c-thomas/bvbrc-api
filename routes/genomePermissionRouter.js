@@ -1,4 +1,23 @@
 /**
+ * @swagger
+ * /permissions/genome:
+ *   get:
+ *     summary: Check genome permissions
+ *     description: Returns access permissions for a given genome.
+ *     parameters:
+ *       - in: query
+ *         name: genomeId
+ *         required: true
+ *         description: ID of the genome
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved permissions
+ *       403:
+ *         description: Access denied
+ */
+/**
  * genomePermissionRouter
  *
  * Creates endpoint for editing genome permissions (and all associated cores)
