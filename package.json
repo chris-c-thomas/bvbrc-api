@@ -45,6 +45,8 @@
     "request-promise": "4.2.2",
     "rql": "^0.3.3",
     "solrjs": "github:BV-BRC-dependencies/solrjs",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "temp": "^0.8.3",
     "touch": "^1.0.0",
     "uuid": "^2.0.1"
@@ -62,6 +64,7 @@
     "pm2": "^4.4.0",
     "pm2-logrotate": "^2.7.0",
     "postcss": "^8.3.10",
+    "swagger-autogen": "^2.23.7",
     "tailwindcss": "^2.2.17"
   }
 }
