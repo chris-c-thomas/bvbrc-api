@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node --unhandled-rejections=strict --stack-size=65536 app.js",
+    "dev": "nodemon --exec 'npm run swagger && node app.js'",
+    "swagger": "node swagger.js",
     "test-api": "mocha -R spec tests/test-api/test.*.spec.js",
     "test-rpc": "mocha -R spec tests/test-rpc/test.*.spec.js",
     "test-media": "mocha -R spec tests/test-media/test.*.spec.js",
@@ -61,6 +63,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "mocha": "^7.2.0",
+    "nodemon": "^3.1.9",
     "pm2": "^4.4.0",
     "pm2-logrotate": "^2.7.0",
     "postcss": "^8.3.10",
