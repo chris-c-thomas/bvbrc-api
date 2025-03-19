@@ -114,8 +114,8 @@ var collections = config.get('collections')
 app.use('/indexer', indexer)
 
 // Initialize Swagger
-const specs = swaggerJSDoc(swaggerConfig);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+const swaggerDocument = require('./public/swagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
   explorer: true,
   customCss: '.swagger-ui .topbar { display: none }',
   swaggerOptions: {

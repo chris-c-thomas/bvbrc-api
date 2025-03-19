@@ -1,216 +1,424 @@
-# PATRIC Data API Tutorial
+# BV-BRC API Tutorial
 
-This document demonstrates PATRIC Data API use cases. You can use `curl` or any client software such as [Chrome plugin REST client](https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo).
+This document provides comprehensive examples for using the Bacterial and Viral Bioinformatics Resource Center (BV-BRC) API. You can use `curl` for these examples or any HTTP client software.
 
+## Table of Contents
 
+1. [Authentication](#authentication)
+2. [Basic Data Retrieval](#basic-data-retrieval)
+   - [REST Style](#rest-style)
+   - [RQL Queries](#rql-queries)
+   - [Solr Queries](#solr-queries)
+3. [Working with Specific Data Types](#working-with-specific-data-types)
+   - [Genomes](#genomes)
+   - [Genome Features](#genome-features)
+   - [Pathways](#pathways)
+   - [Taxonomy](#taxonomy)
+   - [Specialty Genes](#specialty-genes)
+   - [Protein Families](#protein-families)
+4. [Advanced Features](#advanced-features)
+   - [Faceting](#faceting)
+   - [Sorting and Pagination](#sorting-and-pagination)
+   - [Field Selection](#field-selection)
+   - [Response Format Examples](#response-format-examples)
+5. [Common Use Cases](#common-use-cases)
+   - [Getting Genome Metadata](#getting-genome-metadata)
+   - [Retrieving Genomic Sequences](#retrieving-genomic-sequences)
+   - [Searching for Antibiotic Resistance Genes](#searching-for-antibiotic-resistance-genes)
+   - [Querying Taxonomy Data](#querying-taxonomy-data)
+   - [Cross-collection Queries](#cross-collection-queries)
 
-## 1. Fetching data
+## Authentication
 
-PATRIC Data API supports REST style query, RQL and Apache Solr queries.
+To access private data or to bypass rate limits, you need to authenticate:
 
-### REST style
-
-For example, querying genome information for [Mycobacterium tuberculosis H37Rv genome](https://www.patricbrc.org/view/Genome/83332.12) will be like below (genome ID is 83332.12)
-
-```
-$ curl -H "Accept: application/json" \
--H "Content-Type: application/x-www-form-urlencoded" \
-https://www.patricbrc.org/api/genome/83332.12
-```
-
-Returns a json.
-
-```
-{"plasmids":0,"contigs":0,"publication":"9634230,12368430",,,
-"assembly_accession":"GCA_000195955.2","_version_":1552608979231703000}
-```
-
-### RQL
-
-```
-$ curl -H "Accept: application/json" \
--H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
-"https://www.patricbrc.org/api/genome/?eq(genome_id,83332.12)"
-```
-
-Returns a json, but in array. This is correct behavior, since a **query** may or may not return multiple records.
-
-```
-[{"plasmids":0,"contigs":0,"publication":"9634230,12368430",,,
-"bioproject_accession":"PRJNA224","document_type":"genome","assembly_accession":"GCA_000195955.2"}]
-```
-
-Also, please note that we have changed Content-Type to "application/**rqlquery+**www-form-urlencoded". This is how to tell API what my query type is.
-
-As we have more and more conditions or IDs, we may need to **POST** instead of GET. Here is how to do.
-
-```
-$ curl -H "Accept: application/json" \
--H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
--X POST -d "eq(genome_id,83332.12)" \
-https://www.patricbrc.org/api/genome/
+```bash
+# Get authentication token
+curl -X POST -H 'Content-Type:application/x-www-form-urlencoded' \
+  'https://user.bv-brc.org/authenticate' \
+  -d 'username=YOUR_USERNAME' -d 'password=YOUR_PASSWORD'
 ```
 
-### Apache Solr style
-
+This returns a token string:
 ```
-$ curl -H "Accept: application/json" \
--H "Content-Type: application/solrquery+x-www-form-urlencoded" \
-https://www.patricbrc.org/api/genome/?q=genome_id:83332.12
+un=user@bvbrc.org|tokenid=1c04a34e-d351-4a79-b24c-123456789abc
 ```
 
-OR
-
-```
-$ curl -H "Accept: application/json" \
--H "Content-Type: application/solrquery+x-www-form-urlencoded" \
--X POST -d "q=genome_id:83332.12" \
-https://www.patricbrc.org/api/genome/
-```
-
-This queries should return the same result to what we have using RQL.
-
-For more details on RQL operators we support, please refer [README.md](https://github.com/PATRIC3/p3_api/blob/master/README.md). 
-
-For more details on Apache solr query syntax, please refer [Standard Query Parser](https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser) from Apache Reference Guide.
-
-
-
-## 2. Faceting
-
-[Faceting](https://cwiki.apache.org/confluence/display/solr/Faceting) is a apache solr feature that allows you categories your search results. For example, if you want to know how many features exist per different annotations in Mycobacterium tuberculosis H37Rv genome, facet is the right tool for you instead you fetch all the data and count by yourself.
-
-### Solr
-
-```
-$ curl -H "Accept: application/solr+json" \
--H "Content-Type: application/solrquery+x-www-form-urlencoded" \
--X POST -d "q=genome_id:83332.12&rows=0&facet=true&facet.field=annotation&json.nl=map" \
-https://www.patricbrc.org/api/genome_feature/
+Use this token in subsequent requests:
+```bash
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -H "Authorization: Bearer un=user@bvbrc.org|tokenid=1c04a34e-d351-4a79-b24c-123456789abc" \
+  "https://www.bv-brc.org/api/genome/83332.12"
 ```
 
-Now we have a little bit different query. Let me explain one by one.
+## Basic Data Retrieval
 
-* `Accept: application/solr+json` We added **solr** to tell API that we want the original solr result. The result will be simliar to the box below, even though I trimmed a lot. (e.g  "responseHeader"). But you should be able to see it when you do curl.
-* What we used to have with `application/json` is a part of the result. "response" -> "docs". Currently this is empty because we asked so (&row=0).
-* `&facet=true&facet.field=annotation` is a way to ask faceting. In the result, "facet_counts" -> "facet_fields" -> "annotation" will return the facetted count.
-* `json.nl=map` is way of formating faceted result. With this option, you can have the result in key-value format. If you ommit it (default), your result will be in array. 
-* Endpoint changed from `/genome/` to `/genome_feature/`. This is a different core (core is term in Solr. Equivalent RDBMS table)
+### REST Style
 
+Direct resource access by ID:
+
+```bash
+# Get a specific genome by ID
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/genome/83332.12"
+
+# Get a specific genomic feature by ID
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/genome_feature/RefSeq.83332.12.NC_000962.CDS.1001.1960.fwd"
+
+# Get a specific pathway by ID
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/pathway/00010"
+```
+
+### RQL Queries
+
+Resource Query Language (RQL) provides a flexible way to query data:
+
+```bash
+# Simple equality query
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?eq(genome_id,83332.12)"
+
+# Multiple conditions with AND
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(feature_type,CDS))"
+
+# Using OR for multiple possible values
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?or(eq(genome_id,83332.12),eq(genome_id,224308.127))"
+
+# Using IN for multiple values
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?in(genome_id,(83332.12,224308.127))"
+
+# For larger queries, use POST instead of GET
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  -X POST -d "in(genome_id,(83332.12,224308.127,511145.183))" \
+  "https://www.bv-brc.org/api/genome/"
+```
+
+### Solr Queries
+
+Apache Solr query syntax provides another way to query data:
+
+```bash
+# Simple query
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/solrquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?q=genome_id:83332.12"
+
+# Multiple conditions
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/solrquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?q=genome_id:83332.12 AND feature_type:CDS"
+
+# Using POST for more complex queries
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/solrquery+x-www-form-urlencoded" \
+  -X POST -d "q=genome_id:83332.12&fq=genome_status:Complete&sort=genome_name asc&rows=10" \
+  "https://www.bv-brc.org/api/genome/"
+```
+
+## Working with Specific Data Types
+
+### Genomes
+
+```bash
+# Get all complete bacterial genomes from a specific genus
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?and(eq(genome_status,Complete),eq(genus,Escherichia))&limit(10)"
+
+# Get genomes with specific host
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?eq(host_name,Homo sapiens)&limit(10)"
+
+# Get genomes with GC content in a specific range
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?and(gt(gc_content,65),lt(gc_content,75))&limit(10)"
+```
+
+### Genome Features
+
+```bash
+# Get all CDS features from a genome
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(feature_type,CDS))&limit(10)"
+
+# Get features by product name
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),contains(product,polymerase))&limit(10)"
+
+# Get features by gene name
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(gene,rpoB))&limit(10)"
+```
+
+### Pathways
+
+```bash
+# Get all pathways for a specific genome
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/pathway/?eq(genome_id,83332.12)&limit(10)"
+
+# Get pathways by name
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/pathway/?contains(pathway_name,glycolysis)&limit(10)"
+```
+
+### Taxonomy
+
+```bash
+# Get taxonomy information for a specific taxon ID
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/taxonomy/83332"
+
+# Get all genera in a family
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/taxonomy/?and(eq(taxon_rank,genus),eq(family,Bacillaceae))&limit(50)"
+```
+
+### Specialty Genes
+
+```bash
+# Get antibiotic resistance genes
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/sp_gene/?and(eq(property,Antibiotic Resistance),eq(genome_id,83332.12))&limit(10)"
+
+# Get virulence factors
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/sp_gene/?and(eq(property,Virulence Factor),eq(genome_id,83332.12))&limit(10)"
+```
+
+### Protein Families
+
+```bash
+# Get protein families for a genome
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/protein_family/?eq(genome_id,83332.12)&limit(10)"
+
+# Get specific protein family details
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/protein_family/PGF_00000001"
+```
+
+## Advanced Features
+
+### Faceting
+
+Faceting allows you to categorize search results:
+
+```bash
+# Using Solr syntax
+curl -H "Accept: application/solr+json" \
+  -H "Content-Type: application/solrquery+x-www-form-urlencoded" \
+  -X POST -d "q=genome_id:83332.12&rows=0&facet=true&facet.field=feature_type&json.nl=map" \
+  "https://www.bv-brc.org/api/genome_feature/"
+
+# Equivalent RQL syntax
+curl -H "Accept: application/solr+json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  -X POST -d "eq(genome_id,83332.12)&facet((field,feature_type))&limit(0)&json(nl,map)" \
+  "https://www.bv-brc.org/api/genome_feature/"
+```
+
+This returns results like:
 ```json
 {
-    "responseHeader": {},
-    "response": {
-        "numFound": 9957,
-        "start": 0,
-        "docs": []
-    },
     "facet_counts": {
         "facet_fields": {
-            "annotation": {
-                "RefSeq": 5515,
-                "PATRIC": 4442,
-                "BRC1": 0
+            "feature_type": {
+                "CDS": 4000,
+                "rRNA": 3,
+                "tRNA": 45
             }
         }
     }
 }
 ```
 
-### RQL
+### Sorting and Pagination
 
-Equivalent RQL example,
+```bash
+# Sort by genome name (ascending)
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?eq(genus,Escherichia)&sort(+genome_name)&limit(10)"
 
-```
-curl -H "Accept: application/solr+json" \
--H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
--X POST -d "eq(genome_id,83332.12)&facet((field,annotation))&limit(1)&json(nl,map)" \
-https://www.patricbrc.org/api/genome_feature/
-```
+# Sort by genome size (descending)
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?eq(genus,Escherichia)&sort(-genome_length)&limit(10)"
 
-## Downloading FASTA files
-You can request nucleotide or protein FASTA formatted file with your query. For example, if you have a list of feature IDs that you want to retrieve nucleotide FASTA,
-```
-curl -H 'Accept:application/dna+fasta' -H 'Content-Type:application/rqlquery+x-www-form-urlencoded' \
-'https://www.patricbrc.org/api/genome_feature/?in(feature_id,(PATRIC.871585.3.CP002177.CDS.3486.5027.rev))&limit(25000)'
-
-or
-
-curl -H 'Accept:application/dna+fasta' -H 'Content-Type:application/rqlquery+x-www-form-urlencoded' \
--X POST 'https://beta.patricbrc.org/api/genome_feature/' \
--d 'in(feature_id,(PATRIC.871585.3.CP002177.CDS.3486.5027.rev))&limit(25000)'
-```
-Then you will get
-```
->fig|871585.3.peg.3|BDGL_000003|VBIAciCal168233_0003|   Poly(glycerol-phosphate) alpha-glucosyltransferase (EC 2.4.1.52)   [Acinetobacter calcoaceticus PHEA-2 | 871585.3]
-atgaaaactcaatatttttttttatttccaaaaattgatcaaaagaaaaatggattggtt
-tttgctcttttaaagcgcgcaaaaatattaaatgaacaattaggtattagccccacaatt
-attactactgattatgatcgctcccttgctgaaaattattggagccttattactacaaat
-ttagctcctacttcaattggctatctcaatctatatggtgattttcaaggaactcatcta
-aaactggctaataaaaaaattcatagccctatggtagaaatgtttaacagtaacatttta
-aaaactataattcctttcacctacaatcaacgttttcatgataaaaataataaaaactat
-ttgtacgaaatacggcaaaatgactctcctactttaagttatgtgaatactttcaaaaaa
-ggtgtaaaaacaggacgaattatttatgactcttatggttatcttagttgtattcaagtc
-atcaactcagaaaatcaaatgataataactgaaacttattatcatacagaaggttatcca
-gttattataaaaaactatcaactcaacgaaaagaataaaaacattgtttcaaatattttt
-ttatttaataaacaaggtgttattaatgaggtttttgatactgaatctcagcttattcag
-tattggttcctaaaaatctctcaactttataaaaatgatctgatgtatattcttatcgac
-cgtgcaattcatttctatgaaccacttagagagataaaacaagaaaacatgcgatttatt
-gggacaattcatgctacccatctaaatggccatgatattcaaaattctacaattaatcgt
-cattatcgtagctattttaaatatagtaatgaattagacgcactagtaatcttaactgaa
-cgccaaaaacaacatattcaacagcgctttggaatggaagagaaattatttgttattcca
-catatatatgaaaaatctattgaccatgtcaatttttcaaacagagacccaatgttttgc
-ttaactattgctagatatgataaagcgaaaaatttagatagcttaattagaattttcaaa
-aaagttgtagaagtaatccccaatgcttatttaaacatttatggttttggaagtgagcat
-aacttcttacaaagtcaaattgatgaacatcagttaaataaccatattaaattgatgggc
-tataatgagaatactgatgctttatataataaggcaagcttattccttttttctagccga
-tctgaaggtttcggtatggcagttttagaagccctatgccatggctgccctgtcgtgagt
-tatgacatcgattacggaccatcagacatgattaatcatgatgaaaatggctatttagtt
-acttttcaagatgaagaattatttgcacagaaagtagtttctttattaaaagatgaacac
-aaacggcttaaacttagtgaaaatgcatatgcatgtagtcgactcacagatcaaaaacaa
-tttgccctaaaatggcaagagcttttccaggctattcagtaa
+# Pagination with limit and offset
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?eq(genus,Escherichia)&limit(10,20)"
 ```
 
-Replace `Accept:application/dna+fasta` with `Accept:application/protein+fasta` if you like to retrieve protein sequence in FASTA format.
+### Field Selection
 
-## Retrieving private data with Authorization Token
-In order to access your private genome, you will need Authorization Token and send a request to API with that in header. 
-
-```
-$ curl -X POST -H 'Content-Type:application/x-www-form-urlencoded' 'https://user.patricbrc.org/authenticate' \
- -d 'username=_YOUR_USERNAME_' -d 'password=_YOUR_PASSWORD_'
-```
-
-This will return a string like
-```
-un=harry@patricbrc.org|tokenid=1c04a34e-d351-4a79-b24c-.....
+```bash
+# Select only specific fields
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?eq(genome_id,83332.12)&select(genome_id,genome_name,taxon_id,gc_content)"
 ```
 
-Then, use this token in the request. For example,
+### Response Format Examples
+
+```bash
+# JSON format (default)
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/genome/83332.12"
+
+# CSV format
+curl -H "Accept: text/csv" \
+  "https://www.bv-brc.org/api/genome/83332.12"
+
+# TSV format
+curl -H "Accept: text/tsv" \
+  "https://www.bv-brc.org/api/genome/83332.12"
+
+# Excel format
+curl -H "Accept: application/vnd.openxmlformats" -o genome.xlsx \
+  "https://www.bv-brc.org/api/genome/83332.12"
+
+# DNA FASTA format
+curl -H "Accept: application/dna+fasta" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(feature_type,CDS))&limit(5)"
+
+# Protein FASTA format
+curl -H "Accept: application/protein+fasta" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(feature_type,CDS))&limit(5)"
 ```
-$ curl -H "Accept: application/json" \
--H "Content-Type: application/x-www-form-urlencoded" \
--H "Authorization: un=harry@patricbrc.org|tokenid=1c04a34e-d351-4a79-b24c-....."
-https://www.patricbrc.org/api/genome/83332.12
 
+## Common Use Cases
+
+### Getting Genome Metadata
+
+```bash
+# Get metadata for a specific genome
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/genome/83332.12"
+
+# Get a list of genomes by taxonomy
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?and(eq(taxon_lineage_ids,83332),eq(genome_status,Complete))&limit(10)"
+
+# Get genomes with specific isolation source
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome/?and(contains(isolation_source,sputum),eq(host_name,Homo sapiens))&limit(10)"
 ```
 
-## Summary of acceptible headers
+### Retrieving Genomic Sequences
 
-### Accept
-- application/json: json formatted results
-- application/solr+json: json format, but include solr response. Use for facetting since facetted results are outside returned docs.
-- text/csv: comma seperated results
-- text/tsv: tab delimited results
-- application/vnd.openxmlformats: excel formatted results
-- application/dna+fasta: for download FASTA formatted nucleotide sequence for the queried genome features
-- application/protein+fasta: for download FASTA formatted protein sequence for the queried genome features
+```bash
+# Get nucleotide sequence for a gene
+curl -H "Accept: application/dna+fasta" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(gene,rpoB))"
 
-### Content-Type
-- application/x-www-form-urlencoded
-- application/rqlquery+x-www-form-urlencoded
-- application/solrquery+x-www-form-urlencoded
+# Get protein sequence for a gene
+curl -H "Accept: application/protein+fasta" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(gene,rpoB))"
 
-### Authorization
-- Empty string will return only public data. Use autorization token for private or public data.
+# Get all CDS sequences from a genome
+curl -H "Accept: application/dna+fasta" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/genome_feature/?and(eq(genome_id,83332.12),eq(feature_type,CDS))&limit(10)"
+```
 
+### Searching for Antibiotic Resistance Genes
+
+```bash
+# Get antibiotic resistance genes for a genome
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/sp_gene/?and(eq(property,Antibiotic Resistance),eq(genome_id,83332.12))&limit(50)"
+
+# Get antibiotic resistance genes by specific evidence
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/sp_gene/?and(eq(property,Antibiotic Resistance),eq(evidence,Literature))&limit(10)"
+
+# Get resistance genes for a specific antibiotic
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/sp_gene/?and(eq(property,Antibiotic Resistance),contains(product,rifampicin))&limit(10)"
+```
+
+### Querying Taxonomy Data
+
+```bash
+# Get taxonomy information
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/taxonomy/83332"
+
+# Get all species in a genus
+curl -H "Accept: application/json" \
+  -H "Content-Type: application/rqlquery+x-www-form-urlencoded" \
+  "https://www.bv-brc.org/api/taxonomy/?and(eq(taxon_rank,species),eq(genus,Mycobacterium))&limit(100)"
+
+# Get taxonomy categories
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/taxon_category/"
+```
+
+### Cross-collection Queries
+
+```bash
+# Get genome summary for a taxon
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/summary_by_taxon/83332"
+
+# Get distinct values for a field
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/distinct/genome/host_name?q=*:*"
+
+# Get subsystem summary for a genome
+curl -H "Accept: application/json" \
+  "https://www.bv-brc.org/api/subsystem_summary/83332.12"
+```
+
+## Summary of Header Options
+
+### Accept Headers
+- `application/json`: JSON formatted results
+- `application/solr+json`: JSON format with full Solr response (includes facets)
+- `text/csv`: Comma-separated values
+- `text/tsv`: Tab-delimited values
+- `application/vnd.openxmlformats`: Excel format
+- `application/dna+fasta`: DNA sequences in FASTA format
+- `application/protein+fasta`: Protein sequences in FASTA format
+
+### Content-Type Headers
+- `application/x-www-form-urlencoded`: Standard form encoding
+- `application/rqlquery+x-www-form-urlencoded`: For RQL queries
+- `application/solrquery+x-www-form-urlencoded`: For Solr queries
+
+### Authorization Header
+- For authenticated requests: `Authorization: Bearer un=user@bvbrc.org|tokenid=1c04a34e-d351-4a79-b24c-123456789abc`

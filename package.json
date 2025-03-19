@@ -14,7 +14,7 @@
     "test-permissions": "mocha -R spec  \"tests/test-permissions/**/*.spec.js\"",
     "build-css": "npx postcss public/css/docs.css -o public/css/compiled.css",
     "build-image": "./buildImage.sh",
-    "generate-docs": "swagger-jsdoc -d swagger-config.js -o public/swagger.json",
+    "generate-docs": "swagger-cli bundle openapi.yaml -o public/swagger.json",
     "validate-docs": "swagger-cli validate public/swagger.json",
     "generate-schemas": "node tools/generate-openapi-schemas.js",
     "generate-paths": "node tools/generate-openapi-paths.js",
@@ -52,7 +52,8 @@
     "solrjs": "github:BV-BRC-dependencies/solrjs",
     "temp": "^0.8.3",
     "touch": "^1.0.0",
-    "uuid": "^2.0.1"
+    "uuid": "^2.0.1",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.7",

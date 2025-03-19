@@ -2,7 +2,7 @@
  * Swagger configuration file
  */
 module.exports = {
-  definition: {
+  swaggerDefinition: {
     openapi: '3.0.3',
     info: {
       title: 'BV-BRC API',

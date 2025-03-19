@@ -1,0 +1,1440 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "BV-BRC API",
+    "description": "Bacterial and Viral Bioinformatics Resource Center (BV-BRC) API provides access to various bioinformatics data \nincluding genomes, features, annotations, and more. This API supports multiple query formats including REST, \nRQL (Resource Query Language), and Apache Solr queries.\n",
+    "version": "1.9.2",
+    "contact": {
+      "name": "BV-BRC Support",
+      "url": "https://www.bv-brc.org/contact"
+    },
+    "license": {
+      "name": "BSD-3-Clause"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://www.bv-brc.org/api",
+      "description": "Production API server"
+    },
+    {
+      "url": "https://www.bv-brc.org/api/dev",
+      "description": "Development API server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "genome",
+      "description": "Access to genome data"
+    },
+    {
+      "name": "genome_feature",
+      "description": "Access to genomic features"
+    },
+    {
+      "name": "pathway",
+      "description": "Access to pathway data"
+    },
+    {
+      "name": "specialty_gene",
+      "description": "Access to specialty gene data"
+    },
+    {
+      "name": "taxonomy",
+      "description": "Access to taxonomic data"
+    },
+    {
+      "name": "protein_family",
+      "description": "Access to protein family data"
+    },
+    {
+      "name": "protein_structure",
+      "description": "Access to protein structure data"
+    },
+    {
+      "name": "subsystem",
+      "description": "Access to subsystem data"
+    },
+    {
+      "name": "antibiotics",
+      "description": "Access to antibiotics data"
+    },
+    {
+      "name": "bioset",
+      "description": "Access to bioset (transcriptomics) data"
+    },
+    {
+      "name": "authentication",
+      "description": "Authentication endpoints"
+    },
+    {
+      "name": "utilities",
+      "description": "Utility endpoints"
+    }
+  ],
+  "paths": {
+    "/authenticate": {
+      "post": {
+        "summary": "Authenticate user",
+        "description": "Authenticates a user and returns a token to be used for subsequent API calls",
+        "tags": [
+          "authentication"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "User's username or email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "User's password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authentication successful",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "un=user@example.com|tokenid=1c04a34e-d351-4a79-b24c-123456789abc"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genome/{genome_id}": {
+      "get": {
+        "summary": "Get a genome by ID",
+        "description": "Returns detailed information about a specific genome",
+        "tags": [
+          "genome"
+        ],
+        "parameters": [
+          {
+            "name": "genome_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "83332.12"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Genome details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genome"
+                },
+                "example": {
+                  "genome_id": "83332.12",
+                  "genome_name": "Mycobacterium tuberculosis H37Rv",
+                  "taxon_id": 83332,
+                  "assembly_accession": "GCA_000195955.2"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genome not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "status": 404,
+                  "message": "Not Found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genome/": {
+      "get": {
+        "summary": "Query genomes using RQL",
+        "description": "Query genomes using Resource Query Language (RQL). \n\nRQL allows for flexible querying of genomes based on various properties.\n\nExamples:\n- `/genome/?eq(genome_id,83332.12)` - Get genome with ID 83332.12\n- `/genome/?in(genome_name,(Escherichia*,Salmonella*))&gt(genome_length,5000000)` - Get all Escherichia and Salmonella genomes with length > 5,000,000 bp\n- `/genome/?and(eq(genome_status,Complete),eq(host_name,Homo sapiens))` - Get complete genomes from human hosts\n",
+        "tags": [
+          "genome"
+        ],
+        "parameters": [
+          {
+            "name": "rql",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eq(genome_id,83332.12)",
+            "description": "RQL query string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 25000
+            },
+            "description": "Maximum number of records to return"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "+genome_id",
+            "description": "Field to sort by, with + for ascending or - for descending"
+          },
+          {
+            "name": "select",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "genome_id,genome_name,taxon_id",
+            "description": "Comma-separated list of fields to include in the response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Genome"
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/tsv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/vnd.openxmlformats": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Query genomes",
+        "description": "Query genomes using RQL or Solr syntax. \n\nThis endpoint supports both RQL and Solr query formats through different content types.\n\nFor RQL queries, use content type `application/rqlquery+x-www-form-urlencoded`.\nFor Solr queries, use content type `application/solrquery+x-www-form-urlencoded`.\n\nExamples:\n- RQL: `eq(genome_id,83332.12)`\n- Solr: `q=genome_id:83332.12`\n",
+        "tags": [
+          "genome"
+        ],
+        "requestBody": {
+          "content": {
+            "application/rqlquery+x-www-form-urlencoded": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "eq(genome_id,83332.12)"
+            },
+            "application/solrquery+x-www-form-urlencoded": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "q=genome_id:83332.12"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Genome"
+                  }
+                }
+              },
+              "application/solr+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object"
+                    },
+                    "response": {
+                      "type": "object"
+                    },
+                    "facet_counts": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/tsv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/vnd.openxmlformats": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/dna+fasta": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/protein+fasta": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genome_feature/{feature_id}": {
+      "get": {
+        "summary": "Get a genome feature by ID",
+        "description": "Returns detailed information about a specific genomic feature",
+        "tags": [
+          "genome_feature"
+        ],
+        "parameters": [
+          {
+            "name": "feature_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "RefSeq.1001732.3.AKUQ01000008.CDS.655540.656001.rev"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Feature details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenomeFeature"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Feature not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genome_feature/": {
+      "get": {
+        "summary": "Query genome features",
+        "description": "Query genome features using RQL.\n\nExamples:\n- `/genome_feature/?eq(genome_id,83332.12)` - Get all features for genome 83332.12\n- `/genome_feature/?eq(feature_type,CDS)&eq(annotation,PATRIC)` - Get all PATRIC-annotated CDS features\n- `/genome_feature/?and(eq(genome_id,83332.12),eq(gene,rpoB))` - Get feature with gene name 'rpoB' in genome 83332.12\n",
+        "tags": [
+          "genome_feature"
+        ],
+        "parameters": [
+          {
+            "name": "rql",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eq(genome_id,83332.12)",
+            "description": "RQL query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenomeFeature"
+                  }
+                }
+              },
+              "application/dna+fasta": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/protein+fasta": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/tsv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/vnd.openxmlformats": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Query genome features",
+        "description": "Query genome features using RQL or Solr syntax.\n\nThis endpoint supports both RQL and Solr query formats through different content types.\n\nFor RQL queries, use content type `application/rqlquery+x-www-form-urlencoded`.\nFor Solr queries, use content type `application/solrquery+x-www-form-urlencoded`.\n\nExamples:\n- RQL: `eq(genome_id,83332.12)`\n- Solr: `q=genome_id:83332.12`\n",
+        "tags": [
+          "genome_feature"
+        ],
+        "requestBody": {
+          "content": {
+            "application/rqlquery+x-www-form-urlencoded": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "eq(genome_id,83332.12)"
+            },
+            "application/solrquery+x-www-form-urlencoded": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "q=genome_id:83332.12"
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenomeFeature"
+                  }
+                }
+              },
+              "application/solr+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "responseHeader": {
+                      "type": "object"
+                    },
+                    "response": {
+                      "type": "object"
+                    },
+                    "facet_counts": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "application/dna+fasta": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/protein+fasta": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/tsv": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/vnd.openxmlformats": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pathway/{pathway_id}": {
+      "get": {
+        "summary": "Get a pathway by ID",
+        "description": "Returns detailed information about a specific pathway",
+        "tags": [
+          "pathway"
+        ],
+        "parameters": [
+          {
+            "name": "pathway_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "00010"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pathway details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pathway"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pathway not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pathway/": {
+      "get": {
+        "summary": "Query pathways",
+        "description": "Query pathways using RQL",
+        "tags": [
+          "pathway"
+        ],
+        "parameters": [
+          {
+            "name": "rql",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eq(pathway_id,00010)",
+            "description": "RQL query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pathway"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/taxonomy/{taxon_id}": {
+      "get": {
+        "summary": "Get a taxonomy entry by ID",
+        "description": "Returns detailed information about a specific taxon",
+        "tags": [
+          "taxonomy"
+        ],
+        "parameters": [
+          {
+            "name": "taxon_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "83332"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Taxonomy details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Taxonomy"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Taxonomy not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/taxonomy/": {
+      "get": {
+        "summary": "Query taxonomy",
+        "description": "Query taxonomy using RQL",
+        "tags": [
+          "taxonomy"
+        ],
+        "parameters": [
+          {
+            "name": "rql",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eq(taxon_name,Mycobacterium tuberculosis)",
+            "description": "RQL query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Taxonomy"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specialty_gene/{id}": {
+      "get": {
+        "summary": "Get a specialty gene by ID",
+        "description": "Returns detailed information about a specific specialty gene",
+        "tags": [
+          "specialty_gene"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "SP1234"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specialty gene details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecialtyGene"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specialty gene not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specialty_gene/": {
+      "get": {
+        "summary": "Query specialty genes",
+        "description": "Query specialty genes using RQL",
+        "tags": [
+          "specialty_gene"
+        ],
+        "parameters": [
+          {
+            "name": "rql",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eq(property,Antibiotic Resistance)",
+            "description": "RQL query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecialtyGene"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protein_family/{id}": {
+      "get": {
+        "summary": "Get a protein family by ID",
+        "description": "Returns detailed information about a specific protein family",
+        "tags": [
+          "protein_family"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "PGF_00000001"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Protein family details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProteinFamily"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Protein family not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/protein_family/": {
+      "get": {
+        "summary": "Query protein families",
+        "description": "Query protein families using RQL",
+        "tags": [
+          "protein_family"
+        ],
+        "parameters": [
+          {
+            "name": "rql",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "eq(family_type,local)",
+            "description": "RQL query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProteinFamily"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subsystem_summary/{genome_id}": {
+      "get": {
+        "summary": "Get subsystem summary for a genome",
+        "description": "Returns a hierarchical summary of subsystems for a specific genome",
+        "tags": [
+          "subsystem"
+        ],
+        "parameters": [
+          {
+            "name": "genome_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "83332.12"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subsystem summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SubsystemSummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Genome not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/taxon_category/": {
+      "get": {
+        "summary": "Get taxonomy categories",
+        "description": "Returns lists of taxonomic groups (superkingdom, order, family)",
+        "tags": [
+          "taxonomy",
+          "utilities"
+        ],
+        "responses": {
+          "200": {
+            "description": "Taxonomy categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "superkingdom": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "order": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "family": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/distinct/{collection}/{field}": {
+      "get": {
+        "summary": "Get distinct field values",
+        "description": "Returns distinct values for a specific field in a collection.\nOnly specific collection/field combinations are allowed.\n",
+        "tags": [
+          "utilities"
+        ],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "taxonomy",
+                "epitope",
+                "genome",
+                "genome_feature",
+                "sp_gene",
+                "pathway_ref",
+                "subsystem_ref",
+                "protein_feature",
+                "protein_structure",
+                "surveillance",
+                "serology",
+                "sequence_feature"
+              ]
+            },
+            "description": "The collection to query",
+            "example": "genome"
+          },
+          {
+            "name": "field",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The field to get distinct values for",
+            "example": "host_name"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Solr query to filter results",
+            "example": "*:*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Distinct values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Collection/field combination not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/summary_by_taxon/{taxon_id}": {
+      "get": {
+        "summary": "Get a summary of data by taxon ID",
+        "description": "Returns summarized counts of various data types for a specific taxon",
+        "tags": [
+          "taxonomy",
+          "utilities"
+        ],
+        "parameters": [
+          {
+            "name": "taxon_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "83332"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data summary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "unique_family": {
+                      "type": "integer"
+                    },
+                    "unique_genus": {
+                      "type": "integer"
+                    },
+                    "unique_species": {
+                      "type": "integer"
+                    },
+                    "CDS": {
+                      "type": "integer"
+                    },
+                    "mat_peptide": {
+                      "type": "integer"
+                    },
+                    "PDB": {
+                      "type": "integer"
+                    },
+                    "strains_count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Authentication token retrieved from /authenticate endpoint"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "HTTP status code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      },
+      "Genome": {
+        "type": "object",
+        "properties": {
+          "genome_id": {
+            "type": "string",
+            "description": "Unique identifier for the genome"
+          },
+          "genome_name": {
+            "type": "string",
+            "description": "Scientific name of the genome"
+          },
+          "taxon_id": {
+            "type": "integer",
+            "description": "Taxonomy identifier"
+          },
+          "genome_status": {
+            "type": "string",
+            "description": "Status of the genome (e.g., complete, WGS, etc.)"
+          },
+          "assembly_accession": {
+            "type": "string",
+            "description": "Assembly accession number"
+          },
+          "contigs": {
+            "type": "integer",
+            "description": "Number of contigs in the genome"
+          },
+          "plasmids": {
+            "type": "integer",
+            "description": "Number of plasmids in the genome"
+          },
+          "completion_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date when the genome was completed"
+          },
+          "publication": {
+            "type": "string",
+            "description": "Publication PubMed IDs, comma-separated"
+          }
+        }
+      },
+      "GenomeFeature": {
+        "type": "object",
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "description": "Unique identifier for the feature"
+          },
+          "genome_id": {
+            "type": "string",
+            "description": "Genome identifier this feature belongs to"
+          },
+          "annotation": {
+            "type": "string",
+            "description": "Annotation source (e.g., PATRIC, RefSeq)"
+          },
+          "feature_type": {
+            "type": "string",
+            "description": "Type of feature (e.g., CDS, rRNA, tRNA)"
+          },
+          "start": {
+            "type": "integer",
+            "description": "Start position in the sequence"
+          },
+          "end": {
+            "type": "integer",
+            "description": "End position in the sequence"
+          },
+          "strand": {
+            "type": "string",
+            "enum": [
+              "+",
+              "-"
+            ],
+            "description": "Strand orientation"
+          },
+          "gene": {
+            "type": "string",
+            "description": "Gene symbol"
+          },
+          "product": {
+            "type": "string",
+            "description": "Product name or description"
+          },
+          "aa_sequence": {
+            "type": "string",
+            "description": "Amino acid sequence"
+          },
+          "na_sequence": {
+            "type": "string",
+            "description": "Nucleotide sequence"
+          }
+        }
+      },
+      "Pathway": {
+        "type": "object",
+        "properties": {
+          "pathway_id": {
+            "type": "string",
+            "description": "Unique identifier for the pathway"
+          },
+          "pathway_name": {
+            "type": "string",
+            "description": "Name of the pathway"
+          },
+          "pathway_class": {
+            "type": "string",
+            "description": "Class of the pathway"
+          },
+          "annotation": {
+            "type": "string",
+            "description": "Annotation source"
+          }
+        }
+      },
+      "Taxonomy": {
+        "type": "object",
+        "properties": {
+          "taxon_id": {
+            "type": "integer",
+            "description": "NCBI Taxonomy identifier"
+          },
+          "taxon_name": {
+            "type": "string",
+            "description": "Scientific name of the taxon"
+          },
+          "taxon_rank": {
+            "type": "string",
+            "description": "Taxonomic rank (e.g., species, genus, family)"
+          },
+          "genetic_code": {
+            "type": "integer",
+            "description": "Genetic code used by this organism"
+          },
+          "parent_id": {
+            "type": "integer",
+            "description": "Parent taxon ID"
+          },
+          "lineage": {
+            "type": "string",
+            "description": "Full lineage of the taxon"
+          },
+          "lineage_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Array of taxon IDs in the lineage"
+          }
+        }
+      },
+      "SpecialtyGene": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the specialty gene"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source database"
+          },
+          "source_id": {
+            "type": "string",
+            "description": "Identifier in the source database"
+          },
+          "gene": {
+            "type": "string",
+            "description": "Gene symbol"
+          },
+          "product": {
+            "type": "string",
+            "description": "Product name or description"
+          },
+          "property": {
+            "type": "string",
+            "description": "Property (e.g., Antibiotic Resistance, Virulence Factor)"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Evidence for the annotation"
+          },
+          "genome_id": {
+            "type": "string",
+            "description": "Genome identifier this gene belongs to"
+          },
+          "feature_id": {
+            "type": "string",
+            "description": "Feature identifier this gene corresponds to"
+          }
+        }
+      },
+      "ProteinFamily": {
+        "type": "object",
+        "properties": {
+          "family_id": {
+            "type": "string",
+            "description": "Unique identifier for the protein family"
+          },
+          "family_name": {
+            "type": "string",
+            "description": "Name of the protein family"
+          },
+          "family_type": {
+            "type": "string",
+            "description": "Type of the family (e.g., local, global)"
+          },
+          "family_product": {
+            "type": "string",
+            "description": "Product or function of the family"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the family"
+          },
+          "conservation": {
+            "type": "string",
+            "description": "Conservation information"
+          },
+          "gene_count": {
+            "type": "integer",
+            "description": "Number of genes in this family"
+          },
+          "genome_count": {
+            "type": "integer",
+            "description": "Number of genomes containing this family"
+          }
+        }
+      },
+      "SubsystemSummary": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the subsystem"
+          },
+          "subsystem_count": {
+            "type": "integer",
+            "description": "Number of subsystems in this category"
+          },
+          "gene_count": {
+            "type": "integer",
+            "description": "Number of genes in this category"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubsystemSummary"
+            },
+            "description": "Child categories"
+          }
+        }
+      }
+    }
+  }
+}
