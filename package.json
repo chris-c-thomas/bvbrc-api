@@ -13,7 +13,12 @@
     "test-download": "mocha spec tests/test-download/test.spec.js",
     "test-permissions": "mocha -R spec  \"tests/test-permissions/**/*.spec.js\"",
     "build-css": "npx postcss public/css/docs.css -o public/css/compiled.css",
-    "build-image": "./buildImage.sh"
+    "build-image": "./buildImage.sh",
+    "generate-docs": "swagger-jsdoc -d swagger-config.js -o public/swagger.json",
+    "validate-docs": "swagger-cli validate public/swagger.json",
+    "generate-schemas": "node tools/generate-openapi-schemas.js",
+    "generate-paths": "node tools/generate-openapi-paths.js",
+    "build-api-docs": "npm run generate-schemas && npm run generate-docs && npm run validate-docs"
   },
   "dependencies": {
     "apicache": "^1.6.2",
@@ -62,6 +67,9 @@
     "pm2": "^4.4.0",
     "pm2-logrotate": "^2.7.0",
     "postcss": "^8.3.10",
+    "swagger-cli": "^4.0.4",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0",
     "tailwindcss": "^2.2.17"
   }
 }

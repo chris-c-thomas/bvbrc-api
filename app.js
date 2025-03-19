@@ -21,6 +21,11 @@ var indexRouter = require('./routes/index')
 var pkgJSON = require("./package.json");
 var sleep = require("sleep-promise");
 
+// Swagger UI dependencies
+var swaggerJSDoc = require('swagger-jsdoc');
+var swaggerUi = require('swagger-ui-express');
+var swaggerConfig = require('./swagger-config');
+
 
 var cors = require('cors')
 
@@ -107,6 +112,18 @@ app.use(cors({
 var collections = config.get('collections')
 
 app.use('/indexer', indexer)
+
+// Initialize Swagger
+const specs = swaggerJSDoc(swaggerConfig);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+  explorer: true,
+  customCss: '.swagger-ui .topbar { display: none }',
+  swaggerOptions: {
+    docExpansion: 'none',
+    filter: true,
+    showCommonExtensions: true
+  }
+}));
 
 app.get('/', indexRouter)
 app.use('/doc', docRouter)
