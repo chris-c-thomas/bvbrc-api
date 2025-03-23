@@ -47,6 +47,24 @@ const debug = require('debug')('p3api-server:genomePermissions')
 const conf = require('../config')
 
 const Solrjs = require('solrjs')
+/**
+ * @swagger
+ * /solr:
+ *   get:
+ *     summary: Auto-generated summary for GET solr
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /solr:
+ *   get:
+ *     summary: Auto-generated summary for GET solr
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 const SOLR_URL = conf.get('solr').url
 const request = require('request-promise')
 const Web = require('../web');
@@ -67,6 +85,24 @@ router.use(httpParams)
 router.use(authMiddleware)
 router.use(PublicDataTypes)
 
+/**
+ * @swagger
+ * /:target_id:
+ *   post:
+ *     summary: Auto-generated summary for POST /:target_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:target_id:
+ *   post:
+ *     summary: Auto-generated summary for POST /:target_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.post('/:target_id', [
   bodyParser.json({ type: ['application/json'], limit: '100mb' }),
   updatePermissions

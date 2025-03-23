@@ -28,7 +28,43 @@ var reqCounter = require('../middleware/ReqCounter')
 var httpParams = require('../middleware/http-params')
 var Limiter = require('../middleware/Limiter')
 
+/**
+ * @swagger
+ * /jbrowseAPIRoot:
+ *   get:
+ *     summary: Auto-generated summary for GET jbrowseAPIRoot
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /jbrowseAPIRoot:
+ *   get:
+ *     summary: Auto-generated summary for GET jbrowseAPIRoot
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 var apiRoot = config.get('jbrowseAPIRoot')
+/**
+ * @swagger
+ * /distributeURL:
+ *   get:
+ *     summary: Auto-generated summary for GET distributeURL
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /distributeURL:
+ *   get:
+ *     summary: Auto-generated summary for GET distributeURL
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 var distRoot = config.get('distributeURL')
 
 function generateTrackList (req, res, next) {
@@ -60,6 +96,24 @@ function generateTrackList (req, res, next) {
           'label': 'patric_id,gene',
           'color': '#17487d'
         },
+/**
+ * @swagger
+ * /type:
+ *   get:
+ *     summary: Auto-generated summary for GET type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /type:
+ *   get:
+ *     summary: Auto-generated summary for GET type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
         'glyph': 'function(feature) { return "JBrowse/View/FeatureGlyph/" + ( {"gene": "Gene", "mRNA": "ProcessedTranscript", "transcript": "ProcessedTranscript", "segmented": "Segments" }[feature.get("type")] || "Box" ) }',
         'subfeatures': true,
         'onClick': {
@@ -92,6 +146,24 @@ function generateTrackList (req, res, next) {
           'label': 'refseq_locus_tag,gene,gene_id,protein_id,feature_type',
           'color': '#4c5e22'
         },
+/**
+ * @swagger
+ * /type:
+ *   get:
+ *     summary: Auto-generated summary for GET type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /type:
+ *   get:
+ *     summary: Auto-generated summary for GET type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
         'glyph': 'function(feature) { return "JBrowse/View/FeatureGlyph/" + ( {"gene": "Gene", "mRNA": "ProcessedTranscript", "transcript": "ProcessedTranscript", "segmented": "Segments" }[feature.get("type")] || "Box" ) }',
         'subfeatures': true,
         'onClick': {
@@ -142,6 +214,24 @@ function generateSarsCov2TrackList (req, res, next) {
       {
         'category': 'Gene and Protein',
         'urlTemplate': distRoot + 'content/jbrowse/GCF_009858895.2_ASM985889v3_genomic.sorted.gff.gz',
+/**
+ * @swagger
+ * /type:
+ *   get:
+ *     summary: Auto-generated summary for GET type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /type:
+ *   get:
+ *     summary: Auto-generated summary for GET type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
         'glyph': 'function(feature) { return "JBrowse/View/FeatureGlyph/" + ( {"gene": "Gene", "mRNA": "ProcessedTranscript", "transcript": "ProcessedTranscript", "segmented": "Segments" }[feature.get("type")] || "Box" ) }',
         'key': 'RefSeq Annotation',
         'label': 'RefSeqGFF',
@@ -154,6 +244,24 @@ function generateSarsCov2TrackList (req, res, next) {
         'storeClass': 'p3/store/SeqFeatureREST',
         'style': {
           'className': 'feature3',
+/**
+ * @swagger
+ * /feature_type:
+ *   get:
+ *     summary: Auto-generated summary for GET feature_type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /feature_type:
+ *   get:
+ *     summary: Auto-generated summary for GET feature_type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
           'color': 'function(feature) { return feature.get("feature_type")=="CDS" ? "darkred" : "darkorange"; }',
           'label': 'product,protein_id,feature_type',
           'showLabels': true,
@@ -2771,6 +2879,24 @@ router.use(httpParams)
 router.use(authMiddleware)
 router.use(PublicDataTypes)
 
+/**
+ * @swagger
+ * /genome/2697049.107626/trackList:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/2697049.107626/trackList
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/2697049.107626/trackList:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/2697049.107626/trackList
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/2697049.107626/trackList', [
   function (req, res, next) {
     res.write(generateSarsCov2TrackList(req, res, next))
@@ -2778,6 +2904,24 @@ router.get('/genome/2697049.107626/trackList', [
   }
 ])
 
+/**
+ * @swagger
+ * /genome/:id/trackList:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/trackList
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/trackList:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/trackList
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/trackList', [
   function (req, res, next) {
     res.write(generateTrackList(req, res, next))
@@ -2785,6 +2929,24 @@ router.get('/genome/:id/trackList', [
   }
 ])
 
+/**
+ * @swagger
+ * /genome/:id/tracks:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/tracks
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/tracks:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/tracks
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/tracks', [
   function (req, res, next) {
     res.write('[]')
@@ -2792,6 +2954,24 @@ router.get('/genome/:id/tracks', [
   }
 ])
 
+/**
+ * @swagger
+ * /genome/:id/stats/global:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/stats/global
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/stats/global:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/stats/global
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/stats/global', [
   function (req, res, next) {
     req.call_collection = 'genome'
@@ -2820,6 +3000,24 @@ router.get('/genome/:id/stats/global', [
   }
 ])
 
+/**
+ * @swagger
+ * /genome/:id/stats/region/:sequence_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/stats/region/:sequence_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/stats/region/:sequence_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/stats/region/:sequence_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/stats/region/:sequence_id', [
   function (req, res, next) {
     var start = req.query.start || req.params.start
@@ -2860,6 +3058,24 @@ router.get('/genome/:id/stats/region/:sequence_id', [
 ])
 
 // only called when HTMLFeature track
+/**
+ * @swagger
+ * /genome/:id/stats/regionFeatureDensities/:sequence_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/stats/regionFeatureDensities/:sequence_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/stats/regionFeatureDensities/:sequence_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/stats/regionFeatureDensities/:sequence_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/stats/regionFeatureDensities/:sequence_id', [
   function (req, res, next) {
     var start = req.query.start || req.params.start
@@ -2907,6 +3123,24 @@ router.get('/genome/:id/stats/regionFeatureDensities/:sequence_id', [
   }
 ])
 
+/**
+ * @swagger
+ * /genome/:id/features/:seq_accession:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/features/:seq_accession
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/features/:seq_accession:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/features/:seq_accession
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/features/:seq_accession', [
   function (req, res, next) {
     // debug("req.params: ", req.params, "req.query: ", req.query);
@@ -3014,6 +3248,24 @@ router.get('/genome/:id/features/:seq_accession', [
   }
 ])
 
+/**
+ * @swagger
+ * /genome/:id/refseqs:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/refseqs
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/refseqs:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/refseqs
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/refseqs', [
   function (req, res, next) {
     req.call_collection = 'genome_sequence'
@@ -3048,6 +3300,24 @@ router.get('/genome/:id/refseqs', [
   }
 ])
 
+/**
+ * @swagger
+ * /genome/:id/names/:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/names/
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /genome/:id/names/:
+ *   get:
+ *     summary: Auto-generated summary for GET /genome/:id/names/
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/genome/:id/names/', [
   function (req, res, next) {
     res.json([])

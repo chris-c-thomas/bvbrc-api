@@ -25,14 +25,68 @@ const Formidable = require('formidable')
 const Uuid = require('uuid')
 const Fs = require('fs-extra')
 const Path = require('path')
+/**
+ * @swagger
+ * /queueDirectory:
+ *   get:
+ *     summary: Auto-generated summary for GET queueDirectory
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /queueDirectory:
+ *   get:
+ *     summary: Auto-generated summary for GET queueDirectory
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 const QUEUE_DIRECTORY = Config.get('queueDirectory')
 const Queue = require('file-queue').Queue
 
 const Url = require('url')
+/**
+ * @swagger
+ * /solr:
+ *   get:
+ *     summary: Auto-generated summary for GET solr
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /solr:
+ *   get:
+ *     summary: Auto-generated summary for GET solr
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 const SOLR_URL = Config.get('solr').url
 const parsedSolrUrl = Url.parse(SOLR_URL)
 
 const Http = require('http')
+/**
+ * @swagger
+ * /solr:
+ *   get:
+ *     summary: Auto-generated summary for GET solr
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /solr:
+ *   get:
+ *     summary: Auto-generated summary for GET solr
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 const solrAgentConfig = Config.get('solr').shortLiveAgent
 //const solrAgent = new Http.Agent(solrAgentConfig)
 
@@ -72,6 +126,24 @@ Fs.mkdirs(Path.join(QUEUE_DIRECTORY, 'file_data'), function (err) {
 Router.use(HttpParamsMiddleware)
 Router.use(AuthMiddleware)
 
+/**
+ * @swagger
+ * /:id:
+ *   get:
+ *     summary: Auto-generated summary for GET /:id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:id:
+ *   get:
+ *     summary: Auto-generated summary for GET /:id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 Router.get('/:id', function (req, res, next) {
   debug('Read Data from History: ', Path.join(QUEUE_DIRECTORY, 'history', req.params.id))
   Fs.readJson(Path.join(QUEUE_DIRECTORY, 'history', req.params.id), function (err, data) {
@@ -156,6 +228,24 @@ function updateHistory (id, data) {
   })
 }
 
+/**
+ * @swagger
+ * /:type:
+ *   post:
+ *     summary: Auto-generated summary for POST /:type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:type:
+ *   post:
+ *     summary: Auto-generated summary for POST /:type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 Router.post('/:type', [
   function (req, res, next) {
     if (!req.user) {
@@ -224,6 +314,24 @@ Router.post('/:type', [
 ])
 
 // fallback. return number of genomes in queue
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Auto-generated summary for GET /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Auto-generated summary for GET /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 Router.get('/', function (req, res, next) {
   queue.length((err, length) => {
     if (err) {

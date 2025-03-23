@@ -14,6 +14,24 @@ const config = require('../config')
 const APIMethodHandler = require('../middleware/APIMethodHandler')
 const documentation_data = require('./documentation_data.json')
 
+/**
+ * @swagger
+ * /publicURL:
+ *   get:
+ *     summary: Auto-generated summary for GET publicURL
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /publicURL:
+ *   get:
+ *     summary: Auto-generated summary for GET publicURL
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 var baseURL = config.get('publicURL')
 if (baseURL[baseURL.length - 1] === '/') {
   baseURL = baseURL.substring(0, baseURL.length - 1)
@@ -72,10 +90,46 @@ const render_type = (field, schema) => {
 }
 
 /* DOCs home page. */
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Auto-generated summary for GET /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Auto-generated summary for GET /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/', function (req, res) {
   res.render('documentation_home', { results: [], baseURL: baseURL, doc_data: documentation_data, config: config, request: req, title: 'Documentation Home' })
 })
 
+/**
+ * @swagger
+ * /:collection:
+ *   get:
+ *     summary: Auto-generated summary for GET /:collection
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:collection:
+ *   get:
+ *     summary: Auto-generated summary for GET /:collection
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/:collection', [
   function (req, res, next) {
     req.call_collection = req.params.collection

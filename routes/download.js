@@ -30,6 +30,24 @@ const Path = require('path')
 Router.use(HttpParamsMiddleWare)
 Router.use(AuthMiddleware)
 
+/**
+ * @swagger
+ * /*:
+ *   get:
+ *     summary: Auto-generated summary for GET *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /*:
+ *   get:
+ *     summary: Auto-generated summary for GET *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 Router.get('*', [
   function (req, res, next) {
     let url = req.url
@@ -56,6 +74,24 @@ Router.get('*', [
   }
 ])
 
+/**
+ * @swagger
+ * /*:
+ *   post:
+ *     summary: Auto-generated summary for POST *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /*:
+ *   post:
+ *     summary: Auto-generated summary for POST *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 Router.post('*', [
   BodyParser.urlencoded({ extended: true }),
   function (req, res, next) {
@@ -79,6 +115,24 @@ Router.post('*', [
 ])
 
 Router.use(function (req, res, next) {
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
   debug(`req.content-type: ${req.get('content-type')}`)
   debug(`req.query: ${req.query}`)
   debug(`req.bundleTypes: ${req.bundleTypes}`)

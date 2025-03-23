@@ -44,7 +44,43 @@ router.use(PublicDataTypes)
 
 // router.use(function(req,res,next){
 //   debug("req.path", req.path);
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 //   debug("req content-type", req.get("content-type"));
+/**
+ * @swagger
+ * /accept:
+ *   get:
+ *     summary: Auto-generated summary for GET accept
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /accept:
+ *   get:
+ *     summary: Auto-generated summary for GET accept
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 //   debug("accept", req.get("accept"));
 //   debug("req.url", req.url);
 //   debug('req.path', req.path);
@@ -59,9 +95,45 @@ router.use(function (req, res, next) {
   next()
 })
 
+/**
+ * @swagger
+ * /*:
+ *   get:
+ *     summary: Auto-generated summary for GET *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /*:
+ *   get:
+ *     summary: Auto-generated summary for GET *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('*', function (req, res, next) {
   if (req.path === '/') {
     req.call_method = 'query'
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
     var ctype = req.get('content-type')
 
     debug('ctype: ', ctype)
@@ -101,17 +173,71 @@ router.get('*', function (req, res, next) {
 })
 
 // patch/update objects
+/**
+ * @swagger
+ * /:target_id:
+ *   patch:
+ *     summary: Auto-generated summary for PATCH /:target_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:target_id:
+ *   patch:
+ *     summary: Auto-generated summary for PATCH /:target_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.patch('/:target_id', [
   bodyParser.json({ type: ['application/jsonpatch+json'], limit: '100mb' }),
   patchMiddleware
 ])
 
 // same thing as patch, but done over a post for clients that cannot issue the patch http verb
+/**
+ * @swagger
+ * /:target_id:
+ *   post:
+ *     summary: Auto-generated summary for POST /:target_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:target_id:
+ *   post:
+ *     summary: Auto-generated summary for POST /:target_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.post('/:target_id', [
   bodyParser.json({ type: ['application/jsonpatch+json'], limit: '100mb' }),
   patchMiddleware
 ])
 
+/**
+ * @swagger
+ * /*:
+ *   post:
+ *     summary: Auto-generated summary for POST *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /*:
+ *   post:
+ *     summary: Auto-generated summary for POST *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.post('*', [
   bodyParser.json({ type: ['application/jsonrpc+json'], limit: '30mb' }),
   bodyParser.json({ type: ['application/json'], limit: '30mb' }),
@@ -121,6 +247,24 @@ router.post('*', [
       next()
       return
     }
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
     var ctype = req.get('content-type')
     if (req.body.jsonrpc || (ctype === 'application/jsonrpc+json')) {
       debug('JSON RPC Request', JSON.stringify(req.body, null, 4))
@@ -165,6 +309,24 @@ router.post('*', [
     debug('Handle Form Body')
     // req.body=decodeURIComponent(req.body);
     // if (!req._body || !req.body) { debug(" No body to QUERY POST"); req.body="?keyword(*)"; } // next("route"); return }
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
     var ctype = req.get('content-type')
     req.call_method = 'query'
     req.call_params = req.body ? [req.body] : []

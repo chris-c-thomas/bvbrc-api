@@ -33,6 +33,24 @@ module.exports = [
       next()
       return
     }
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /content-type:
+ *   get:
+ *     summary: Auto-generated summary for GET content-type
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
     const ctype = req.get('content-type')
 
     if (req.body.jsonrpc || (ctype === 'application/jsonrpc+json')) {

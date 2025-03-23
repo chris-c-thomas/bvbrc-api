@@ -37,6 +37,24 @@ const Config = require('../config')
 
 async function subQuery (dataType, query, opts) {
   return httpRequest({
+/**
+ * @swagger
+ * /http_port:
+ *   get:
+ *     summary: Auto-generated summary for GET http_port
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /http_port:
+ *   get:
+ *     summary: Auto-generated summary for GET http_port
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
     port: Config.get('http_port'),
     headers: {
       'Content-Type': 'application/rqlquery+x-www-form-urlencoded',
@@ -52,6 +70,24 @@ async function subQuery (dataType, query, opts) {
 Router.use(HttpParamsMiddleware)
 Router.use(AuthMiddleware)
 
+/**
+ * @swagger
+ * /*:
+ *   post:
+ *     summary: Auto-generated summary for POST *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /*:
+ *   post:
+ *     summary: Auto-generated summary for POST *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 Router.post('*', [
   BodyParser.json({ extended: true }),
   function (req, res, next) {

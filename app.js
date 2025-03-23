@@ -10,6 +10,7 @@ var cors = require('cors');
 
 var swaggerJsdoc = require("swagger-jsdoc");
 var swaggerUi = require("swagger-ui-express");
+const fs = require("fs");
 
 var hpiSearchRouter = require('./routes/hpiSearch');
 var dataTypeRouter = require('./routes/dataType');
@@ -42,8 +43,8 @@ const listener  = app.listen(config.get('http_port') || 3001, function(){
   process.send("ready");
 });
 
-const swaggerUi = require("swagger-ui-express");
-const fs = require("fs");
+
+
 
 if (fs.existsSync("./swagger-output.json")) {
   const swaggerFile = require("./swagger-output.json");

@@ -20,6 +20,24 @@
 const Express = require('express')
 const Router = Express.Router({ strict: true, mergeParams: true })
 const Config = require('../config')
+/**
+ * @swagger
+ * /contentDirectory:
+ *   get:
+ *     summary: Auto-generated summary for GET contentDirectory
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /contentDirectory:
+ *   get:
+ *     summary: Auto-generated summary for GET contentDirectory
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 const CONTENT_FOLDER = Config.get('contentDirectory')
 const HttpParamsMiddleWare = require('../middleware/http-params')
 const Fs = require('fs-extra')
@@ -27,6 +45,24 @@ const Path = require('path')
 
 Router.use(HttpParamsMiddleWare)
 
+/**
+ * @swagger
+ * /*:
+ *   get:
+ *     summary: Auto-generated summary for GET *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /*:
+ *   get:
+ *     summary: Auto-generated summary for GET *
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 Router.get('*', function (req, res, next) {
   const file = Path.join(CONTENT_FOLDER, req.params[0])
   if (Fs.existsSync(file)) {

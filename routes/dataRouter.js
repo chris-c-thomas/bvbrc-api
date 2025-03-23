@@ -35,6 +35,24 @@ const { httpRequest } = require('../util/http')
 const debug = require('debug')('p3api-server:route/summary')
 const apicache = require('apicache')
 const redis = require('redis')
+/**
+ * @swagger
+ * /redis:
+ *   get:
+ *     summary: Auto-generated summary for GET redis
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /redis:
+ *   get:
+ *     summary: Auto-generated summary for GET redis
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 const redisOptions = config.get('redis')
 
 const cacheWithRedis = apicache.options({ redisClient: redis.createClient(redisOptions) }).middleware
@@ -44,6 +62,24 @@ router.use(httpParams)
 
 async function subQuery (dataType, query, opts) {
   return httpRequest({
+/**
+ * @swagger
+ * /http_port:
+ *   get:
+ *     summary: Auto-generated summary for GET http_port
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /http_port:
+ *   get:
+ *     summary: Auto-generated summary for GET http_port
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
     port: config.get('http_port'),
     headers: {
       'Content-Type': 'application/solrquery+x-www-form-urlencoded',
@@ -58,6 +94,24 @@ async function subQuery (dataType, query, opts) {
     })
 }
 
+/**
+ * @swagger
+ * /summary_by_taxon/:taxon_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /summary_by_taxon/:taxon_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /summary_by_taxon/:taxon_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /summary_by_taxon/:taxon_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/summary_by_taxon/:taxon_id', [
   cacheWithRedis('1 day', onlyStatus200),
   bodyParser.json({ extended: true }),
@@ -158,6 +212,24 @@ const allowed = {
   'sequence_feature': ['evidence_code', 'gene', 'sf_category', 'source', 'source_strain', 'subtype', 'taxon_id']
 }
 
+/**
+ * @swagger
+ * /distinct/:collection/:field:
+ *   get:
+ *     summary: Auto-generated summary for GET /distinct/:collection/:field
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /distinct/:collection/:field:
+ *   get:
+ *     summary: Auto-generated summary for GET /distinct/:collection/:field
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/distinct/:collection/:field', [
   bodyParser.json({ extended: true }),
   (req, res, next) => {
@@ -195,6 +267,24 @@ router.get('/distinct/:collection/:field', [
   }
 ])
 
+/**
+ * @swagger
+ * /taxon_category/:
+ *   get:
+ *     summary: Auto-generated summary for GET /taxon_category/
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /taxon_category/:
+ *   get:
+ *     summary: Auto-generated summary for GET /taxon_category/
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/taxon_category/', [
   bodyParser.json({ extended: true }),
   // preset query params
@@ -228,6 +318,24 @@ router.get('/taxon_category/', [
   media
 ])
 
+/**
+ * @swagger
+ * /subsystem_summary/:genome_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /subsystem_summary/:genome_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /subsystem_summary/:genome_id:
+ *   get:
+ *     summary: Auto-generated summary for GET /subsystem_summary/:genome_id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/subsystem_summary/:genome_id', [
   bodyParser.json({ extended: true }),
   cacheWithRedis('1 day', onlyStatus200),

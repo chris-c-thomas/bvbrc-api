@@ -51,6 +51,24 @@ const THRESHOLD_PERCENT = 'percent_matched'
 const THRESHOLD_LOG_RATIO = 'log_ratio'
 const FLAG_ORTHOLOGY = 'useOrthology'
 
+/**
+ * @swagger
+ * /distributeURL:
+ *   get:
+ *     summary: Auto-generated summary for GET distributeURL
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /distributeURL:
+ *   get:
+ *     summary: Auto-generated summary for GET distributeURL
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 var PATRIC_URL = config.get('distributeURL')
 
 router.use(httpParams)
@@ -58,6 +76,24 @@ router.use(authMiddleware)
 
 // handle GET hpi/search/
 // Not sure what to return here
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Auto-generated summary for GET /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Auto-generated summary for GET /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/', [
   bodyParser.urlencoded({ extended: true }),
   function (req, res, next) {
@@ -69,6 +105,24 @@ router.get('/', [
 // POST hpi/search/
 // Given an input set of Host IDs and match parameters, return matching experiments and ID lists
 // curl -H 'Content-Type: application/json' -X POST 'http://localhost:3001/hpi/search' -d '{ "type": "gene", "idSource": "alt_locus_tag", "ids": ["NP_031402.3", "XP_011246971.1"], "threshold": 0.5, "thresholdType": "percent_matched", "organism": "Mus musculus", "additionalFlags": { "useOrthology": "false" } }'
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     summary: Auto-generated summary for POST /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     summary: Auto-generated summary for POST /
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.post('/', [
   bodyParser.json(),
 
@@ -308,6 +362,24 @@ router.post('/', [
 
 // GET hpi/search/experiment
 // Maybe a 404 or a list of all experiment ids
+/**
+ * @swagger
+ * /experiment:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /experiment:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/experiment', [
   bodyParser.urlencoded({ extended: true }),
   function (req, res, next) {
@@ -337,6 +409,24 @@ router.get('/experiment', [
 
 // GET hpi/search/experiment/{experimentIdentifier}
 // The details of an experiment, as showin in the primary endpoint
+/**
+ * @swagger
+ * /experiment/:id:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment/:id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /experiment/:id:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment/:id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/experiment/:id', [
   bodyParser.urlencoded({ extended: true }),
 
@@ -429,6 +519,24 @@ router.get('/experiment/:id', [
 
 // GET hpi/search/experiment/{experimentIdentifier}/id-list/{listIdentifier}
 // The details of an experiment, as shown in the primary endpoint
+/**
+ * @swagger
+ * /experiment/:id/id-list/:id_list:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /experiment/:id/id-list/:id_list:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/experiment/:id/id-list/:id_list', [
   bodyParser.urlencoded({ extended: true }),
   function (req, res, next) {
@@ -479,6 +587,24 @@ router.get('/experiment/:id/id-list/:id_list', [
 // GET hpi/search/experiment/{experimentIdentifier}/id-list/{listIdentifier}/ids<?includeOrthologs='human'>
 // Return the ids for the id-list.  If the optional includeOrthologs parameter is supplied,
 // return a second column with lorthologous ids from that organism
+/**
+ * @swagger
+ * /experiment/:id/id-list/:id_list/ids:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /experiment/:id/id-list/:id_list/ids:
+ *   get:
+ *     summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/experiment/:id/id-list/:id_list/ids', [
   bodyParser.urlencoded({ extended: true }),
   function (req, res, next) {
@@ -523,6 +649,24 @@ router.get('/experiment/:id/id-list/:id_list/ids', [
 
 // GET hpi/search/api
 // Supplies information specific to this BRC's implementation of the API
+/**
+ * @swagger
+ * /api:
+ *   get:
+ *     summary: Auto-generated summary for GET /api
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
+/**
+ * @swagger
+ * /api:
+ *   get:
+ *     summary: Auto-generated summary for GET /api
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 router.get('/api', [
   bodyParser.urlencoded({ extended: true }),
   function (req, res, next) {
