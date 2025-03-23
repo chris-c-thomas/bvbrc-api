@@ -1,0 +1,1336 @@
+openapi: 3.0.0
+info:
+  title: BV-BRC Solr API
+  version: 1.0.0
+  description: Auto-generated documentation from Solr schemas
+paths:
+  /solr/transcriptomics_sample:
+    get:
+      summary: Search the transcriptomics_sample Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/transcriptomics_gene:
+    get:
+      summary: Search the transcriptomics_gene Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/transcriptomics_experiment:
+    get:
+      summary: Search the transcriptomics_experiment Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/taxonomy:
+    get:
+      summary: Search the taxonomy Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/surveillance:
+    get:
+      summary: Search the surveillance Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/subsystem_ref:
+    get:
+      summary: Search the subsystem_ref Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/subsystem:
+    get:
+      summary: Search the subsystem Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/structured_assertion:
+    get:
+      summary: Search the structured_assertion Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/strain:
+    get:
+      summary: Search the strain Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/spike_variant:
+    get:
+      summary: Search the spike_variant Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/spike_lineage:
+    get:
+      summary: Search the spike_lineage Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/sp_gene_ref:
+    get:
+      summary: Search the sp_gene_ref Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/sp_gene_evidence:
+    get:
+      summary: Search the sp_gene_evidence Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/sp_gene:
+    get:
+      summary: Search the sp_gene Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/serology:
+    get:
+      summary: Search the serology Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/sequence_feature_vt:
+    get:
+      summary: Search the sequence_feature_vt Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/sequence_feature:
+    get:
+      summary: Search the sequence_feature Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/protein_structure:
+    get:
+      summary: Search the protein_structure Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/protein_feature:
+    get:
+      summary: Search the protein_feature Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/protein_family_ref:
+    get:
+      summary: Search the protein_family_ref Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/ppi:
+    get:
+      summary: Search the ppi Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/pathway_ref:
+    get:
+      summary: Search the pathway_ref Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/pathway:
+    get:
+      summary: Search the pathway Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/misc_niaid_sgc:
+    get:
+      summary: Search the misc_niaid_sgc Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/id_ref:
+    get:
+      summary: Search the id_ref Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/genome_sequence:
+    get:
+      summary: Search the genome_sequence Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/genome_feature:
+    get:
+      summary: Search the genome_feature Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/genome_amr:
+    get:
+      summary: Search the genome_amr Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/genome:
+    get:
+      summary: Search the genome Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/gene_ontology_ref:
+    get:
+      summary: Search the gene_ontology_ref Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/feature_sequence:
+    get:
+      summary: Search the feature_sequence Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/experiment:
+    get:
+      summary: Search the experiment Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/epitope_assay:
+    get:
+      summary: Search the epitope_assay Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/epitope:
+    get:
+      summary: Search the epitope Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/enzyme_class_ref:
+    get:
+      summary: Search the enzyme_class_ref Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/bioset_result:
+    get:
+      summary: Search the bioset_result Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/bioset:
+    get:
+      summary: Search the bioset Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
+  /solr/antibiotics:
+    get:
+      summary: Search the antibiotics Solr core
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 'Solr query string (e.g., genome_id:12345)'
+          required: true
+        - in: query
+          name: fq
+          schema:
+            type: string
+          description: Filter query
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: 'Sort query (e.g., genome_name asc)'
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          description: Number of rows to return
+        - in: query
+          name: start
+          schema:
+            type: integer
+            default: 0
+          description: Start offset
+      responses:
+        '200':
+          description: Query results
