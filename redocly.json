@@ -1,0 +1,22 @@
+{
+    "theme": {
+      "colors": {
+        "primary": {
+          "main": "#2d77ff"
+        },
+        "text": {
+          "primary": "#2c3e50",
+          "secondary": "#6c757d"
+        },
+        "background": "#ffffff"
+      },
+      "typography": {
+        "fontFamily": "Inter, Roboto, sans-serif",
+        "fontSize": "14px",
+        "headings": {
+          "fontFamily": "Inter, Roboto, sans-serif",
+          "fontWeight": "600"
+        }
+      }
+    }
+  }

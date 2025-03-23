@@ -1,17 +1,16 @@
-theme:
-  openapi:
-    theme:
-      colors:
-        primary:
-          main: '#2c3e50'
-        text:
-          primary: '#2c3e50'
-          secondary: '#6c757d'
-      sidebar:
-        backgroundColor: '#ffffff'
-      rightPanel:
-        backgroundColor: '#ffffff'
-      typography:
-        fontFamily: 'Inter, Roboto, sans-serif'
-        headings:
-          fontWeight: '600'
+openapi:
+  theme:
+    colors:
+      primary:
+        main: '#2c3e50'
+      text:
+        primary: '#2c3e50'
+        secondary: '#6c757d'
+    sidebar:
+      backgroundColor: '#ffffff'
+    rightPanel:
+      backgroundColor: '#ffffff'
+    typography:
+      fontFamily: 'Inter, Roboto, sans-serif'
+      headings:
+        fontWeight: '600'

@@ -7,7 +7,7 @@ const path = require('path');
 
 const getTagFromPath = (routePath) => {
   const segments = routePath.split('/');
-  return segments[1] ? segments[1].charAt(0).toUpperCase() + segments[1].slice(1) : 'General';
+  return segments[1] ? segments[1].replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'General';
 };
 
 const options = {
@@ -20,7 +20,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3001",
+        url: "https://alpha.bv-brc.org/api",
       },
     ],
   },
@@ -99,6 +99,42 @@ const injectSolrSchemas = async () => {
 
 (async () => {
   await injectSolrSchemas();
+  
+  // Normalize collection names for tags
+  const normalizeTagName = (name) =>
+    name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  
+  const solrCollections = schemaFiles.map((file) =>
+    normalizeTagName(path.basename(path.dirname(file)))
+  );
+  
+  // Inject dynamic tag groups
+  swaggerSpec['x-tagGroups'] = [
+    {
+      name: 'Solr Collections',
+      tags: solrCollections
+    },
+    {
+      name: 'Internal API',
+      tags: ['Admin', 'Auth', 'Metrics']
+    },
+    {
+      name: 'Misc',
+      tags: ['General']
+    }
+  ];
+  
+  // Inject top-level tag metadata
+  swaggerSpec.tags = solrCollections.map((tag) => ({
+    name: tag,
+    description: `Auto-generated tag group for ${tag}`
+  }));
+  
+  swaggerSpec.info['x-logo'] = {
+    url: 'https://yourdomain.com/logo.svg',
+    altText: 'BV-BRC API'
+  };
+  
   fs.writeFileSync("./swagger-output.yaml", yaml.stringify(swaggerSpec));
 })();
 

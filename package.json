@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node --unhandled-rejections=strict --stack-size=65536 app.js",
+    "local": "node app.js",
     "dev": "nodemon --exec 'npm run swagger && node app.js'",
     "docs:swagger-js": "node swagger.js",
     "docs:export": "node scripts/export-merged-swagger.js",
     "docs:serve": "node server.js",
-    "docs:html": "npx @redocly/cli build-docs swagger-output.json -o docs/index.html --config redocly.yaml",
+"docs:html": "redocly build-docs swagger-output.json -o docs/index.html --config ./redocly.json",
     "docs:pdf": "node scripts/export-docs-pdf.js",
     "docs:export:solr": "node openapi-solr.js",
     "docs:sdk:ts": "openapi-generator generate -i swagger-output.json -g typescript-axios -o sdk/typescript-axios",
@@ -69,6 +70,7 @@
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@redocly/cli": "^1.34.0",
     "autoprefixer": "^10.3.7",
     "chai": "4.1.2",
     "eslint": "^7.8.1",

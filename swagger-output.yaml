@@ -3,8 +3,11 @@ info:
   title: BV-BRC API
   version: 1.0.0
   description: API documentation for BV-BRC
+  x-logo:
+    url: https://yourdomain.com/logo.svg
+    altText: BV-BRC API
 servers:
-  - url: http://localhost:3001
+  - url: https://alpha.bv-brc.org/api
 paths:
   "/content/{id}":
     get:
@@ -544,4 +547,129 @@ components:
     antibiotics:
       type: object
       properties: {}
-tags: []
+tags:
+  - name: Transcriptomics Sample
+    description: Auto-generated tag group for Transcriptomics Sample
+  - name: Transcriptomics Gene
+    description: Auto-generated tag group for Transcriptomics Gene
+  - name: Transcriptomics Experiment
+    description: Auto-generated tag group for Transcriptomics Experiment
+  - name: Taxonomy
+    description: Auto-generated tag group for Taxonomy
+  - name: Surveillance
+    description: Auto-generated tag group for Surveillance
+  - name: Subsystem Ref
+    description: Auto-generated tag group for Subsystem Ref
+  - name: Subsystem
+    description: Auto-generated tag group for Subsystem
+  - name: Structured Assertion
+    description: Auto-generated tag group for Structured Assertion
+  - name: Strain
+    description: Auto-generated tag group for Strain
+  - name: Spike Variant
+    description: Auto-generated tag group for Spike Variant
+  - name: Spike Lineage
+    description: Auto-generated tag group for Spike Lineage
+  - name: Sp Gene Ref
+    description: Auto-generated tag group for Sp Gene Ref
+  - name: Sp Gene Evidence
+    description: Auto-generated tag group for Sp Gene Evidence
+  - name: Sp Gene
+    description: Auto-generated tag group for Sp Gene
+  - name: Serology
+    description: Auto-generated tag group for Serology
+  - name: Sequence Feature Vt
+    description: Auto-generated tag group for Sequence Feature Vt
+  - name: Sequence Feature
+    description: Auto-generated tag group for Sequence Feature
+  - name: Protein Structure
+    description: Auto-generated tag group for Protein Structure
+  - name: Protein Feature
+    description: Auto-generated tag group for Protein Feature
+  - name: Protein Family Ref
+    description: Auto-generated tag group for Protein Family Ref
+  - name: Ppi
+    description: Auto-generated tag group for Ppi
+  - name: Pathway Ref
+    description: Auto-generated tag group for Pathway Ref
+  - name: Pathway
+    description: Auto-generated tag group for Pathway
+  - name: Misc Niaid Sgc
+    description: Auto-generated tag group for Misc Niaid Sgc
+  - name: Id Ref
+    description: Auto-generated tag group for Id Ref
+  - name: Genome Sequence
+    description: Auto-generated tag group for Genome Sequence
+  - name: Genome Feature
+    description: Auto-generated tag group for Genome Feature
+  - name: Genome Amr
+    description: Auto-generated tag group for Genome Amr
+  - name: Genome
+    description: Auto-generated tag group for Genome
+  - name: Gene Ontology Ref
+    description: Auto-generated tag group for Gene Ontology Ref
+  - name: Feature Sequence
+    description: Auto-generated tag group for Feature Sequence
+  - name: Experiment
+    description: Auto-generated tag group for Experiment
+  - name: Epitope Assay
+    description: Auto-generated tag group for Epitope Assay
+  - name: Epitope
+    description: Auto-generated tag group for Epitope
+  - name: Enzyme Class Ref
+    description: Auto-generated tag group for Enzyme Class Ref
+  - name: Bioset Result
+    description: Auto-generated tag group for Bioset Result
+  - name: Bioset
+    description: Auto-generated tag group for Bioset
+  - name: Antibiotics
+    description: Auto-generated tag group for Antibiotics
+x-tagGroups:
+  - name: Solr Collections
+    tags:
+      - Transcriptomics Sample
+      - Transcriptomics Gene
+      - Transcriptomics Experiment
+      - Taxonomy
+      - Surveillance
+      - Subsystem Ref
+      - Subsystem
+      - Structured Assertion
+      - Strain
+      - Spike Variant
+      - Spike Lineage
+      - Sp Gene Ref
+      - Sp Gene Evidence
+      - Sp Gene
+      - Serology
+      - Sequence Feature Vt
+      - Sequence Feature
+      - Protein Structure
+      - Protein Feature
+      - Protein Family Ref
+      - Ppi
+      - Pathway Ref
+      - Pathway
+      - Misc Niaid Sgc
+      - Id Ref
+      - Genome Sequence
+      - Genome Feature
+      - Genome Amr
+      - Genome
+      - Gene Ontology Ref
+      - Feature Sequence
+      - Experiment
+      - Epitope Assay
+      - Epitope
+      - Enzyme Class Ref
+      - Bioset Result
+      - Bioset
+      - Antibiotics
+  - name: Internal API
+    tags:
+      - Admin
+      - Auth
+      - Metrics
+  - name: Misc
+    tags:
+      - General
