@@ -1,22 +1,19 @@
 {
-    "theme": {
-      "colors": {
-        "primary": {
-          "main": "#2d77ff"
+  "theme": {
+    "openapi": {
+      "theme": {
+        "colors": {
+          "primary": { "main": "#2c3e50" },
+          "text": {
+            "primary": "#2c3e50",
+            "secondary": "#6c757d"
+          }
         },
-        "text": {
-          "primary": "#2c3e50",
-          "secondary": "#6c757d"
-        },
-        "background": "#ffffff"
-      },
-      "typography": {
-        "fontFamily": "Inter, Roboto, sans-serif",
-        "fontSize": "14px",
-        "headings": {
+        "typography": {
           "fontFamily": "Inter, Roboto, sans-serif",
-          "fontWeight": "600"
+          "headings": { "fontWeight": "600" }
         }
       }
     }
   }
+}

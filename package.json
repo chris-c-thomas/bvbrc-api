@@ -1,6 +1,6 @@
 {
   "name": "p3api",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "scripts": {
     "start": "node --unhandled-rejections=strict --stack-size=65536 app.js",
@@ -9,7 +9,7 @@
     "docs:swagger-js": "node swagger.js",
     "docs:export": "node scripts/export-merged-swagger.js",
     "docs:serve": "node server.js",
-"docs:html": "redocly build-docs swagger-output.json -o docs/index.html --config ./redocly.json",
+    "docs:html": "redocly build-docs swagger-output.json -o docs/index.html --config ./redocly.yaml",
     "docs:pdf": "node scripts/export-docs-pdf.js",
     "docs:export:solr": "node openapi-solr.js",
     "docs:sdk:ts": "openapi-generator generate -i swagger-output.json -g typescript-axios -o sdk/typescript-axios",

@@ -73,7 +73,9 @@ const solrTypeToOpenAPI = {
 const parseFields = async (filePath) => {
   const xml = fs.readFileSync(filePath, 'utf8');
   const result = await parser.parseStringPromise(xml);
-  const fields = result.schema.field || [];
+
+  // Correct Solr structure: result.schema.fields[0].field
+  const fields = result?.schema?.fields?.[0]?.field || [];
   const properties = {};
 
   fields.forEach(f => {
@@ -90,15 +92,71 @@ const injectSolrSchemas = async () => {
     const name = path.basename(path.dirname(file));
     const properties = await parseFields(file);
 
-    swaggerSpec.components.schemas[name] = {
-      type: 'object',
-      properties
-    };
+    // Check if properties are valid before assigning
+    if (Object.keys(properties).length > 0) {
+      swaggerSpec.components.schemas[name] = {
+        type: 'object',
+        properties
+      };
+    }
   }
 };
 
 (async () => {
   await injectSolrSchemas();
+
+  // Generate example objects from Solr field types
+  const generateExample = (properties) => {
+    const example = {};
+    for (const [key, val] of Object.entries(properties)) {
+      switch (val.type) {
+        case 'string':
+          example[key] = `${key}_example`;
+          break;
+        case 'integer':
+          example[key] = 42;
+          break;
+        case 'boolean':
+          example[key] = true;
+          break;
+        case 'number':
+          example[key] = 3.14;
+          break;
+        default:
+          example[key] = `example_${key}`;
+      }
+    }
+    return example;
+  };
+
+  // Create example map from schemas
+  const schemaExamples = {};
+  for (const [name, schema] of Object.entries(swaggerSpec.components.schemas)) {
+    if (schema.properties && Object.keys(schema.properties).length > 0) {
+      schemaExamples[name.toLowerCase()] = generateExample(schema.properties);
+    }
+  }
+
+  // Inject inline examples into matching paths
+  for (const path in swaggerSpec.paths) {
+    for (const method of Object.keys(swaggerSpec.paths[path])) {
+      const tag = getTagFromPath(path).toLowerCase();
+      if (
+        schemaExamples[tag] &&
+        swaggerSpec.paths[path][method].responses &&
+        swaggerSpec.paths[path][method].responses["200"]
+      ) {
+        swaggerSpec.paths[path][method].responses["200"].content = {
+          "application/json": {
+            schema: {
+              $ref: `#/components/schemas/${tag}`
+            },
+            example: schemaExamples[tag]
+          }
+        };
+      }
+    }
+  }
   
   // Normalize collection names for tags
   const normalizeTagName = (name) =>

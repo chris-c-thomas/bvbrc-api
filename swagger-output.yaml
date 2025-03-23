@@ -248,24 +248,81 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/experiment"
+              example:
+                &a1
+                exp_id: exp_id_example
+                study_name: study_name_example
+                study_title: study_title_example
+                study_description: study_description_example
+                study_pi: study_pi_example
+                study_institution: study_institution_example
+                exp_name: exp_name_example
+                exp_title: exp_title_example
+                exp_description: exp_description_example
+                exp_poc: exp_poc_example
+                experimenters: experimenters_example
+                public_repository: public_repository_example
+                public_identifier: public_identifier_example
+                pmid: pmid_example
+                doi: doi_example
+                exp_type: exp_type_example
+                measurement_technique: measurement_technique_example
+                detection_instrument: detection_instrument_example
+                exp_protocol: exp_protocol_example
+                organism: organism_example
+                strain: strain_example
+                taxon_id: 42
+                taxon_lineage_ids: taxon_lineage_ids_example
+                genome_id: genome_id_example
+                treatment_type: treatment_type_example
+                treatment_name: treatment_name_example
+                treatment_amount: treatment_amount_example
+                treatment_duration: treatment_duration_example
+                samples: 42
+                biosets: 42
+                additional_metadata: additional_metadata_example
+                additional_data: additional_data_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
   /experiment/:id:
     get:
       summary: Auto-generated summary for GET /experiment/:id
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/experiment"
+              example: *a1
   /experiment/:id/id-list/:id_list:
     get:
       summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/experiment"
+              example: *a1
   /experiment/:id/id-list/:id_list/ids:
     get:
       summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/experiment"
+              example: *a1
   /api:
     get:
       summary: Auto-generated summary for GET /api
@@ -337,30 +394,193 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example:
+                &a2
+                genome_id: genome_id_example
+                p2_genome_id: 42
+                genome_name: genome_name_example
+                common_name: common_name_example
+                organism_name: organism_name_example
+                other_names: other_names_example
+                taxon_id: 42
+                taxon_lineage_ids: taxon_lineage_ids_example
+                taxon_lineage_names: taxon_lineage_names_example
+                superkingdom: superkingdom_example
+                kingdom: kingdom_example
+                phylum: phylum_example
+                class: class_example
+                order: order_example
+                family: family_example
+                genus: genus_example
+                species: species_example
+                genome_status: genome_status_example
+                strain: strain_example
+                serovar: serovar_example
+                biovar: biovar_example
+                pathovar: pathovar_example
+                mlst: mlst_example
+                segment: segment_example
+                subtype: subtype_example
+                h_type: 42
+                n_type: 42
+                h1_clade_global: h1_clade_global_example
+                h1_clade_us: h1_clade_us_example
+                h3_clade: h3_clade_example
+                h5_clade: h5_clade_example
+                ph1n1_like: ph1n1_like_example
+                lineage: lineage_example
+                clade: clade_example
+                subclade: subclade_example
+                other_typing: other_typing_example
+                culture_collection: culture_collection_example
+                type_strain: type_strain_example
+                reference_genome: reference_genome_example
+                completion_date: completion_date_example
+                publication: publication_example
+                authors: authors_example
+                bioproject_accession: bioproject_accession_example
+                biosample_accession: biosample_accession_example
+                assembly_accession: assembly_accession_example
+                sra_accession: sra_accession_example
+                ncbi_project_id: ncbi_project_id_example
+                refseq_project_id: refseq_project_id_example
+                genbank_accessions: genbank_accessions_example
+                refseq_accessions: refseq_accessions_example
+                sequencing_centers: sequencing_centers_example
+                sequencing_status: sequencing_status_example
+                sequencing_platform: sequencing_platform_example
+                sequencing_depth: sequencing_depth_example
+                assembly_method: assembly_method_example
+                chromosomes: 42
+                plasmids: 42
+                segments: 42
+                contigs: 42
+                genome_length: 42
+                gc_content: 3.14
+                contig_l50: 42
+                contig_n50: 42
+                patric_cds: 42
+                refseq_cds: 42
+                trna: 42
+                rrna: 42
+                mat_peptide: 42
+                cds: 42
+                cds_ratio: 3.14
+                hypothetical_cds: 42
+                hypothetical_cds_ratio: 3.14
+                partial_cds: 42
+                partial_cds_ratio: 3.14
+                plfam_cds: 42
+                plfam_cds_ratio: 3.14
+                core_families: 42
+                core_family_ratio: 3.14
+                missing_core_family_ids: missing_core_family_ids_example
+                coarse_consistency: 3.14
+                fine_consistency: 3.14
+                checkm_completeness: 3.14
+                checkm_contamination: 3.14
+                genome_quality_flags: genome_quality_flags_example
+                genome_quality: genome_quality_example
+                nearest_genomes: nearest_genomes_example
+                outgroup_genomes: outgroup_genomes_example
+                isolation_site: isolation_site_example
+                isolation_source: isolation_source_example
+                isolation_comments: isolation_comments_example
+                collection_date: collection_date_example
+                collection_year: 42
+                season: season_example
+                isolation_country: isolation_country_example
+                state_province: state_province_example
+                geographic_group: geographic_group_example
+                geographic_location: geographic_location_example
+                latitude: latitude_example
+                longitude: longitude_example
+                altitude: altitude_example
+                depth: depth_example
+                other_environmental: other_environmental_example
+                host_name: host_name_example
+                host_common_name: host_common_name_example
+                host_scientific_name: host_scientific_name_example
+                host_gender: host_gender_example
+                host_age: host_age_example
+                host_health: host_health_example
+                host_group: host_group_example
+                lab_host: lab_host_example
+                passage: passage_example
+                body_sample_site: body_sample_site_example
+                body_sample_subsite: body_sample_subsite_example
+                other_clinical: other_clinical_example
+                antimicrobial_resistance: antimicrobial_resistance_example
+                antimicrobial_resistance_evidence: antimicrobial_resistance_evidence_example
+                phenotype: phenotype_example
+                gram_stain: gram_stain_example
+                cell_shape: cell_shape_example
+                motility: motility_example
+                sporulation: sporulation_example
+                temperature_range: temperature_range_example
+                optimal_temperature: optimal_temperature_example
+                salinity: salinity_example
+                oxygen_requirement: oxygen_requirement_example
+                habitat: habitat_example
+                disease: disease_example
+                additional_metadata: additional_metadata_example
+                comments: comments_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
   /genome/:id/trackList:
     get:
       summary: Auto-generated summary for GET /genome/:id/trackList
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /genome/:id/tracks:
     get:
       summary: Auto-generated summary for GET /genome/:id/tracks
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /genome/:id/stats/global:
     get:
       summary: Auto-generated summary for GET /genome/:id/stats/global
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /genome/:id/stats/region/:sequence_id:
     get:
       summary: Auto-generated summary for GET /genome/:id/stats/region/:sequence_id
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /genome/:id/stats/regionFeatureDensities/:sequence_id:
     get:
       summary: Auto-generated summary for GET
@@ -368,24 +588,44 @@ paths:
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /genome/:id/features/:seq_accession:
     get:
       summary: Auto-generated summary for GET /genome/:id/features/:seq_accession
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /genome/:id/refseqs:
     get:
       summary: Auto-generated summary for GET /genome/:id/refseqs
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /genome/:id/names/:
     get:
       summary: Auto-generated summary for GET /genome/:id/names/
       responses:
         "200":
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
   /query/multi:
     post:
       summary: Execute multiple queries
@@ -435,118 +675,2360 @@ components:
   schemas:
     transcriptomics_sample:
       type: object
-      properties: {}
+      properties:
+        eid:
+          type: integer
+        expid:
+          type: integer
+        accession:
+          type: string
+        pid:
+          type: string
+        pid_i:
+          type: integer
+        samples:
+          type: string
+        expname:
+          type: string
+        channels:
+          type: string
+        platform:
+          type: string
+        release_date:
+          type: string
+        pmid:
+          type: string
+        organism:
+          type: string
+        strain:
+          type: string
+        mutant:
+          type: string
+        condition:
+          type: string
+        timepoint:
+          type: string
+        expmean:
+          type: number
+        expstddev:
+          type: number
+        genes:
+          type: integer
+        sig_log_ratio:
+          type: number
+        sig_z_score:
+          type: number
+        genome_ids:
+          type: string
+        additional_metadata:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     transcriptomics_gene:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        eid:
+          type: integer
+        pid:
+          type: integer
+        genome_id:
+          type: string
+        feature_id:
+          type: string
+        alt_locus_tag:
+          type: string
+        refseq_locus_tag:
+          type: string
+        patric_id:
+          type: string
+        accession:
+          type: string
+        expname:
+          type: string
+        pmid:
+          type: string
+        organism:
+          type: string
+        strain:
+          type: string
+        mutant:
+          type: string
+        condition:
+          type: string
+        timepoint:
+          type: string
+        avg_intensity:
+          type: number
+        log_ratio:
+          type: number
+        z_score:
+          type: number
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     transcriptomics_experiment:
       type: object
-      properties: {}
+      properties:
+        eid:
+          type: string
+        eid_i:
+          type: integer
+        expid:
+          type: integer
+        accession:
+          type: string
+        institution:
+          type: string
+        pi:
+          type: string
+        author:
+          type: string
+        pmid:
+          type: string
+        release_date:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        organism:
+          type: string
+        strain:
+          type: string
+        mutant:
+          type: string
+        timeseries:
+          type: string
+        condition:
+          type: string
+        samples:
+          type: integer
+        platforms:
+          type: integer
+        genes:
+          type: integer
+        genome_ids:
+          type: string
+        additional_metadata:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     taxonomy:
       type: object
-      properties: {}
+      properties:
+        taxon_id:
+          type: string
+        taxon_id_i:
+          type: integer
+        taxon_name:
+          type: string
+        taxon_rank:
+          type: string
+        other_names:
+          type: string
+        genetic_code:
+          type: integer
+        lineage:
+          type: string
+        lineage_ids:
+          type: integer
+        lineage_names:
+          type: string
+        lineage_ranks:
+          type: string
+        parent_id:
+          type: integer
+        division:
+          type: string
+        description:
+          type: string
+        genomes:
+          type: integer
+        genomes_f:
+          type: string
+        genome_count:
+          type: integer
+        genome_length_mean:
+          type: number
+        genome_length_sd:
+          type: number
+        cds_mean:
+          type: number
+        cds_sd:
+          type: number
+        hypothetical_cds_ratio_mean:
+          type: number
+        hypothetical_cds_ratio_sd:
+          type: number
+        plfam_cds_ratio_mean:
+          type: number
+        plfam_cds_ratio_sd:
+          type: number
+        core_families:
+          type: integer
+        core_family_ids:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
     surveillance:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        taxon_lineage_ids:
+          type: string
+        project_identifier:
+          type: string
+        contributing_institution:
+          type: string
+        sample_identifier:
+          type: string
+        sample_accession:
+          type: string
+        sample_material:
+          type: string
+        sample_transport_medium:
+          type: string
+        sample_receipt_date:
+          type: string
+        submission_date:
+          type: string
+        last_update_date:
+          type: string
+        longitudinal_study:
+          type: string
+        embargo_end_date:
+          type: string
+        collector_name:
+          type: string
+        collector_institution:
+          type: string
+        contact_email_address:
+          type: string
+        collection_date:
+          type: string
+        collection_year:
+          type: string
+        collection_season:
+          type: string
+        days_elapsed_to_sample_collection:
+          type: string
+        collection_country:
+          type: string
+        collection_state_province:
+          type: string
+        collection_city:
+          type: string
+        collection_poi:
+          type: string
+        collection_latitude:
+          type: string
+        collection_longitude:
+          type: string
+        geographic_group:
+          type: string
+        pathogen_test_type:
+          type: string
+        pathogen_test_result:
+          type: string
+        pathogen_test_interpretation:
+          type: string
+        species:
+          type: string
+        pathogen_type:
+          type: string
+        subtype:
+          type: string
+        strain:
+          type: string
+        sequence_accession:
+          type: string
+        genome_id:
+          type: string
+        host_identifier:
+          type: string
+        host_id_type:
+          type: string
+        host_species:
+          type: string
+        host_common_name:
+          type: string
+        host_group:
+          type: string
+        host_sex:
+          type: string
+        host_age:
+          type: string
+        host_race:
+          type: string
+        host_ethnicity:
+          type: string
+        host_height:
+          type: string
+        host_weight:
+          type: string
+        host_habitat:
+          type: string
+        host_natural_state:
+          type: string
+        host_capture_status:
+          type: string
+        host_health:
+          type: string
+        exposure:
+          type: string
+        duration_of_exposure:
+          type: string
+        exposure_type:
+          type: string
+        use_of_personal_protective_equipment:
+          type: string
+        primary_living_situation:
+          type: string
+        nursing_home_residence:
+          type: string
+        daycare_attendance:
+          type: string
+        travel_history:
+          type: string
+        profession:
+          type: string
+        education:
+          type: string
+        pregnancy:
+          type: string
+        trimester_of_pregnancy:
+          type: string
+        breastfeeding:
+          type: string
+        hospitalized:
+          type: string
+        hospitalization_duration:
+          type: string
+        intensive_care_unit:
+          type: string
+        chest_imaging_interpretation:
+          type: string
+        ventilation:
+          type: string
+        oxygen_saturation:
+          type: string
+        ecmo:
+          type: string
+        dialysis:
+          type: string
+        disease_status:
+          type: string
+        days_elapsed_to_disease_status:
+          type: string
+        disease_severity:
+          type: string
+        alcohol_or_other_drug_dependence:
+          type: string
+        tobacco_use:
+          type: string
+        packs_per_day_for_how_many_years:
+          type: string
+        chronic_conditions:
+          type: string
+        maintenance_medication:
+          type: string
+        types_of_allergies:
+          type: string
+        influenza_like_illness_over_the_past_year:
+          type: string
+        infections_within_five_years:
+          type: string
+        human_leukocyte_antigens:
+          type: string
+        symptoms:
+          type: string
+        onset_hours:
+          type: string
+        sudden_onset:
+          type: string
+        diagnosis:
+          type: string
+        pre_visit_medications:
+          type: string
+        post_visit_medications:
+          type: string
+        treatment:
+          type: string
+        initiation_of_treatment:
+          type: string
+        duration_of_treatment:
+          type: string
+        treatment_dosage:
+          type: string
+        treatment_type:
+          type: string
+        vaccination_type:
+          type: string
+        days_elapsed_to_vaccination:
+          type: string
+        source_of_vaccine_information:
+          type: string
+        vaccine_lot_number:
+          type: string
+        vaccine_manufacturer:
+          type: string
+        vaccine_dosage:
+          type: string
+        other_vaccinations:
+          type: string
+        comments:
+          type: string
+        additional_metadata:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     subsystem_ref:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        subsystem_id:
+          type: string
+        subsystem_name:
+          type: string
+        superclass:
+          type: string
+        class:
+          type: string
+        subclass:
+          type: string
+        description:
+          type: string
+        pmid:
+          type: string
+        role_id:
+          type: string
+        role_name:
+          type: string
+        notes:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     subsystem:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        feature_id:
+          type: string
+        refseq_locus_tag:
+          type: string
+        patric_id:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        role_id:
+          type: string
+        role_name:
+          type: string
+        subsystem_id:
+          type: string
+        subsystem_name:
+          type: string
+        superclass:
+          type: string
+        class:
+          type: string
+        subclass:
+          type: string
+        active:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     structured_assertion:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        feature_id:
+          type: string
+        patric_id:
+          type: string
+        refseq_locus_tag:
+          type: string
+        source:
+          type: string
+        property:
+          type: string
+        value:
+          type: string
+        comment:
+          type: string
+        pmid:
+          type: string
+        evidence_code:
+          type: string
+        score:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     strain:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        taxon_id:
+          type: integer
+        taxon_lineage_ids:
+          type: string
+        taxon_lineage_names:
+          type: string
+        family:
+          type: string
+        genus:
+          type: string
+        species:
+          type: string
+        strain:
+          type: string
+        subtype:
+          type: string
+        h_type:
+          type: integer
+        n_type:
+          type: integer
+        genome_ids:
+          type: string
+        genbank_accessions:
+          type: string
+        segment_count:
+          type: integer
+        status:
+          type: string
+        host_group:
+          type: string
+        host_common_name:
+          type: string
+        host_name:
+          type: string
+        lab_host:
+          type: string
+        passage:
+          type: string
+        geographic_group:
+          type: string
+        isolation_country:
+          type: string
+        collection_year:
+          type: integer
+        collection_date:
+          type: string
+        season:
+          type: string
+        1_pb2:
+          type: string
+        2_pb1:
+          type: string
+        3_pa:
+          type: string
+        4_ha:
+          type: string
+        5_np:
+          type: string
+        6_na:
+          type: string
+        7_mp:
+          type: string
+        8_ns:
+          type: string
+        s:
+          type: string
+        m:
+          type: string
+        l:
+          type: string
+        other_segments:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     spike_variant:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        month:
+          type: string
+        total_isolates:
+          type: integer
+        lineage_count:
+          type: integer
+        prevalence:
+          type: number
+        growth_rate:
+          type: number
+        aa_variant:
+          type: string
+        sequence_features:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     spike_lineage:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        month:
+          type: string
+        total_isolates:
+          type: integer
+        lineage_count:
+          type: integer
+        prevalence:
+          type: number
+        growth_rate:
+          type: number
+        lineage:
+          type: string
+        sequence_features:
+          type: string
+        lineage_of_concern:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     sp_gene_ref:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        property:
+          type: string
+        source:
+          type: string
+        source_id:
+          type: string
+        gene_name:
+          type: string
+        locus_tag:
+          type: string
+        gene_id:
+          type: string
+        gi:
+          type: string
+        genus:
+          type: string
+        species:
+          type: string
+        organism:
+          type: string
+        product:
+          type: string
+        function:
+          type: string
+        classification:
+          type: string
+        antibiotics_class:
+          type: string
+        antibiotics:
+          type: string
+        pmid:
+          type: string
+        assertion:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     sp_gene_evidence:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        property:
+          type: string
+        source:
+          type: string
+        source_id:
+          type: string
+        pmid:
+          type: string
+        assertion:
+          type: string
+        classification:
+          type: string
+        specific_organism:
+          type: string
+        specific_host:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     sp_gene:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        feature_id:
+          type: string
+        alt_locus_tag:
+          type: string
+        refseq_locus_tag:
+          type: string
+        patric_id:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        property:
+          type: string
+        source:
+          type: string
+        property_source:
+          type: string
+        source_id:
+          type: string
+        organism:
+          type: string
+        function:
+          type: string
+        classification:
+          type: string
+        antibiotics_class:
+          type: string
+        antibiotics:
+          type: string
+        pmid:
+          type: string
+        assertion:
+          type: string
+        query_coverage:
+          type: integer
+        subject_coverage:
+          type: integer
+        identity:
+          type: integer
+        e_value:
+          type: string
+        same_species:
+          type: integer
+        same_genus:
+          type: integer
+        same_genome:
+          type: integer
+        evidence:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     serology:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        taxon_lineage_ids:
+          type: string
+        project_identifier:
+          type: string
+        contributing_institution:
+          type: string
+        sample_identifier:
+          type: string
+        sample_accession:
+          type: string
+        host_identifier:
+          type: string
+        host_type:
+          type: string
+        host_species:
+          type: string
+        host_common_name:
+          type: string
+        host_sex:
+          type: string
+        host_age:
+          type: string
+        host_age_group:
+          type: string
+        host_health:
+          type: string
+        collection_country:
+          type: string
+        collection_state:
+          type: string
+        collection_city:
+          type: string
+        collection_date:
+          type: string
+        collection_year:
+          type: string
+        geographic_group:
+          type: string
+        test_type:
+          type: string
+        test_antigen:
+          type: string
+        test_result:
+          type: string
+        test_interpretation:
+          type: string
+        positive_definition:
+          type: string
+        test_pathogen:
+          type: string
+        strain:
+          type: string
+        serotype:
+          type: string
+        virus_identifier:
+          type: string
+        genbank_accession:
+          type: string
+        additional_metadata:
+          type: string
+        comments:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     sequence_feature_vt:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        sf_id:
+          type: string
+        sf_name:
+          type: string
+        sf_category:
+          type: string
+        sfvt_id:
+          type: string
+        sfvt_genome_count:
+          type: string
+        sfvt_genome_ids:
+          type: string
+        sf_sequence:
+          type: string
+        sf_sequence_md5:
+          type: string
+        sfvt_sequence:
+          type: string
+        sfvt_sequence_md5:
+          type: string
+        sfvt_variations:
+          type: string
+        additional_metadata:
+          type: string
+        comments:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     sequence_feature:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        genbank_accession:
+          type: string
+        subtype:
+          type: string
+        segment:
+          type: string
+        feature_id:
+          type: string
+        patric_id:
+          type: string
+        refseq_locus_tag:
+          type: string
+        aa_sequence_md5:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        sf_id:
+          type: string
+        sf_name:
+          type: string
+        sf_category:
+          type: string
+        source:
+          type: string
+        source_id:
+          type: string
+        source_accession:
+          type: string
+        source_strain:
+          type: string
+        source_aa_sequence:
+          type: string
+        source_sf_location:
+          type: string
+        evidence_code:
+          type: string
+        publication:
+          type: string
+        start:
+          type: integer
+        end:
+          type: integer
+        segments:
+          type: string
+        length:
+          type: integer
+        sf_sequence:
+          type: string
+        sf_sequence_md5:
+          type: string
+        aa_variant:
+          type: string
+        variant_types:
+          type: string
+        additional_metadata:
+          type: string
+        comments:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     protein_structure:
       type: object
-      properties: {}
+      properties:
+        pdb_id:
+          type: string
+        title:
+          type: string
+        organism_name:
+          type: string
+        taxon_id:
+          type: integer
+        taxon_lineage_ids:
+          type: string
+        taxon_lineage_names:
+          type: string
+        genome_id:
+          type: string
+        feature_id:
+          type: string
+        patric_id:
+          type: string
+        uniprotkb_accession:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        sequence_md5:
+          type: string
+        sequence:
+          type: string
+        alignments:
+          type: string
+        method:
+          type: string
+        resolution:
+          type: string
+        pmid:
+          type: string
+        institution:
+          type: string
+        authors:
+          type: string
+        release_date:
+          type: string
+        file_path:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     protein_feature:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        feature_id:
+          type: string
+        patric_id:
+          type: string
+        refseq_locus_tag:
+          type: string
+        aa_sequence_md5:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        interpro_id:
+          type: string
+        interpro_description:
+          type: string
+        feature_type:
+          type: string
+        source:
+          type: string
+        source_id:
+          type: string
+        description:
+          type: string
+        classification:
+          type: string
+        score:
+          type: number
+        e_value:
+          type: string
+        evidence:
+          type: string
+        publication:
+          type: string
+        start:
+          type: integer
+        end:
+          type: integer
+        segments:
+          type: string
+        length:
+          type: integer
+        sequence:
+          type: string
+        comments:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     protein_family_ref:
       type: object
-      properties: {}
+      properties:
+        family_id:
+          type: string
+        family_type:
+          type: string
+        family_product:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     ppi:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        interactor_a:
+          type: string
+        interactor_type_a:
+          type: string
+        interactor_desc_a:
+          type: string
+        domain_a:
+          type: string
+        taxon_id_a:
+          type: integer
+        genome_id_a:
+          type: string
+        genome_name_a:
+          type: string
+        feature_id_a:
+          type: string
+        refseq_locus_tag_a:
+          type: string
+        gene_a:
+          type: string
+        interactor_b:
+          type: string
+        interactor_type_b:
+          type: string
+        interactor_desc_b:
+          type: string
+        domain_b:
+          type: string
+        taxon_id_b:
+          type: integer
+        genome_id_b:
+          type: string
+        genome_name_b:
+          type: string
+        feature_id_b:
+          type: string
+        refseq_locus_tag_b:
+          type: string
+        gene_b:
+          type: string
+        category:
+          type: string
+        interaction_type:
+          type: string
+        detection_method:
+          type: string
+        evidence:
+          type: string
+        pmid:
+          type: string
+        source_db:
+          type: string
+        source_id:
+          type: string
+        score:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     pathway_ref:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        pathway_id:
+          type: string
+        pathway_name:
+          type: string
+        pathway_class:
+          type: string
+        ec_number:
+          type: string
+        ec_description:
+          type: string
+        map_type:
+          type: string
+        map_name:
+          type: string
+        map_location:
+          type: string
+        occurrence:
+          type: integer
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     pathway:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        sequence_id:
+          type: string
+        accession:
+          type: string
+        annotation:
+          type: string
+        feature_id:
+          type: string
+        alt_locus_tag:
+          type: string
+        refseq_locus_tag:
+          type: string
+        patric_id:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        ec_number:
+          type: string
+        ec_description:
+          type: string
+        pathway_id:
+          type: string
+        pathway_name:
+          type: string
+        pathway_class:
+          type: string
+        genome_ec:
+          type: string
+        pathway_ec:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     misc_niaid_sgc:
       type: object
-      properties: {}
+      properties:
+        target_id:
+          type: string
+        target_status:
+          type: string
+        selection_criteria:
+          type: string
+        genus:
+          type: string
+        species:
+          type: string
+        strain:
+          type: string
+        has_clones:
+          type: string
+        has_proteins:
+          type: string
+        gene_symbol_collection:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     id_ref:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        uniprotkb_accession:
+          type: string
+        id_type:
+          type: string
+        id_value:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     genome_sequence:
       type: object
-      properties: {}
+      properties:
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        sequence_id:
+          type: string
+        p2_sequence_id:
+          type: integer
+        accession:
+          type: string
+        gi:
+          type: integer
+        sequence_type:
+          type: string
+        sequence_status:
+          type: string
+        mol_type:
+          type: string
+        topology:
+          type: string
+        description:
+          type: string
+        chromosome:
+          type: string
+        plasmid:
+          type: string
+        segment:
+          type: string
+        gc_content:
+          type: number
+        length:
+          type: integer
+        sequence_md5:
+          type: string
+        sequence:
+          type: string
+        release_date:
+          type: string
+        version:
+          type: integer
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     genome_feature:
       type: object
-      properties: {}
+      properties:
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        sequence_id:
+          type: string
+        accession:
+          type: string
+        annotation:
+          type: string
+        feature_type:
+          type: string
+        feature_id:
+          type: string
+        p2_feature_id:
+          type: integer
+        alt_locus_tag:
+          type: string
+        patric_id:
+          type: string
+        brc_id:
+          type: string
+        refseq_locus_tag:
+          type: string
+        protein_id:
+          type: string
+        gene_id:
+          type: integer
+        uniprotkb_accession:
+          type: string
+        pdb_accession:
+          type: string
+        start:
+          type: integer
+        end:
+          type: integer
+        strand:
+          type: string
+        location:
+          type: string
+        segments:
+          type: string
+        codon_start:
+          type: integer
+        na_length:
+          type: integer
+        aa_length:
+          type: integer
+        na_sequence_md5:
+          type: string
+        aa_sequence_md5:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        figfam_id:
+          type: string
+        plfam_id:
+          type: string
+        pgfam_id:
+          type: string
+        sog_id:
+          type: string
+        og_id:
+          type: string
+        go:
+          type: string
+        property:
+          type: string
+        notes:
+          type: string
+        classifier_score:
+          type: number
+        classifier_round:
+          type: integer
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     genome_amr:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        genome_id:
+          type: string
+        genome_name:
+          type: string
+        taxon_id:
+          type: integer
+        antibiotic:
+          type: string
+        resistant_phenotype:
+          type: string
+        measurement:
+          type: string
+        measurement_sign:
+          type: string
+        measurement_value:
+          type: string
+        measurement_unit:
+          type: string
+        laboratory_typing_method:
+          type: string
+        laboratory_typing_method_version:
+          type: string
+        laboratory_typing_platform:
+          type: string
+        vendor:
+          type: string
+        computational_method:
+          type: string
+        computational_method_version:
+          type: string
+        computational_method_performance:
+          type: string
+        testing_standard:
+          type: string
+        testing_standard_year:
+          type: integer
+        source:
+          type: string
+        pmid:
+          type: integer
+        evidence:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     genome:
       type: object
-      properties: {}
+      properties:
+        genome_id:
+          type: string
+        p2_genome_id:
+          type: integer
+        genome_name:
+          type: string
+        common_name:
+          type: string
+        organism_name:
+          type: string
+        other_names:
+          type: string
+        taxon_id:
+          type: integer
+        taxon_lineage_ids:
+          type: string
+        taxon_lineage_names:
+          type: string
+        superkingdom:
+          type: string
+        kingdom:
+          type: string
+        phylum:
+          type: string
+        class:
+          type: string
+        order:
+          type: string
+        family:
+          type: string
+        genus:
+          type: string
+        species:
+          type: string
+        genome_status:
+          type: string
+        strain:
+          type: string
+        serovar:
+          type: string
+        biovar:
+          type: string
+        pathovar:
+          type: string
+        mlst:
+          type: string
+        segment:
+          type: string
+        subtype:
+          type: string
+        h_type:
+          type: integer
+        n_type:
+          type: integer
+        h1_clade_global:
+          type: string
+        h1_clade_us:
+          type: string
+        h3_clade:
+          type: string
+        h5_clade:
+          type: string
+        ph1n1_like:
+          type: string
+        lineage:
+          type: string
+        clade:
+          type: string
+        subclade:
+          type: string
+        other_typing:
+          type: string
+        culture_collection:
+          type: string
+        type_strain:
+          type: string
+        reference_genome:
+          type: string
+        completion_date:
+          type: string
+        publication:
+          type: string
+        authors:
+          type: string
+        bioproject_accession:
+          type: string
+        biosample_accession:
+          type: string
+        assembly_accession:
+          type: string
+        sra_accession:
+          type: string
+        ncbi_project_id:
+          type: string
+        refseq_project_id:
+          type: string
+        genbank_accessions:
+          type: string
+        refseq_accessions:
+          type: string
+        sequencing_centers:
+          type: string
+        sequencing_status:
+          type: string
+        sequencing_platform:
+          type: string
+        sequencing_depth:
+          type: string
+        assembly_method:
+          type: string
+        chromosomes:
+          type: integer
+        plasmids:
+          type: integer
+        segments:
+          type: integer
+        contigs:
+          type: integer
+        genome_length:
+          type: integer
+        gc_content:
+          type: number
+        contig_l50:
+          type: integer
+        contig_n50:
+          type: integer
+        patric_cds:
+          type: integer
+        refseq_cds:
+          type: integer
+        trna:
+          type: integer
+        rrna:
+          type: integer
+        mat_peptide:
+          type: integer
+        cds:
+          type: integer
+        cds_ratio:
+          type: number
+        hypothetical_cds:
+          type: integer
+        hypothetical_cds_ratio:
+          type: number
+        partial_cds:
+          type: integer
+        partial_cds_ratio:
+          type: number
+        plfam_cds:
+          type: integer
+        plfam_cds_ratio:
+          type: number
+        core_families:
+          type: integer
+        core_family_ratio:
+          type: number
+        missing_core_family_ids:
+          type: string
+        coarse_consistency:
+          type: number
+        fine_consistency:
+          type: number
+        checkm_completeness:
+          type: number
+        checkm_contamination:
+          type: number
+        genome_quality_flags:
+          type: string
+        genome_quality:
+          type: string
+        nearest_genomes:
+          type: string
+        outgroup_genomes:
+          type: string
+        isolation_site:
+          type: string
+        isolation_source:
+          type: string
+        isolation_comments:
+          type: string
+        collection_date:
+          type: string
+        collection_year:
+          type: integer
+        season:
+          type: string
+        isolation_country:
+          type: string
+        state_province:
+          type: string
+        geographic_group:
+          type: string
+        geographic_location:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        altitude:
+          type: string
+        depth:
+          type: string
+        other_environmental:
+          type: string
+        host_name:
+          type: string
+        host_common_name:
+          type: string
+        host_scientific_name:
+          type: string
+        host_gender:
+          type: string
+        host_age:
+          type: string
+        host_health:
+          type: string
+        host_group:
+          type: string
+        lab_host:
+          type: string
+        passage:
+          type: string
+        body_sample_site:
+          type: string
+        body_sample_subsite:
+          type: string
+        other_clinical:
+          type: string
+        antimicrobial_resistance:
+          type: string
+        antimicrobial_resistance_evidence:
+          type: string
+        phenotype:
+          type: string
+        gram_stain:
+          type: string
+        cell_shape:
+          type: string
+        motility:
+          type: string
+        sporulation:
+          type: string
+        temperature_range:
+          type: string
+        optimal_temperature:
+          type: string
+        salinity:
+          type: string
+        oxygen_requirement:
+          type: string
+        habitat:
+          type: string
+        disease:
+          type: string
+        additional_metadata:
+          type: string
+        comments:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
+        public:
+          type: boolean
+        owner:
+          type: string
+        user_read:
+          type: string
+        user_write:
+          type: string
     gene_ontology_ref:
       type: object
-      properties: {}
+      properties:
+        go_id:
+          type: string
+        go_name:
+          type: string
+        ontology:
+          type: string
+        definition:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     feature_sequence:
       type: object
-      properties: {}
+      properties:
+        md5:
+          type: string
+        sequence_type:
+          type: string
+        sequence:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     experiment:
       type: object
-      properties: {}
+      properties:
+        exp_id:
+          type: string
+        study_name:
+          type: string
+        study_title:
+          type: string
+        study_description:
+          type: string
+        study_pi:
+          type: string
+        study_institution:
+          type: string
+        exp_name:
+          type: string
+        exp_title:
+          type: string
+        exp_description:
+          type: string
+        exp_poc:
+          type: string
+        experimenters:
+          type: string
+        public_repository:
+          type: string
+        public_identifier:
+          type: string
+        pmid:
+          type: string
+        doi:
+          type: string
+        exp_type:
+          type: string
+        measurement_technique:
+          type: string
+        detection_instrument:
+          type: string
+        exp_protocol:
+          type: string
+        organism:
+          type: string
+        strain:
+          type: string
+        taxon_id:
+          type: integer
+        taxon_lineage_ids:
+          type: string
+        genome_id:
+          type: string
+        treatment_type:
+          type: string
+        treatment_name:
+          type: string
+        treatment_amount:
+          type: string
+        treatment_duration:
+          type: string
+        samples:
+          type: integer
+        biosets:
+          type: integer
+        additional_metadata:
+          type: string
+        additional_data:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     epitope_assay:
       type: object
-      properties: {}
+      properties:
+        assay_id:
+          type: string
+        assay_type:
+          type: string
+        epitope_id:
+          type: string
+        epitope_type:
+          type: string
+        epitope_sequence:
+          type: string
+        organism:
+          type: string
+        taxon_id:
+          type: integer
+        taxon_lineage_ids:
+          type: string
+        taxon_lineage_names:
+          type: string
+        protein_name:
+          type: string
+        protein_id:
+          type: string
+        protein_accession:
+          type: string
+        pdb_id:
+          type: string
+        start:
+          type: integer
+        end:
+          type: integer
+        host_name:
+          type: string
+        host_taxon_id:
+          type: string
+        assay_group:
+          type: string
+        assay_method:
+          type: string
+        assay_result:
+          type: string
+        assay_measurement:
+          type: string
+        assay_measurement_unit:
+          type: string
+        mhc_allele:
+          type: string
+        mhc_allele_class:
+          type: string
+        pmid:
+          type: string
+        authors:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     epitope:
       type: object
-      properties: {}
+      properties:
+        epitope_id:
+          type: string
+        epitope_type:
+          type: string
+        epitope_sequence:
+          type: string
+        organism:
+          type: string
+        taxon_id:
+          type: integer
+        taxon_lineage_ids:
+          type: string
+        taxon_lineage_names:
+          type: string
+        protein_name:
+          type: string
+        protein_id:
+          type: string
+        protein_accession:
+          type: string
+        start:
+          type: integer
+        end:
+          type: integer
+        host_name:
+          type: string
+        total_assays:
+          type: integer
+        assay_results:
+          type: string
+        bcell_assays:
+          type: string
+        tcell_assays:
+          type: string
+        mhc_assays:
+          type: string
+        comments:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     enzyme_class_ref:
       type: object
-      properties: {}
+      properties:
+        ec_number:
+          type: string
+        ec_description:
+          type: string
+        go:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     bioset_result:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        exp_id:
+          type: string
+        exp_name:
+          type: string
+        exp_title:
+          type: string
+        exp_type:
+          type: string
+        bioset_id:
+          type: string
+        bioset_name:
+          type: string
+        bioset_description:
+          type: string
+        bioset_type:
+          type: string
+        result_type:
+          type: string
+        organism:
+          type: string
+        strain:
+          type: string
+        taxon_id:
+          type: integer
+        genome_id:
+          type: string
+        treatment_type:
+          type: string
+        treatment_name:
+          type: string
+        treatment_amount:
+          type: string
+        treatment_duration:
+          type: string
+        entity_type:
+          type: string
+        entity_id:
+          type: string
+        entity_name:
+          type: string
+        feature_id:
+          type: string
+        patric_id:
+          type: string
+        locus_tag:
+          type: string
+        gene_id:
+          type: string
+        protein_id:
+          type: string
+        uniprot_id:
+          type: string
+        other_ids:
+          type: string
+        gene:
+          type: string
+        product:
+          type: string
+        counts:
+          type: number
+        fpkm:
+          type: number
+        tpm:
+          type: number
+        log2_fc:
+          type: number
+        other_value:
+          type: number
+        p_value:
+          type: number
+        z_score:
+          type: number
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     bioset:
       type: object
-      properties: {}
+      properties:
+        bioset_id:
+          type: string
+        study_name:
+          type: string
+        study_title:
+          type: string
+        study_description:
+          type: string
+        study_pi:
+          type: string
+        study_institution:
+          type: string
+        exp_id:
+          type: string
+        exp_name:
+          type: string
+        exp_title:
+          type: string
+        exp_type:
+          type: string
+        bioset_name:
+          type: string
+        bioset_description:
+          type: string
+        bioset_type:
+          type: string
+        analysis_method:
+          type: string
+        bioset_criteria:
+          type: string
+        result_type:
+          type: string
+        protocol:
+          type: string
+        bioset_result:
+          type: string
+        organism:
+          type: string
+        strain:
+          type: string
+        taxon_id:
+          type: integer
+        taxon_lineage_ids:
+          type: string
+        genome_id:
+          type: string
+        analysis_group_1:
+          type: string
+        analysis_group_2:
+          type: string
+        treatment_type:
+          type: string
+        treatment_name:
+          type: string
+        treatment_amount:
+          type: string
+        treatment_duration:
+          type: string
+        entity_type:
+          type: string
+        entity_count:
+          type: string
+        additional_metadata:
+          type: string
+        additional_data:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
     antibiotics:
       type: object
-      properties: {}
+      properties:
+        pubchem_cid:
+          type: string
+        pubchem_cid_i:
+          type: integer
+        cas_id:
+          type: string
+        antibiotic_name:
+          type: string
+        synonyms:
+          type: string
+        molecular_formula:
+          type: string
+        molecular_weight:
+          type: string
+        inchi_key:
+          type: string
+        canonical_smiles:
+          type: string
+        isomeric_smiles:
+          type: string
+        description:
+          type: string
+        pharmacology:
+          type: string
+        pharmacological_classes:
+          type: string
+        mechanism_of_action:
+          type: string
+        drugbank_interactions:
+          type: string
+        atc_classification:
+          type: string
+        text:
+          type: string
+        _version_:
+          type: integer
+        date_inserted:
+          type: string
+        date_modified:
+          type: string
 tags:
   - name: Transcriptomics Sample
     description: Auto-generated tag group for Transcriptomics Sample
