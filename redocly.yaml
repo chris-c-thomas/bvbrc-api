@@ -8,10 +8,10 @@ theme:
           primary: '#2c3e50'
           secondary: '#6c757d'
         background:
-          default: '#ffffff'
+          main: '#ffffff'
       typography:
         fontFamily: 'Inter, Roboto, sans-serif'
         headings:
-          fontWeight: 600
+          fontWeight: '600'
       sidebar:
         width: 320px
