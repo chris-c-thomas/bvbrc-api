@@ -2,6 +2,11 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const fs = require("fs");
 const yaml = require("yaml");
 
+const getTagFromPath = (routePath) => {
+  const segments = routePath.split('/');
+  return segments[1] ? segments[1].charAt(0).toUpperCase() + segments[1].slice(1) : 'General';
+};
+
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -17,6 +22,24 @@ const options = {
     ],
   },
   apis: ["./app.js", "./routes/**/*.js"],
+};
+
+const generateJsDoc = (method, routePath) => {
+  const tag = getTagFromPath(routePath);
+  return `
+    /**
+     * @swagger
+     * /${routePath}:
+     *   ${method}:
+     *     tags:
+     *       - ${tag}
+     *     summary: Auto-generated summary for ${method.toUpperCase()} ${routePath}
+     *     description: This endpoint is auto-documented based on the route declaration.
+     *     responses:
+     *       200:
+     *         description: Successful response
+     */
+    `.trim();
 };
 
 const swaggerSpec = swaggerJSDoc(options);
