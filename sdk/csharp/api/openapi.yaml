@@ -1,0 +1,463 @@
+openapi: 3.0.0
+info:
+  description: API documentation for BV-BRC
+  title: BV-BRC API
+  version: 1.0.0
+servers:
+- url: http://localhost:3001
+paths:
+  /content/{id}:
+    get:
+      description: Fetches content details based on a given ID.
+      parameters:
+      - description: ID of the content
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Successfully retrieved content
+        "404":
+          description: Content not found
+      summary: Retrieve content by ID
+  /contentDirectory:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET contentDirectory
+  /*:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET *
+    post:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for POST *
+  /data:
+    post:
+      description: Creates a new dataset entry in the API.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_data_post_request'
+        required: true
+      responses:
+        "201":
+          description: Successfully created dataset
+        "400":
+          description: Invalid data format
+      summary: Add a new dataset entry
+  /redis:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET redis
+  /http_port:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET http_port
+  /summary_by_taxon/:taxon_id:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /summary_by_taxon/:taxon_id
+  /distinct/:collection/:field:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /distinct/:collection/:field
+  /taxon_category/:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /taxon_category/
+  /subsystem_summary/:genome_id:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /subsystem_summary/:genome_id
+  /data/type:
+    get:
+      description: Returns a list of all data types available in the API.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  example: genome
+                  type: string
+                type: array
+          description: Successfully retrieved data types
+      summary: Retrieve available data types
+  /content-type:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET content-type
+  /accept:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET accept
+  /:target_id:
+    patch:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for PATCH /:target_id
+    post:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for POST /:target_id
+  /doc:
+    get:
+      description: Serves API documentation in JSON format.
+      responses:
+        "200":
+          description: Successfully retrieved documentation
+      summary: Retrieve API documentation
+  /publicURL:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET publicURL
+  /:
+    get:
+      description: Returns general information about the API.
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /
+    post:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for POST /
+  /:collection:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /:collection
+  /download:
+    get:
+      description: Allows downloading files from the API using a file ID.
+      parameters:
+      - description: ID of the file to download
+        explode: true
+        in: query
+        name: fileId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: File downloaded successfully
+        "404":
+          description: File not found
+      summary: Download a file
+  /permissions/genome:
+    get:
+      description: Returns access permissions for a given genome.
+      parameters:
+      - description: ID of the genome
+        explode: true
+        in: query
+        name: genomeId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Successfully retrieved permissions
+        "403":
+          description: Access denied
+      summary: Check genome permissions
+  /solr:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET solr
+  /hpi/search:
+    get:
+      description: Fetches data from the HPI search API using a search term.
+      parameters:
+      - description: Search term for querying HPI data.
+        explode: true
+        in: query
+        name: term
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_hpi_search_get_200_response'
+          description: Successfully retrieved HPI search results
+      summary: Search HPI data
+  /distributeURL:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET distributeURL
+  /experiment:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /experiment
+  /experiment/:id:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /experiment/:id
+  /experiment/:id/id-list/:id_list:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list
+  /experiment/:id/id-list/:id_list/ids:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids
+  /api:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /api
+  /indexer:
+    post:
+      description: Initiates the indexing process for the API database.
+      responses:
+        "200":
+          description: Indexing started successfully
+        "500":
+          description: Error starting indexing
+      summary: Trigger data indexing
+  /queueDirectory:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET queueDirectory
+  /:id:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /:id
+  /:type:
+    post:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for POST /:type
+  /jbrowse:
+    get:
+      description: Fetches genomic visualization data for JBrowse.
+      parameters:
+      - description: Genome ID for JBrowse
+        explode: true
+        in: query
+        name: genomeId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: Successfully retrieved JBrowse data
+      summary: Retrieve JBrowse data
+  /jbrowseAPIRoot:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET jbrowseAPIRoot
+  /type:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET type
+  /feature_type:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET feature_type
+  /genome/2697049.107626/trackList:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/2697049.107626/trackList
+  /genome/:id/trackList:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/trackList
+  /genome/:id/tracks:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/tracks
+  /genome/:id/stats/global:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/stats/global
+  /genome/:id/stats/region/:sequence_id:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/stats/region/:sequence_id
+  /genome/:id/stats/regionFeatureDensities/:sequence_id:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/stats/regionFeatureDensities/:sequence_id
+  /genome/:id/features/:seq_accession:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/features/:seq_accession
+  /genome/:id/refseqs:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/refseqs
+  /genome/:id/names/:
+    get:
+      responses:
+        "200":
+          description: Successful response
+      summary: Auto-generated summary for GET /genome/:id/names/
+  /query/multi:
+    post:
+      description: Submits multiple queries to the API and returns combined results.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_query_multi_post_request'
+        required: true
+      responses:
+        "200":
+          description: Successfully executed queries
+        "400":
+          description: Invalid query format
+      summary: Execute multiple queries
+  /rpc:
+    post:
+      description: Handles remote procedure calls (RPC) for various API functions.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_rpc_post_request'
+        required: true
+      responses:
+        "200":
+          description: Successfully executed RPC call
+        "400":
+          description: Invalid request format
+      summary: Execute an RPC request
+components:
+  schemas:
+    _query_multi_post_request:
+      properties:
+        queries:
+          items:
+            $ref: '#/components/schemas/_query_multi_post_request_queries_inner'
+          type: array
+      type: object
+    _hpi_search_get_200_response_results_inner:
+      example:
+        name: Example HPI Entry
+        id: "12345"
+      properties:
+        id:
+          example: "12345"
+          type: string
+        name:
+          example: Example HPI Entry
+          type: string
+      type: object
+    _query_multi_post_request_queries_inner:
+      properties:
+        query:
+          type: string
+        filters:
+          type: object
+      type: object
+    _rpc_post_request:
+      properties:
+        method:
+          type: string
+        params:
+          type: object
+      type: object
+    _data_post_request:
+      properties:
+        name:
+          example: New dataset
+          type: string
+        type:
+          example: genome
+          type: string
+      type: object
+    _hpi_search_get_200_response:
+      example:
+        results:
+        - name: Example HPI Entry
+          id: "12345"
+        - name: Example HPI Entry
+          id: "12345"
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/_hpi_search_get_200_response_results_inner'
+          type: array
+      type: object
+
