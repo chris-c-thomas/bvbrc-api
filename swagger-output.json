@@ -694,6 +694,8 @@
       }
     }
   },
-  "components": {},
+  "components": {
+    "schemas": {}
+  },
   "tags": []
 }

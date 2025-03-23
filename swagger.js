@@ -29,6 +29,7 @@ const options = {
 
 const generateJsDoc = (method, routePath) => {
   const tag = getTagFromPath(routePath);
+  const model = getTagFromPath(routePath).toLowerCase(); // e.g., Genome -> genome
   return `
     /**
      * @swagger
@@ -41,6 +42,10 @@ const generateJsDoc = (method, routePath) => {
      *     responses:
      *       200:
      *         description: Successful response
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/${model}'
      */
     `.trim();
 };

@@ -428,5 +428,120 @@ paths:
           description: Successfully executed RPC call
         "400":
           description: Invalid request format
-components: {}
+components:
+  schemas:
+    transcriptomics_sample:
+      type: object
+      properties: {}
+    transcriptomics_gene:
+      type: object
+      properties: {}
+    transcriptomics_experiment:
+      type: object
+      properties: {}
+    taxonomy:
+      type: object
+      properties: {}
+    surveillance:
+      type: object
+      properties: {}
+    subsystem_ref:
+      type: object
+      properties: {}
+    subsystem:
+      type: object
+      properties: {}
+    structured_assertion:
+      type: object
+      properties: {}
+    strain:
+      type: object
+      properties: {}
+    spike_variant:
+      type: object
+      properties: {}
+    spike_lineage:
+      type: object
+      properties: {}
+    sp_gene_ref:
+      type: object
+      properties: {}
+    sp_gene_evidence:
+      type: object
+      properties: {}
+    sp_gene:
+      type: object
+      properties: {}
+    serology:
+      type: object
+      properties: {}
+    sequence_feature_vt:
+      type: object
+      properties: {}
+    sequence_feature:
+      type: object
+      properties: {}
+    protein_structure:
+      type: object
+      properties: {}
+    protein_feature:
+      type: object
+      properties: {}
+    protein_family_ref:
+      type: object
+      properties: {}
+    ppi:
+      type: object
+      properties: {}
+    pathway_ref:
+      type: object
+      properties: {}
+    pathway:
+      type: object
+      properties: {}
+    misc_niaid_sgc:
+      type: object
+      properties: {}
+    id_ref:
+      type: object
+      properties: {}
+    genome_sequence:
+      type: object
+      properties: {}
+    genome_feature:
+      type: object
+      properties: {}
+    genome_amr:
+      type: object
+      properties: {}
+    genome:
+      type: object
+      properties: {}
+    gene_ontology_ref:
+      type: object
+      properties: {}
+    feature_sequence:
+      type: object
+      properties: {}
+    experiment:
+      type: object
+      properties: {}
+    epitope_assay:
+      type: object
+      properties: {}
+    epitope:
+      type: object
+      properties: {}
+    enzyme_class_ref:
+      type: object
+      properties: {}
+    bioset_result:
+      type: object
+      properties: {}
+    bioset:
+      type: object
+      properties: {}
+    antibiotics:
+      type: object
+      properties: {}
 tags: []
