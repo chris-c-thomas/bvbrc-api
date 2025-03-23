@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node --unhandled-rejections=strict --stack-size=65536 app.js",
     "dev": "nodemon --exec 'npm run swagger && node app.js'",
-    "swagger": "node swagger.js",
+    "gen:swagger-js": "node swagger.js",
+    "gen:openapi-solr-yaml": "node openapi-solr.js",
+    "gen:both": "npm run gen:swagger-js && npm run gen:openapi-solr-yaml",
     "test-api": "mocha -R spec tests/test-api/test.*.spec.js",
     "test-rpc": "mocha -R spec tests/test-rpc/test.*.spec.js",
     "test-media": "mocha -R spec tests/test-media/test.*.spec.js",
