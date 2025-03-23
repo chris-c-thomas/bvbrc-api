@@ -11,7 +11,7 @@
     "docs:export": "node scripts/export-merged-swagger.js",
     "docs:serve": "node server.js",
     "docs:html": "npx @redocly/cli build-docs swagger-output.json -o docs/index.html",
-    "docs:pdf": "npx puppeteer-pdf docs/index.html docs/bvbrc-api-docs.pdf",
+    "docs:pdf": "node scripts/export-docs-pdf.js",
     "test-api": "mocha -R spec tests/test-api/test.*.spec.js",
     "test-rpc": "mocha -R spec tests/test-rpc/test.*.spec.js",
     "test-media": "mocha -R spec tests/test-media/test.*.spec.js",
