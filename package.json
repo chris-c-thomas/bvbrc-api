@@ -76,6 +76,7 @@
     "pm2": "^4.4.0",
     "pm2-logrotate": "^2.7.0",
     "postcss": "^8.3.10",
+    "puppeteer": "^24.4.0",
     "swagger-autogen": "^2.23.7",
     "tailwindcss": "^2.2.17"
   }
