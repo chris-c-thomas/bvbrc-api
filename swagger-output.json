@@ -1,484 +1,699 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
+    "title": "BV-BRC API",
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "description": "API documentation for BV-BRC"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "schemes": [
-    "http"
+  "servers": [
+    {
+      "url": "http://localhost:3001"
+    }
   ],
   "paths": {
-    "/": {
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/indexer/{id}": {
+    "/content/{id}": {
       "get": {
-        "description": "",
+        "summary": "Retrieve content by ID",
+        "description": "Fetches content details based on a given ID.",
         "parameters": [
           {
+            "in": "path",
             "name": "id",
-            "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/indexer/{type}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "406": {
-            "description": "Not Acceptable"
-          }
-        }
-      }
-    },
-    "/indexer/": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/doc/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/doc/{collection}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "collection",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/content*": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          },
-          {
-            "name": "range",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/query*": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
+            "description": "ID of the content",
             "schema": {
-              "type": "object",
-              "properties": {
-                "dataType": {
-                  "example": "any"
-                },
-                "query": {
-                  "example": "any"
-                },
-                "accept": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Successfully retrieved content"
+          },
+          "404": {
+            "description": "Content not found"
           }
         }
       }
     },
-    "/hpi/search/": {
+    "/contentDirectory": {
       "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
+        "summary": "Auto-generated summary for GET contentDirectory",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/*": {
+      "get": {
+        "summary": "Auto-generated summary for GET *",
+        "responses": {
+          "200": {
+            "description": "Successful response"
           }
         }
       },
       "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          },
-          {
-            "name": "range",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "example": "any"
-                },
-                "idSource": {
-                  "example": "any"
-                },
-                "ids": {
-                  "example": "any"
-                },
-                "thresholdType": {
-                  "example": "any"
-                },
-                "threshold": {
-                  "example": "any"
+        "summary": "Auto-generated summary for POST *",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/data": {
+      "post": {
+        "summary": "Add a new dataset entry",
+        "description": "Creates a new dataset entry in the API.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "New dataset"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "genome"
+                  }
                 }
               }
             }
           }
-        ],
+        },
         "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/hpi/search/experiment": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/hpi/search/experiment/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+          "201": {
+            "description": "Successfully created dataset"
           },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/hpi/search/experiment/{id}/id-list/{id_list}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id_list",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          },
-          {
-            "name": "range",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/hpi/search/experiment/{id}/id-list/{id_list}/ids": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id_list",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/hpi/search/api": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/{data{redisClientredis.createClient(redisOptions)}).middlewareconstonlyStatus200=(req}": {
-      "options": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/data/summary_by_taxon/{taxon_id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "taxon_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/data/distinct/{collection}/{field}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "collection",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "field",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/data/taxon_category/": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          },
-          {
-            "name": "download",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid data format"
           }
         }
       }
     },
-    "/data/subsystem_summary/{genome_id}": {
+    "/redis": {
       "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "genome_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
-          }
-        ],
+        "summary": "Auto-generated summary for GET redis",
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "200": {
+            "description": "Successful response"
           }
         }
       }
     },
-    "/permissions/genome/{target_id}": {
+    "/http_port": {
+      "get": {
+        "summary": "Auto-generated summary for GET http_port",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/summary_by_taxon/:taxon_id": {
+      "get": {
+        "summary": "Auto-generated summary for GET /summary_by_taxon/:taxon_id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/distinct/:collection/:field": {
+      "get": {
+        "summary": "Auto-generated summary for GET /distinct/:collection/:field",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/taxon_category/": {
+      "get": {
+        "summary": "Auto-generated summary for GET /taxon_category/",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/subsystem_summary/:genome_id": {
+      "get": {
+        "summary": "Auto-generated summary for GET /subsystem_summary/:genome_id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/data/type": {
+      "get": {
+        "summary": "Retrieve available data types",
+        "description": "Returns a list of all data types available in the API.",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved data types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "genome"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content-type": {
+      "get": {
+        "summary": "Auto-generated summary for GET content-type",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/accept": {
+      "get": {
+        "summary": "Auto-generated summary for GET accept",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/:target_id": {
+      "patch": {
+        "summary": "Auto-generated summary for PATCH /:target_id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
       "post": {
-        "description": "",
+        "summary": "Auto-generated summary for POST /:target_id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/doc": {
+      "get": {
+        "summary": "Retrieve API documentation",
+        "description": "Serves API documentation in JSON format.",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved documentation"
+          }
+        }
+      }
+    },
+    "/publicURL": {
+      "get": {
+        "summary": "Auto-generated summary for GET publicURL",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Auto-generated summary for GET /",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "description": "Returns general information about the API."
+      },
+      "post": {
+        "summary": "Auto-generated summary for POST /",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/:collection": {
+      "get": {
+        "summary": "Auto-generated summary for GET /:collection",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/download": {
+      "get": {
+        "summary": "Download a file",
+        "description": "Allows downloading files from the API using a file ID.",
         "parameters": [
           {
-            "name": "target_id",
-            "in": "path",
+            "in": "query",
+            "name": "fileId",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "split().forEach(function",
-            "in": "query"
+            "description": "ID of the file to download",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "File downloaded successfully"
+          },
+          "404": {
+            "description": "File not found"
+          }
+        }
+      }
+    },
+    "/permissions/genome": {
+      "get": {
+        "summary": "Check genome permissions",
+        "description": "Returns access permissions for a given genome.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "genomeId",
+            "required": true,
+            "description": "ID of the genome",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved permissions"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "Access denied"
+          }
+        }
+      }
+    },
+    "/solr": {
+      "get": {
+        "summary": "Auto-generated summary for GET solr",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/hpi/search": {
+      "get": {
+        "summary": "Search HPI data",
+        "description": "Fetches data from the HPI search API using a search term.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "term",
+            "required": false,
+            "description": "Search term for querying HPI data.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved HPI search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "12345"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Example HPI Entry"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/distributeURL": {
+      "get": {
+        "summary": "Auto-generated summary for GET distributeURL",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/experiment": {
+      "get": {
+        "summary": "Auto-generated summary for GET /experiment",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/experiment/:id": {
+      "get": {
+        "summary": "Auto-generated summary for GET /experiment/:id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/experiment/:id/id-list/:id_list": {
+      "get": {
+        "summary": "Auto-generated summary for GET /experiment/:id/id-list/:id_list",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/experiment/:id/id-list/:id_list/ids": {
+      "get": {
+        "summary": "Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/api": {
+      "get": {
+        "summary": "Auto-generated summary for GET /api",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/indexer": {
+      "post": {
+        "summary": "Trigger data indexing",
+        "description": "Initiates the indexing process for the API database.",
+        "responses": {
+          "200": {
+            "description": "Indexing started successfully"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "500": {
+            "description": "Error starting indexing"
+          }
+        }
+      }
+    },
+    "/queueDirectory": {
+      "get": {
+        "summary": "Auto-generated summary for GET queueDirectory",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/:id": {
+      "get": {
+        "summary": "Auto-generated summary for GET /:id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/:type": {
+      "post": {
+        "summary": "Auto-generated summary for POST /:type",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/jbrowse": {
+      "get": {
+        "summary": "Retrieve JBrowse data",
+        "description": "Fetches genomic visualization data for JBrowse.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "genomeId",
+            "required": true,
+            "description": "Genome ID for JBrowse",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved JBrowse data"
+          }
+        }
+      }
+    },
+    "/jbrowseAPIRoot": {
+      "get": {
+        "summary": "Auto-generated summary for GET jbrowseAPIRoot",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/type": {
+      "get": {
+        "summary": "Auto-generated summary for GET type",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/feature_type": {
+      "get": {
+        "summary": "Auto-generated summary for GET feature_type",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/2697049.107626/trackList": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/2697049.107626/trackList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/trackList": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/trackList",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/tracks": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/tracks",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/stats/global": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/stats/global",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/stats/region/:sequence_id": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/stats/region/:sequence_id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/stats/regionFeatureDensities/:sequence_id": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/stats/regionFeatureDensities/:sequence_id",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/features/:seq_accession": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/features/:seq_accession",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/refseqs": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/refseqs",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/genome/:id/names/": {
+      "get": {
+        "summary": "Auto-generated summary for GET /genome/:id/names/",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/query/multi": {
+      "post": {
+        "summary": "Execute multiple queries",
+        "description": "Submits multiple queries to the API and returns combined results.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "queries": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "query": {
+                          "type": "string"
+                        },
+                        "filters": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully executed queries"
+          },
+          "400": {
+            "description": "Invalid query format"
+          }
+        }
+      }
+    },
+    "/rpc": {
+      "post": {
+        "summary": "Execute an RPC request",
+        "description": "Handles remote procedure calls (RPC) for various API functions.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "method": {
+                    "type": "string"
+                  },
+                  "params": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully executed RPC call"
+          },
+          "400": {
+            "description": "Invalid request format"
           }
         }
       }
     }
-  }
+  },
+  "components": {},
+  "tags": []
 }

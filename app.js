@@ -67,6 +67,9 @@ app.use('/hpi/search', hpiSearchRouter);
 app.use('/data', dataRouter);
 app.use('/permissions/genome', genomePermissionRouter);
 
+// redoc
+app.use('/docs', express.static(path.join(__dirname, 'docs')));
+
 // 404 and error handling
 app.use(function (req, res, next) {
   console.error(`Unable to find router.`, req);
