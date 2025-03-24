@@ -1,0 +1,11 @@
+{
+    "title": "BV-BRC API",
+    "description": "BV-BRC API Documentation",
+    "spec": "./swagger-output-flat.json",
+    "logo": {
+      "src": "#",
+      "alt": "BV-BRC Logo"
+    },
+    "baseUrl": "/docs",
+    "theme": "default"
+  }
