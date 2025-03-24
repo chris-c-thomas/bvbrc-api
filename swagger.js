@@ -26,15 +26,48 @@ const options = {
     info: {
       title: "BV-BRC API",
       version: "1.0.0",
-      description: "API documentation for BV-BRC",
+      description: "API documentation for the Bacterial and Viral Bioinformatics Resource Center (BV-BRC)",
       "x-logo": {
         url: "https://yourdomain.com/logo.svg",
         altText: "BV-BRC API"
+      },
+      contact: {
+        name: "BV-BRC Support",
+        url: "https://www.bv-brc.org/contact",
+        email: "help@bv-brc.org"
+      },
+      license: {
+        name: "MIT",
+        url: "https://opensource.org/licenses/MIT"
       }
     },
     servers: [
       {
-        url: "https://alpha.bv-brc.org/api"
+        url: "https://alpha.bv-brc.org/api",
+        description: "Alpha development server"
+      },
+      {
+        url: "https://www.bv-brc.org/api",
+        description: "Production server"
+      }
+    ],
+    externalDocs: {
+      description: "BV-BRC Documentation",
+      url: "https://www.bv-brc.org/docs"
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+          description: "JWT token for authentication"
+        }
+      }
+    },
+    security: [
+      {
+        bearerAuth: []
       }
     ]
   },
@@ -45,6 +78,10 @@ const swaggerSpec = swaggerJSDoc(options);
 
 const getTagFromPath = (routePath) => {
   const segments = routePath.split("/");
+  // If the path starts with /solr/, use the collection name as the tag
+  if (segments[1] === "solr" && segments.length > 2) {
+    return `Solr - ${segments[2].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`;
+  }
   return segments[1]
     ? segments[1].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : "General";
@@ -116,12 +153,14 @@ const injectSolrSchemas = async () => {
 
   for (const [collection, example] of Object.entries(schemaExamples)) {
     const pathKey = `/solr/${collection}`;
-    const tag = getTagFromPath(pathKey);
+    const collectionName = collection.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    const tag = `Solr - ${collectionName}`;
+    
     swaggerSpec.paths[pathKey] = {
       get: {
         tags: [tag],
-        summary: `Search ${collection} Solr core`,
-        description: `Returns records from the ${collection} Solr core.`,
+        summary: `Search ${collectionName} collection`,
+        description: `Returns records from the ${collectionName} Solr collection.`,
         parameters: [
           {
             in: "query",
@@ -136,6 +175,27 @@ const injectSolrSchemas = async () => {
             schema: { type: "integer", default: 25 },
             required: false,
             description: "Number of records to return"
+          },
+          {
+            in: "query",
+            name: "sort",
+            schema: { type: "string" },
+            required: false,
+            description: "Sort field(s) and direction (e.g., genome_id asc)"
+          },
+          {
+            in: "query",
+            name: "fl",
+            schema: { type: "string" },
+            required: false,
+            description: "Fields to return (comma-separated)"
+          },
+          {
+            in: "query",
+            name: "facet",
+            schema: { type: "boolean" },
+            required: false,
+            description: "Enable faceting"
           }
         ],
         responses: {
@@ -144,9 +204,28 @@ const injectSolrSchemas = async () => {
             content: {
               "application/json": {
                 schema: {
-                  $ref: `#/components/schemas/${collection}`
+                  type: "object",
+                  properties: {
+                    response: {
+                      type: "object",
+                      properties: {
+                        numFound: { type: "integer" },
+                        start: { type: "integer" },
+                        docs: {
+                          type: "array",
+                          items: { $ref: `#/components/schemas/${collection}` }
+                        }
+                      }
+                    }
+                  }
                 },
-                example
+                example: {
+                  response: {
+                    numFound: 10,
+                    start: 0,
+                    docs: [example]
+                  }
+                }
               }
             }
           }
@@ -250,20 +329,45 @@ const injectSolrSchemas = async () => {
 
   // Tag aggregation and deduplication
   const extraTags = ["Admin", "Auth", "Metrics", "General"];
-  const baseTags = Object.keys(swaggerSpec.components.schemas || {}).map(getTagFromPath);
-  const allTagNames = Array.from(new Set([...baseTags, ...extraTags]));
+  
+  // Create tags for each Solr collection
+  const solrTags = Object.keys(swaggerSpec.components.schemas || {}).map(collection => 
+    `Solr - ${collection.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`
+  );
+  
+  // Get non-solr route tags
+  const routeTags = [];
+  for (const path in swaggerSpec.paths) {
+    if (!path.startsWith('/solr/')) {
+      for (const method in swaggerSpec.paths[path]) {
+        const operation = swaggerSpec.paths[path][method];
+        if (operation.tags) {
+          routeTags.push(...operation.tags);
+        }
+      }
+    }
+  }
+  
+  const uniqueRouteTags = Array.from(new Set(routeTags));
+  const allTagNames = Array.from(new Set([...solrTags, ...uniqueRouteTags, ...extraTags]));
 
   // Top-level tag objects
   swaggerSpec.tags = allTagNames.map((tag) => ({
     name: tag,
-    description: `Auto-generated tag group for ${tag}`
+    description: tag.startsWith('Solr - ') 
+      ? `Solr collection for ${tag.substring(7)}`
+      : `API endpoints for ${tag}`
   }));
 
   // Group tags for sidebar grouping
   swaggerSpec["x-tagGroups"] = [
     {
       name: "Solr Collections",
-      tags: baseTags
+      tags: solrTags
+    },
+    {
+      name: "API Endpoints",
+      tags: uniqueRouteTags.filter(tag => !extraTags.includes(tag))
     },
     {
       name: "Internal API",
