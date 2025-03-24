@@ -671,6 +671,2018 @@ paths:
           description: Successfully executed RPC call
         "400":
           description: Invalid request format
+  /solr/transcriptomics_sample:
+    get:
+      tags:
+        - Solr
+      summary: Search transcriptomics_sample Solr core
+      description: Returns records from the transcriptomics_sample Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/transcriptomics_sample"
+              example:
+                eid: 42
+                expid: 42
+                accession: accession_example
+                pid: pid_example
+                pid_i: 42
+                samples: samples_example
+                expname: expname_example
+                channels: channels_example
+                platform: platform_example
+                release_date: release_date_example
+                pmid: pmid_example
+                organism: organism_example
+                strain: strain_example
+                mutant: mutant_example
+                condition: condition_example
+                timepoint: timepoint_example
+                expmean: 3.14
+                expstddev: 3.14
+                genes: 42
+                sig_log_ratio: 3.14
+                sig_z_score: 3.14
+                genome_ids: genome_ids_example
+                additional_metadata: additional_metadata_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/transcriptomics_gene:
+    get:
+      tags:
+        - Solr
+      summary: Search transcriptomics_gene Solr core
+      description: Returns records from the transcriptomics_gene Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/transcriptomics_gene"
+              example:
+                id: id_example
+                eid: 42
+                pid: 42
+                genome_id: genome_id_example
+                feature_id: feature_id_example
+                alt_locus_tag: alt_locus_tag_example
+                refseq_locus_tag: refseq_locus_tag_example
+                patric_id: patric_id_example
+                accession: accession_example
+                expname: expname_example
+                pmid: pmid_example
+                organism: organism_example
+                strain: strain_example
+                mutant: mutant_example
+                condition: condition_example
+                timepoint: timepoint_example
+                avg_intensity: 3.14
+                log_ratio: 3.14
+                z_score: 3.14
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/transcriptomics_experiment:
+    get:
+      tags:
+        - Solr
+      summary: Search transcriptomics_experiment Solr core
+      description: Returns records from the transcriptomics_experiment Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/transcriptomics_experiment"
+              example:
+                eid: eid_example
+                eid_i: 42
+                expid: 42
+                accession: accession_example
+                institution: institution_example
+                pi: pi_example
+                author: author_example
+                pmid: pmid_example
+                release_date: release_date_example
+                title: title_example
+                description: description_example
+                organism: organism_example
+                strain: strain_example
+                mutant: mutant_example
+                timeseries: timeseries_example
+                condition: condition_example
+                samples: 42
+                platforms: 42
+                genes: 42
+                genome_ids: genome_ids_example
+                additional_metadata: additional_metadata_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/taxonomy:
+    get:
+      tags:
+        - Solr
+      summary: Search taxonomy Solr core
+      description: Returns records from the taxonomy Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/taxonomy"
+              example:
+                taxon_id: taxon_id_example
+                taxon_id_i: 42
+                taxon_name: taxon_name_example
+                taxon_rank: taxon_rank_example
+                other_names: other_names_example
+                genetic_code: 42
+                lineage: lineage_example
+                lineage_ids: 42
+                lineage_names: lineage_names_example
+                lineage_ranks: lineage_ranks_example
+                parent_id: 42
+                division: division_example
+                description: description_example
+                genomes: 42
+                genomes_f: genomes_f_example
+                genome_count: 42
+                genome_length_mean: 3.14
+                genome_length_sd: 3.14
+                cds_mean: 3.14
+                cds_sd: 3.14
+                hypothetical_cds_ratio_mean: 3.14
+                hypothetical_cds_ratio_sd: 3.14
+                plfam_cds_ratio_mean: 3.14
+                plfam_cds_ratio_sd: 3.14
+                core_families: 42
+                core_family_ids: core_family_ids_example
+                text: text_example
+                _version_: 42
+  /solr/surveillance:
+    get:
+      tags:
+        - Solr
+      summary: Search surveillance Solr core
+      description: Returns records from the surveillance Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/surveillance"
+              example:
+                id: id_example
+                taxon_lineage_ids: taxon_lineage_ids_example
+                project_identifier: project_identifier_example
+                contributing_institution: contributing_institution_example
+                sample_identifier: sample_identifier_example
+                sample_accession: sample_accession_example
+                sample_material: sample_material_example
+                sample_transport_medium: sample_transport_medium_example
+                sample_receipt_date: sample_receipt_date_example
+                submission_date: submission_date_example
+                last_update_date: last_update_date_example
+                longitudinal_study: longitudinal_study_example
+                embargo_end_date: embargo_end_date_example
+                collector_name: collector_name_example
+                collector_institution: collector_institution_example
+                contact_email_address: contact_email_address_example
+                collection_date: collection_date_example
+                collection_year: collection_year_example
+                collection_season: collection_season_example
+                days_elapsed_to_sample_collection: days_elapsed_to_sample_collection_example
+                collection_country: collection_country_example
+                collection_state_province: collection_state_province_example
+                collection_city: collection_city_example
+                collection_poi: collection_poi_example
+                collection_latitude: collection_latitude_example
+                collection_longitude: collection_longitude_example
+                geographic_group: geographic_group_example
+                pathogen_test_type: pathogen_test_type_example
+                pathogen_test_result: pathogen_test_result_example
+                pathogen_test_interpretation: pathogen_test_interpretation_example
+                species: species_example
+                pathogen_type: pathogen_type_example
+                subtype: subtype_example
+                strain: strain_example
+                sequence_accession: sequence_accession_example
+                genome_id: genome_id_example
+                host_identifier: host_identifier_example
+                host_id_type: host_id_type_example
+                host_species: host_species_example
+                host_common_name: host_common_name_example
+                host_group: host_group_example
+                host_sex: host_sex_example
+                host_age: host_age_example
+                host_race: host_race_example
+                host_ethnicity: host_ethnicity_example
+                host_height: host_height_example
+                host_weight: host_weight_example
+                host_habitat: host_habitat_example
+                host_natural_state: host_natural_state_example
+                host_capture_status: host_capture_status_example
+                host_health: host_health_example
+                exposure: exposure_example
+                duration_of_exposure: duration_of_exposure_example
+                exposure_type: exposure_type_example
+                use_of_personal_protective_equipment: use_of_personal_protective_equipment_example
+                primary_living_situation: primary_living_situation_example
+                nursing_home_residence: nursing_home_residence_example
+                daycare_attendance: daycare_attendance_example
+                travel_history: travel_history_example
+                profession: profession_example
+                education: education_example
+                pregnancy: pregnancy_example
+                trimester_of_pregnancy: trimester_of_pregnancy_example
+                breastfeeding: breastfeeding_example
+                hospitalized: hospitalized_example
+                hospitalization_duration: hospitalization_duration_example
+                intensive_care_unit: intensive_care_unit_example
+                chest_imaging_interpretation: chest_imaging_interpretation_example
+                ventilation: ventilation_example
+                oxygen_saturation: oxygen_saturation_example
+                ecmo: ecmo_example
+                dialysis: dialysis_example
+                disease_status: disease_status_example
+                days_elapsed_to_disease_status: days_elapsed_to_disease_status_example
+                disease_severity: disease_severity_example
+                alcohol_or_other_drug_dependence: alcohol_or_other_drug_dependence_example
+                tobacco_use: tobacco_use_example
+                packs_per_day_for_how_many_years: packs_per_day_for_how_many_years_example
+                chronic_conditions: chronic_conditions_example
+                maintenance_medication: maintenance_medication_example
+                types_of_allergies: types_of_allergies_example
+                influenza_like_illness_over_the_past_year: influenza_like_illness_over_the_past_year_example
+                infections_within_five_years: infections_within_five_years_example
+                human_leukocyte_antigens: human_leukocyte_antigens_example
+                symptoms: symptoms_example
+                onset_hours: onset_hours_example
+                sudden_onset: sudden_onset_example
+                diagnosis: diagnosis_example
+                pre_visit_medications: pre_visit_medications_example
+                post_visit_medications: post_visit_medications_example
+                treatment: treatment_example
+                initiation_of_treatment: initiation_of_treatment_example
+                duration_of_treatment: duration_of_treatment_example
+                treatment_dosage: treatment_dosage_example
+                treatment_type: treatment_type_example
+                vaccination_type: vaccination_type_example
+                days_elapsed_to_vaccination: days_elapsed_to_vaccination_example
+                source_of_vaccine_information: source_of_vaccine_information_example
+                vaccine_lot_number: vaccine_lot_number_example
+                vaccine_manufacturer: vaccine_manufacturer_example
+                vaccine_dosage: vaccine_dosage_example
+                other_vaccinations: other_vaccinations_example
+                comments: comments_example
+                additional_metadata: additional_metadata_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/subsystem_ref:
+    get:
+      tags:
+        - Solr
+      summary: Search subsystem_ref Solr core
+      description: Returns records from the subsystem_ref Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/subsystem_ref"
+              example:
+                id: id_example
+                subsystem_id: subsystem_id_example
+                subsystem_name: subsystem_name_example
+                superclass: superclass_example
+                class: class_example
+                subclass: subclass_example
+                description: description_example
+                pmid: pmid_example
+                role_id: role_id_example
+                role_name: role_name_example
+                notes: notes_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/subsystem:
+    get:
+      tags:
+        - Solr
+      summary: Search subsystem Solr core
+      description: Returns records from the subsystem Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/subsystem"
+              example:
+                id: id_example
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                feature_id: feature_id_example
+                refseq_locus_tag: refseq_locus_tag_example
+                patric_id: patric_id_example
+                gene: gene_example
+                product: product_example
+                role_id: role_id_example
+                role_name: role_name_example
+                subsystem_id: subsystem_id_example
+                subsystem_name: subsystem_name_example
+                superclass: superclass_example
+                class: class_example
+                subclass: subclass_example
+                active: active_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/structured_assertion:
+    get:
+      tags:
+        - Solr
+      summary: Search structured_assertion Solr core
+      description: Returns records from the structured_assertion Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/structured_assertion"
+              example:
+                id: id_example
+                feature_id: feature_id_example
+                patric_id: patric_id_example
+                refseq_locus_tag: refseq_locus_tag_example
+                source: source_example
+                property: property_example
+                value: value_example
+                comment: comment_example
+                pmid: pmid_example
+                evidence_code: evidence_code_example
+                score: score_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/strain:
+    get:
+      tags:
+        - Solr
+      summary: Search strain Solr core
+      description: Returns records from the strain Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/strain"
+              example:
+                id: id_example
+                taxon_id: 42
+                taxon_lineage_ids: taxon_lineage_ids_example
+                taxon_lineage_names: taxon_lineage_names_example
+                family: family_example
+                genus: genus_example
+                species: species_example
+                strain: strain_example
+                subtype: subtype_example
+                h_type: 42
+                n_type: 42
+                genome_ids: genome_ids_example
+                genbank_accessions: genbank_accessions_example
+                segment_count: 42
+                status: status_example
+                host_group: host_group_example
+                host_common_name: host_common_name_example
+                host_name: host_name_example
+                lab_host: lab_host_example
+                passage: passage_example
+                geographic_group: geographic_group_example
+                isolation_country: isolation_country_example
+                collection_year: 42
+                collection_date: collection_date_example
+                season: season_example
+                1_pb2: 1_pb2_example
+                2_pb1: 2_pb1_example
+                3_pa: 3_pa_example
+                4_ha: 4_ha_example
+                5_np: 5_np_example
+                6_na: 6_na_example
+                7_mp: 7_mp_example
+                8_ns: 8_ns_example
+                s: s_example
+                m: m_example
+                l: l_example
+                other_segments: other_segments_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/spike_variant:
+    get:
+      tags:
+        - Solr
+      summary: Search spike_variant Solr core
+      description: Returns records from the spike_variant Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/spike_variant"
+              example:
+                id: id_example
+                country: country_example
+                region: region_example
+                month: month_example
+                total_isolates: 42
+                lineage_count: 42
+                prevalence: 3.14
+                growth_rate: 3.14
+                aa_variant: aa_variant_example
+                sequence_features: sequence_features_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/spike_lineage:
+    get:
+      tags:
+        - Solr
+      summary: Search spike_lineage Solr core
+      description: Returns records from the spike_lineage Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/spike_lineage"
+              example:
+                id: id_example
+                country: country_example
+                region: region_example
+                month: month_example
+                total_isolates: 42
+                lineage_count: 42
+                prevalence: 3.14
+                growth_rate: 3.14
+                lineage: lineage_example
+                sequence_features: sequence_features_example
+                lineage_of_concern: lineage_of_concern_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/sp_gene_ref:
+    get:
+      tags:
+        - Solr
+      summary: Search sp_gene_ref Solr core
+      description: Returns records from the sp_gene_ref Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sp_gene_ref"
+              example:
+                id: id_example
+                property: property_example
+                source: source_example
+                source_id: source_id_example
+                gene_name: gene_name_example
+                locus_tag: locus_tag_example
+                gene_id: gene_id_example
+                gi: gi_example
+                genus: genus_example
+                species: species_example
+                organism: organism_example
+                product: product_example
+                function: function_example
+                classification: classification_example
+                antibiotics_class: antibiotics_class_example
+                antibiotics: antibiotics_example
+                pmid: pmid_example
+                assertion: assertion_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/sp_gene_evidence:
+    get:
+      tags:
+        - Solr
+      summary: Search sp_gene_evidence Solr core
+      description: Returns records from the sp_gene_evidence Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sp_gene_evidence"
+              example:
+                id: id_example
+                property: property_example
+                source: source_example
+                source_id: source_id_example
+                pmid: pmid_example
+                assertion: assertion_example
+                classification: classification_example
+                specific_organism: specific_organism_example
+                specific_host: specific_host_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/sp_gene:
+    get:
+      tags:
+        - Solr
+      summary: Search sp_gene Solr core
+      description: Returns records from the sp_gene Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sp_gene"
+              example:
+                id: id_example
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                feature_id: feature_id_example
+                alt_locus_tag: alt_locus_tag_example
+                refseq_locus_tag: refseq_locus_tag_example
+                patric_id: patric_id_example
+                gene: gene_example
+                product: product_example
+                property: property_example
+                source: source_example
+                property_source: property_source_example
+                source_id: source_id_example
+                organism: organism_example
+                function: function_example
+                classification: classification_example
+                antibiotics_class: antibiotics_class_example
+                antibiotics: antibiotics_example
+                pmid: pmid_example
+                assertion: assertion_example
+                query_coverage: 42
+                subject_coverage: 42
+                identity: 42
+                e_value: e_value_example
+                same_species: 42
+                same_genus: 42
+                same_genome: 42
+                evidence: evidence_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/serology:
+    get:
+      tags:
+        - Solr
+      summary: Search serology Solr core
+      description: Returns records from the serology Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/serology"
+              example:
+                id: id_example
+                taxon_lineage_ids: taxon_lineage_ids_example
+                project_identifier: project_identifier_example
+                contributing_institution: contributing_institution_example
+                sample_identifier: sample_identifier_example
+                sample_accession: sample_accession_example
+                host_identifier: host_identifier_example
+                host_type: host_type_example
+                host_species: host_species_example
+                host_common_name: host_common_name_example
+                host_sex: host_sex_example
+                host_age: host_age_example
+                host_age_group: host_age_group_example
+                host_health: host_health_example
+                collection_country: collection_country_example
+                collection_state: collection_state_example
+                collection_city: collection_city_example
+                collection_date: collection_date_example
+                collection_year: collection_year_example
+                geographic_group: geographic_group_example
+                test_type: test_type_example
+                test_antigen: test_antigen_example
+                test_result: test_result_example
+                test_interpretation: test_interpretation_example
+                positive_definition: positive_definition_example
+                test_pathogen: test_pathogen_example
+                strain: strain_example
+                serotype: serotype_example
+                virus_identifier: virus_identifier_example
+                genbank_accession: genbank_accession_example
+                additional_metadata: additional_metadata_example
+                comments: comments_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/sequence_feature_vt:
+    get:
+      tags:
+        - Solr
+      summary: Search sequence_feature_vt Solr core
+      description: Returns records from the sequence_feature_vt Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sequence_feature_vt"
+              example:
+                id: id_example
+                sf_id: sf_id_example
+                sf_name: sf_name_example
+                sf_category: sf_category_example
+                sfvt_id: sfvt_id_example
+                sfvt_genome_count: sfvt_genome_count_example
+                sfvt_genome_ids: sfvt_genome_ids_example
+                sf_sequence: sf_sequence_example
+                sf_sequence_md5: sf_sequence_md5_example
+                sfvt_sequence: sfvt_sequence_example
+                sfvt_sequence_md5: sfvt_sequence_md5_example
+                sfvt_variations: sfvt_variations_example
+                additional_metadata: additional_metadata_example
+                comments: comments_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/sequence_feature:
+    get:
+      tags:
+        - Solr
+      summary: Search sequence_feature Solr core
+      description: Returns records from the sequence_feature Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sequence_feature"
+              example:
+                id: id_example
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                genbank_accession: genbank_accession_example
+                subtype: subtype_example
+                segment: segment_example
+                feature_id: feature_id_example
+                patric_id: patric_id_example
+                refseq_locus_tag: refseq_locus_tag_example
+                aa_sequence_md5: aa_sequence_md5_example
+                gene: gene_example
+                product: product_example
+                sf_id: sf_id_example
+                sf_name: sf_name_example
+                sf_category: sf_category_example
+                source: source_example
+                source_id: source_id_example
+                source_accession: source_accession_example
+                source_strain: source_strain_example
+                source_aa_sequence: source_aa_sequence_example
+                source_sf_location: source_sf_location_example
+                evidence_code: evidence_code_example
+                publication: publication_example
+                start: 42
+                end: 42
+                segments: segments_example
+                length: 42
+                sf_sequence: sf_sequence_example
+                sf_sequence_md5: sf_sequence_md5_example
+                aa_variant: aa_variant_example
+                variant_types: variant_types_example
+                additional_metadata: additional_metadata_example
+                comments: comments_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/protein_structure:
+    get:
+      tags:
+        - Solr
+      summary: Search protein_structure Solr core
+      description: Returns records from the protein_structure Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/protein_structure"
+              example:
+                pdb_id: pdb_id_example
+                title: title_example
+                organism_name: organism_name_example
+                taxon_id: 42
+                taxon_lineage_ids: taxon_lineage_ids_example
+                taxon_lineage_names: taxon_lineage_names_example
+                genome_id: genome_id_example
+                feature_id: feature_id_example
+                patric_id: patric_id_example
+                uniprotkb_accession: uniprotkb_accession_example
+                gene: gene_example
+                product: product_example
+                sequence_md5: sequence_md5_example
+                sequence: sequence_example
+                alignments: alignments_example
+                method: method_example
+                resolution: resolution_example
+                pmid: pmid_example
+                institution: institution_example
+                authors: authors_example
+                release_date: release_date_example
+                file_path: file_path_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/protein_feature:
+    get:
+      tags:
+        - Solr
+      summary: Search protein_feature Solr core
+      description: Returns records from the protein_feature Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/protein_feature"
+              example:
+                id: id_example
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                feature_id: feature_id_example
+                patric_id: patric_id_example
+                refseq_locus_tag: refseq_locus_tag_example
+                aa_sequence_md5: aa_sequence_md5_example
+                gene: gene_example
+                product: product_example
+                interpro_id: interpro_id_example
+                interpro_description: interpro_description_example
+                feature_type: feature_type_example
+                source: source_example
+                source_id: source_id_example
+                description: description_example
+                classification: classification_example
+                score: 3.14
+                e_value: e_value_example
+                evidence: evidence_example
+                publication: publication_example
+                start: 42
+                end: 42
+                segments: segments_example
+                length: 42
+                sequence: sequence_example
+                comments: comments_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/protein_family_ref:
+    get:
+      tags:
+        - Solr
+      summary: Search protein_family_ref Solr core
+      description: Returns records from the protein_family_ref Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/protein_family_ref"
+              example:
+                family_id: family_id_example
+                family_type: family_type_example
+                family_product: family_product_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/ppi:
+    get:
+      tags:
+        - Solr
+      summary: Search ppi Solr core
+      description: Returns records from the ppi Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ppi"
+              example:
+                id: id_example
+                interactor_a: interactor_a_example
+                interactor_type_a: interactor_type_a_example
+                interactor_desc_a: interactor_desc_a_example
+                domain_a: domain_a_example
+                taxon_id_a: 42
+                genome_id_a: genome_id_a_example
+                genome_name_a: genome_name_a_example
+                feature_id_a: feature_id_a_example
+                refseq_locus_tag_a: refseq_locus_tag_a_example
+                gene_a: gene_a_example
+                interactor_b: interactor_b_example
+                interactor_type_b: interactor_type_b_example
+                interactor_desc_b: interactor_desc_b_example
+                domain_b: domain_b_example
+                taxon_id_b: 42
+                genome_id_b: genome_id_b_example
+                genome_name_b: genome_name_b_example
+                feature_id_b: feature_id_b_example
+                refseq_locus_tag_b: refseq_locus_tag_b_example
+                gene_b: gene_b_example
+                category: category_example
+                interaction_type: interaction_type_example
+                detection_method: detection_method_example
+                evidence: evidence_example
+                pmid: pmid_example
+                source_db: source_db_example
+                source_id: source_id_example
+                score: score_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/pathway_ref:
+    get:
+      tags:
+        - Solr
+      summary: Search pathway_ref Solr core
+      description: Returns records from the pathway_ref Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/pathway_ref"
+              example:
+                id: id_example
+                pathway_id: pathway_id_example
+                pathway_name: pathway_name_example
+                pathway_class: pathway_class_example
+                ec_number: ec_number_example
+                ec_description: ec_description_example
+                map_type: map_type_example
+                map_name: map_name_example
+                map_location: map_location_example
+                occurrence: 42
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/pathway:
+    get:
+      tags:
+        - Solr
+      summary: Search pathway Solr core
+      description: Returns records from the pathway Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/pathway"
+              example:
+                id: id_example
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                sequence_id: sequence_id_example
+                accession: accession_example
+                annotation: annotation_example
+                feature_id: feature_id_example
+                alt_locus_tag: alt_locus_tag_example
+                refseq_locus_tag: refseq_locus_tag_example
+                patric_id: patric_id_example
+                gene: gene_example
+                product: product_example
+                ec_number: ec_number_example
+                ec_description: ec_description_example
+                pathway_id: pathway_id_example
+                pathway_name: pathway_name_example
+                pathway_class: pathway_class_example
+                genome_ec: genome_ec_example
+                pathway_ec: pathway_ec_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/misc_niaid_sgc:
+    get:
+      tags:
+        - Solr
+      summary: Search misc_niaid_sgc Solr core
+      description: Returns records from the misc_niaid_sgc Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/misc_niaid_sgc"
+              example:
+                target_id: target_id_example
+                target_status: target_status_example
+                selection_criteria: selection_criteria_example
+                genus: genus_example
+                species: species_example
+                strain: strain_example
+                has_clones: has_clones_example
+                has_proteins: has_proteins_example
+                gene_symbol_collection: gene_symbol_collection_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/id_ref:
+    get:
+      tags:
+        - Solr
+      summary: Search id_ref Solr core
+      description: Returns records from the id_ref Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/id_ref"
+              example:
+                id: id_example
+                uniprotkb_accession: uniprotkb_accession_example
+                id_type: id_type_example
+                id_value: id_value_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/genome_sequence:
+    get:
+      tags:
+        - Solr
+      summary: Search genome_sequence Solr core
+      description: Returns records from the genome_sequence Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome_sequence"
+              example:
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                sequence_id: sequence_id_example
+                p2_sequence_id: 42
+                accession: accession_example
+                gi: 42
+                sequence_type: sequence_type_example
+                sequence_status: sequence_status_example
+                mol_type: mol_type_example
+                topology: topology_example
+                description: description_example
+                chromosome: chromosome_example
+                plasmid: plasmid_example
+                segment: segment_example
+                gc_content: 3.14
+                length: 42
+                sequence_md5: sequence_md5_example
+                sequence: sequence_example
+                release_date: release_date_example
+                version: 42
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/genome_feature:
+    get:
+      tags:
+        - Solr
+      summary: Search genome_feature Solr core
+      description: Returns records from the genome_feature Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome_feature"
+              example:
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                sequence_id: sequence_id_example
+                accession: accession_example
+                annotation: annotation_example
+                feature_type: feature_type_example
+                feature_id: feature_id_example
+                p2_feature_id: 42
+                alt_locus_tag: alt_locus_tag_example
+                patric_id: patric_id_example
+                brc_id: brc_id_example
+                refseq_locus_tag: refseq_locus_tag_example
+                protein_id: protein_id_example
+                gene_id: 42
+                uniprotkb_accession: uniprotkb_accession_example
+                pdb_accession: pdb_accession_example
+                start: 42
+                end: 42
+                strand: strand_example
+                location: location_example
+                segments: segments_example
+                codon_start: 42
+                na_length: 42
+                aa_length: 42
+                na_sequence_md5: na_sequence_md5_example
+                aa_sequence_md5: aa_sequence_md5_example
+                gene: gene_example
+                product: product_example
+                figfam_id: figfam_id_example
+                plfam_id: plfam_id_example
+                pgfam_id: pgfam_id_example
+                sog_id: sog_id_example
+                og_id: og_id_example
+                go: go_example
+                property: property_example
+                notes: notes_example
+                classifier_score: 3.14
+                classifier_round: 42
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/genome_amr:
+    get:
+      tags:
+        - Solr
+      summary: Search genome_amr Solr core
+      description: Returns records from the genome_amr Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome_amr"
+              example:
+                id: id_example
+                genome_id: genome_id_example
+                genome_name: genome_name_example
+                taxon_id: 42
+                antibiotic: antibiotic_example
+                resistant_phenotype: resistant_phenotype_example
+                measurement: measurement_example
+                measurement_sign: measurement_sign_example
+                measurement_value: measurement_value_example
+                measurement_unit: measurement_unit_example
+                laboratory_typing_method: laboratory_typing_method_example
+                laboratory_typing_method_version: laboratory_typing_method_version_example
+                laboratory_typing_platform: laboratory_typing_platform_example
+                vendor: vendor_example
+                computational_method: computational_method_example
+                computational_method_version: computational_method_version_example
+                computational_method_performance: computational_method_performance_example
+                testing_standard: testing_standard_example
+                testing_standard_year: 42
+                source: source_example
+                pmid: 42
+                evidence: evidence_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+                public: true
+                owner: owner_example
+                user_read: user_read_example
+                user_write: user_write_example
+  /solr/genome:
+    get:
+      tags:
+        - Solr
+      summary: Search genome Solr core
+      description: Returns records from the genome Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/genome"
+              example: *a2
+  /solr/gene_ontology_ref:
+    get:
+      tags:
+        - Solr
+      summary: Search gene_ontology_ref Solr core
+      description: Returns records from the gene_ontology_ref Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/gene_ontology_ref"
+              example:
+                go_id: go_id_example
+                go_name: go_name_example
+                ontology: ontology_example
+                definition: definition_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/feature_sequence:
+    get:
+      tags:
+        - Solr
+      summary: Search feature_sequence Solr core
+      description: Returns records from the feature_sequence Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/feature_sequence"
+              example:
+                md5: md5_example
+                sequence_type: sequence_type_example
+                sequence: sequence_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/experiment:
+    get:
+      tags:
+        - Solr
+      summary: Search experiment Solr core
+      description: Returns records from the experiment Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/experiment"
+              example: *a1
+  /solr/epitope_assay:
+    get:
+      tags:
+        - Solr
+      summary: Search epitope_assay Solr core
+      description: Returns records from the epitope_assay Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/epitope_assay"
+              example:
+                assay_id: assay_id_example
+                assay_type: assay_type_example
+                epitope_id: epitope_id_example
+                epitope_type: epitope_type_example
+                epitope_sequence: epitope_sequence_example
+                organism: organism_example
+                taxon_id: 42
+                taxon_lineage_ids: taxon_lineage_ids_example
+                taxon_lineage_names: taxon_lineage_names_example
+                protein_name: protein_name_example
+                protein_id: protein_id_example
+                protein_accession: protein_accession_example
+                pdb_id: pdb_id_example
+                start: 42
+                end: 42
+                host_name: host_name_example
+                host_taxon_id: host_taxon_id_example
+                assay_group: assay_group_example
+                assay_method: assay_method_example
+                assay_result: assay_result_example
+                assay_measurement: assay_measurement_example
+                assay_measurement_unit: assay_measurement_unit_example
+                mhc_allele: mhc_allele_example
+                mhc_allele_class: mhc_allele_class_example
+                pmid: pmid_example
+                authors: authors_example
+                title: title_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/epitope:
+    get:
+      tags:
+        - Solr
+      summary: Search epitope Solr core
+      description: Returns records from the epitope Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/epitope"
+              example:
+                epitope_id: epitope_id_example
+                epitope_type: epitope_type_example
+                epitope_sequence: epitope_sequence_example
+                organism: organism_example
+                taxon_id: 42
+                taxon_lineage_ids: taxon_lineage_ids_example
+                taxon_lineage_names: taxon_lineage_names_example
+                protein_name: protein_name_example
+                protein_id: protein_id_example
+                protein_accession: protein_accession_example
+                start: 42
+                end: 42
+                host_name: host_name_example
+                total_assays: 42
+                assay_results: assay_results_example
+                bcell_assays: bcell_assays_example
+                tcell_assays: tcell_assays_example
+                mhc_assays: mhc_assays_example
+                comments: comments_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/enzyme_class_ref:
+    get:
+      tags:
+        - Solr
+      summary: Search enzyme_class_ref Solr core
+      description: Returns records from the enzyme_class_ref Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/enzyme_class_ref"
+              example:
+                ec_number: ec_number_example
+                ec_description: ec_description_example
+                go: go_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/bioset_result:
+    get:
+      tags:
+        - Solr
+      summary: Search bioset_result Solr core
+      description: Returns records from the bioset_result Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bioset_result"
+              example:
+                id: id_example
+                exp_id: exp_id_example
+                exp_name: exp_name_example
+                exp_title: exp_title_example
+                exp_type: exp_type_example
+                bioset_id: bioset_id_example
+                bioset_name: bioset_name_example
+                bioset_description: bioset_description_example
+                bioset_type: bioset_type_example
+                result_type: result_type_example
+                organism: organism_example
+                strain: strain_example
+                taxon_id: 42
+                genome_id: genome_id_example
+                treatment_type: treatment_type_example
+                treatment_name: treatment_name_example
+                treatment_amount: treatment_amount_example
+                treatment_duration: treatment_duration_example
+                entity_type: entity_type_example
+                entity_id: entity_id_example
+                entity_name: entity_name_example
+                feature_id: feature_id_example
+                patric_id: patric_id_example
+                locus_tag: locus_tag_example
+                gene_id: gene_id_example
+                protein_id: protein_id_example
+                uniprot_id: uniprot_id_example
+                other_ids: other_ids_example
+                gene: gene_example
+                product: product_example
+                counts: 3.14
+                fpkm: 3.14
+                tpm: 3.14
+                log2_fc: 3.14
+                other_value: 3.14
+                p_value: 3.14
+                z_score: 3.14
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/bioset:
+    get:
+      tags:
+        - Solr
+      summary: Search bioset Solr core
+      description: Returns records from the bioset Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bioset"
+              example:
+                bioset_id: bioset_id_example
+                study_name: study_name_example
+                study_title: study_title_example
+                study_description: study_description_example
+                study_pi: study_pi_example
+                study_institution: study_institution_example
+                exp_id: exp_id_example
+                exp_name: exp_name_example
+                exp_title: exp_title_example
+                exp_type: exp_type_example
+                bioset_name: bioset_name_example
+                bioset_description: bioset_description_example
+                bioset_type: bioset_type_example
+                analysis_method: analysis_method_example
+                bioset_criteria: bioset_criteria_example
+                result_type: result_type_example
+                protocol: protocol_example
+                bioset_result: bioset_result_example
+                organism: organism_example
+                strain: strain_example
+                taxon_id: 42
+                taxon_lineage_ids: taxon_lineage_ids_example
+                genome_id: genome_id_example
+                analysis_group_1: analysis_group_1_example
+                analysis_group_2: analysis_group_2_example
+                treatment_type: treatment_type_example
+                treatment_name: treatment_name_example
+                treatment_amount: treatment_amount_example
+                treatment_duration: treatment_duration_example
+                entity_type: entity_type_example
+                entity_count: entity_count_example
+                additional_metadata: additional_metadata_example
+                additional_data: additional_data_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
+  /solr/antibiotics:
+    get:
+      tags:
+        - Solr
+      summary: Search antibiotics Solr core
+      description: Returns records from the antibiotics Solr core.
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          required: true
+          description: Solr query string (e.g., genome_id:123456.7)
+        - in: query
+          name: rows
+          schema:
+            type: integer
+            default: 25
+          required: false
+          description: Number of records to return
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/antibiotics"
+              example:
+                pubchem_cid: pubchem_cid_example
+                pubchem_cid_i: 42
+                cas_id: cas_id_example
+                antibiotic_name: antibiotic_name_example
+                synonyms: synonyms_example
+                molecular_formula: molecular_formula_example
+                molecular_weight: molecular_weight_example
+                inchi_key: inchi_key_example
+                canonical_smiles: canonical_smiles_example
+                isomeric_smiles: isomeric_smiles_example
+                description: description_example
+                pharmacology: pharmacology_example
+                pharmacological_classes: pharmacological_classes_example
+                mechanism_of_action: mechanism_of_action_example
+                drugbank_interactions: drugbank_interactions_example
+                atc_classification: atc_classification_example
+                text: text_example
+                _version_: 42
+                date_inserted: date_inserted_example
+                date_modified: date_modified_example
 components:
   schemas:
     transcriptomics_sample:

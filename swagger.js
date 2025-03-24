@@ -137,6 +137,49 @@ const injectSolrSchemas = async () => {
     }
   }
 
+  // Inject explicit paths for each Solr collection
+  for (const [collection, example] of Object.entries(schemaExamples)) {
+    const path = `/solr/${collection}`;
+    const tag = getTagFromPath(path);
+
+    swaggerSpec.paths[path] = {
+      get: {
+        tags: [tag],
+        summary: `Search ${collection} Solr core`,
+        description: `Returns records from the ${collection} Solr core.`,
+        parameters: [
+          {
+            in: "query",
+            name: "q",
+            schema: { type: "string" },
+            required: true,
+            description: "Solr query string (e.g., genome_id:123456.7)"
+          },
+          {
+            in: "query",
+            name: "rows",
+            schema: { type: "integer", default: 25 },
+            required: false,
+            description: "Number of records to return"
+          }
+        ],
+        responses: {
+          "200": {
+            description: "Successful response",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: `#/components/schemas/${collection}`
+                },
+                example
+              }
+            }
+          }
+        }
+      }
+    };
+  }
+
   // Inject inline examples into matching paths
   for (const path in swaggerSpec.paths) {
     for (const method of Object.keys(swaggerSpec.paths[path])) {
