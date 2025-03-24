@@ -43,7 +43,6 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
-// Util to normalize tag names
 const getTagFromPath = (routePath) => {
   const segments = routePath.split("/");
   return segments[1]
@@ -51,7 +50,6 @@ const getTagFromPath = (routePath) => {
     : "General";
 };
 
-// Parse a Solr schema.xml or managed-schema into OpenAPI properties
 const parseFields = async (filePath) => {
   const xml = fs.readFileSync(filePath, "utf8");
   const result = await parser.parseStringPromise(xml);
@@ -67,7 +65,6 @@ const parseFields = async (filePath) => {
   return properties;
 };
 
-// Inject Solr schemas into components.schemas
 const injectSolrSchemas = async () => {
   swaggerSpec.components = swaggerSpec.components || {};
   swaggerSpec.components.schemas = swaggerSpec.components.schemas || {};
@@ -87,7 +84,6 @@ const injectSolrSchemas = async () => {
 (async () => {
   await injectSolrSchemas();
 
-  // Generate example objects from schemas
   const generateExample = (properties) => {
     const example = {};
     for (const [key, val] of Object.entries(properties)) {
@@ -118,11 +114,10 @@ const injectSolrSchemas = async () => {
     }
   }
 
-  // Inject /solr/{collection} paths
   for (const [collection, example] of Object.entries(schemaExamples)) {
-    const path = `/solr/${collection}`;
-    const tag = getTagFromPath(path);
-    swaggerSpec.paths[path] = {
+    const pathKey = `/solr/${collection}`;
+    const tag = getTagFromPath(pathKey);
+    swaggerSpec.paths[pathKey] = {
       get: {
         tags: [tag],
         summary: `Search ${collection} Solr core`,
@@ -160,7 +155,6 @@ const injectSolrSchemas = async () => {
     };
   }
 
-  // Inject default error responses for all paths/methods
   const standardErrors = {
     "400": {
       description: "Bad Request - The request could not be understood or was missing required parameters.",
@@ -207,18 +201,18 @@ const injectSolrSchemas = async () => {
       }
     },
     "500": {
-      description: "Internal Server Error - Something went wrong on the server.",
+      description: "Internal Server Error - An unexpected condition was encountered.",
       content: {
         "application/json": {
           example: {
             error: "Internal Server Error",
-            message: "An unexpected error occurred."
+            message: "Something went wrong on the server."
           }
         }
       }
     },
     "502": {
-      description: "Bad Gateway - Invalid response from upstream.",
+      description: "Bad Gateway - The server received an invalid response from an upstream server.",
       content: {
         "application/json": {
           example: {
@@ -229,12 +223,12 @@ const injectSolrSchemas = async () => {
       }
     },
     "503": {
-      description: "Service Unavailable - Try again later.",
+      description: "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance.",
       content: {
         "application/json": {
           example: {
             error: "Service Unavailable",
-            message: "Server is overloaded or under maintenance."
+            message: "Server is temporarily unavailable. Please try again later."
           }
         }
       }
@@ -253,12 +247,19 @@ const injectSolrSchemas = async () => {
     }
   }
 
-  // Inject tag metadata
-  const allTags = Object.keys(schemaExamples).map(getTagFromPath);
-  swaggerSpec.tags = allTags.map((tag) => ({
-    name: tag,
-    description: `Auto-generated tag group for ${tag}`
-  }));
+  // Generate tags from Solr schemas
+  const allTags = Object.keys(swaggerSpec.components.schemas || {}).map(getTagFromPath);
+
+  swaggerSpec.tags = [
+    ...allTags.map(tag => ({
+      name: tag,
+      description: `Auto-generated tag group for ${tag}`
+    })),
+    { name: "Admin", description: "Administrative operations" },
+    { name: "Auth", description: "Authentication and authorization" },
+    { name: "Metrics", description: "Performance or usage metrics" },
+    { name: "General", description: "Uncategorized endpoints" }
+  ];
 
   swaggerSpec["x-tagGroups"] = [
     {

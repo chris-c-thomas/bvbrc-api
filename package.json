@@ -13,7 +13,7 @@
     "docs:flatten": "node scripts/flatten-yaml.js",
     "docs:pdf": "node scripts/export-docs-pdf.js",
     "docs:export:solr": "node openapi-solr.js",
-    "docs:scalar": "npx scalar build --config scalar.config.json --output scalar-docs",
+    "docs:scalar": "npx scalar reference swagger-output-flat.json --port 3000",
     "docs:build": "node swagger.js && node scripts/flatten-yaml.js",
     "docs:sdk:ts": "openapi-generator generate -i swagger-output.json -g typescript-axios -o sdk/typescript-axios",
     "docs:sdk:py": "openapi-generator generate -i swagger-output.json -g python -o sdk/python",

@@ -47,26 +47,28 @@ paths:
         '404':
           description: Content not found
         '500': &ref_3
-          description: Internal Server Error - Something went wrong on the server.
+          description: Internal Server Error - An unexpected condition was encountered.
           content:
             application/json:
               example:
                 error: Internal Server Error
-                message: An unexpected error occurred.
+                message: Something went wrong on the server.
         '502': &ref_4
-          description: Bad Gateway - Invalid response from upstream.
+          description: Bad Gateway - The server received an invalid response from an upstream server.
           content:
             application/json:
               example:
                 error: Bad Gateway
                 message: Upstream service failed to respond properly.
         '503': &ref_5
-          description: Service Unavailable - Try again later.
+          description: >-
+            Service Unavailable - The server is currently unable to handle the request due to temporary overload or
+            maintenance.
           content:
             application/json:
               example:
                 error: Service Unavailable
-                message: Server is overloaded or under maintenance.
+                message: Server is temporarily unavailable. Please try again later.
   /contentDirectory:
     get:
       summary: Auto-generated summary for GET contentDirectory
@@ -5701,6 +5703,14 @@ tags:
     description: Auto-generated tag group for General
   - name: General
     description: Auto-generated tag group for General
+  - name: Admin
+    description: Administrative operations
+  - name: Auth
+    description: Authentication and authorization
+  - name: Metrics
+    description: Performance or usage metrics
+  - name: General
+    description: Uncategorized endpoints
 x-tagGroups:
   - name: Solr Collections
     tags:
