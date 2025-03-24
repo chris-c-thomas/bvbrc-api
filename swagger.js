@@ -328,6 +328,158 @@ const injectSolrSchemas = async () => {
       }
     }
   }
+  
+  // Enrich core dynamic endpoints
+  const enrichPath = (pathKey, method, config) => {
+    if (!swaggerSpec.paths[pathKey]) swaggerSpec.paths[pathKey] = {};
+    swaggerSpec.paths[pathKey][method] = {
+      summary: config.summary,
+      description: config.description,
+      requestBody: config.requestBody,
+      responses: {
+        "200": {
+          description: config.success || "Success",
+          content: {
+            "application/json": {
+              schema: config.responseSchema,
+              example: config.example
+            }
+          }
+        }
+      }
+    };
+  };
+  
+  // Enrich /rpc
+  enrichPath("/rpc", "post", {
+    summary: "Execute RPC",
+    description: "Executes a remote procedure call using the specified method and parameters.",
+    requestBody: {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              method: { type: "string" },
+              params: { type: "object" }
+            },
+            required: ["method"]
+          },
+          example: {
+            method: "user.login",
+            params: {
+              username: "user1",
+              password: "secret"
+            }
+          }
+        }
+      }
+    },
+    responseSchema: {
+      type: "object",
+      properties: {
+        result: { type: "object" },
+        error: { type: "string" }
+      }
+    },
+    example: {
+      result: {
+        userId: "abc123",
+        token: "jwt.token.here"
+      }
+    }
+  });
+  
+  // Enrich /query/multi
+  enrichPath("/query/multi", "post", {
+    summary: "Execute multiple queries",
+    description: "Executes a batch of queries and returns their combined results.",
+    requestBody: {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              queries: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    query: { type: "string" },
+                    filters: { type: "object" }
+                  }
+                }
+              }
+            }
+          },
+          example: {
+            queries: [
+              { query: "genome_id:123456.7", filters: { public: true } },
+              { query: "taxon_id:2697049", filters: { genome_status: "Complete" } }
+            ]
+          }
+        }
+      }
+    },
+    responseSchema: {
+      type: "object",
+      properties: {
+        results: {
+          type: "array",
+          items: { type: "object" }
+        }
+      }
+    },
+    example: {
+      results: [
+        { genome_id: "123456.7", taxon_id: 2697049 },
+        { genome_id: "765432.1", taxon_id: 12345 }
+      ]
+    }
+  });
+  
+  // Enrich /data
+  enrichPath("/data", "post", {
+    summary: "Submit a data payload",
+    description: "Ingests and stores user-supplied data into the system.",
+    requestBody: {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              name: { type: "string" },
+              type: { type: "string" },
+              payload: { type: "object" }
+            },
+            required: ["name", "type"]
+          },
+          example: {
+            name: "Example Dataset",
+            type: "genome",
+            payload: {
+              genome_id: "123456.7",
+              genome_name: "Test Genome"
+            }
+          }
+        }
+      }
+    },
+    responseSchema: {
+      type: "object",
+      properties: {
+        status: { type: "string" },
+        id: { type: "string" }
+      }
+    },
+    example: {
+      status: "success",
+      id: "abc123"
+    }
+  });
 
   fs.writeFileSync("./swagger-output.yaml", yaml.stringify(swaggerSpec));
 })();
