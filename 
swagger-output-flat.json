@@ -1,0 +1,14 @@
+  "x-tagGroups": [
+    {
+      "name": "Solr Collections",
+      "tags": ["Solr"]
+    },
+    {
+      "name": "Internal API",
+      "tags": ["Admin", "Auth", "Metrics"]
+    },
+    {
+      "name": "Misc",
+      "tags": ["General"]
+    }
+  ]

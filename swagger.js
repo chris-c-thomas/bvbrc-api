@@ -247,24 +247,23 @@ const injectSolrSchemas = async () => {
     }
   }
 
-  // Generate tags from Solr schemas
-  const allTags = Object.keys(swaggerSpec.components.schemas || {}).map(getTagFromPath);
 
-  swaggerSpec.tags = [
-    ...allTags.map(tag => ({
-      name: tag,
-      description: `Auto-generated tag group for ${tag}`
-    })),
-    { name: "Admin", description: "Administrative operations" },
-    { name: "Auth", description: "Authentication and authorization" },
-    { name: "Metrics", description: "Performance or usage metrics" },
-    { name: "General", description: "Uncategorized endpoints" }
-  ];
+  // Tag aggregation and deduplication
+  const extraTags = ["Admin", "Auth", "Metrics", "General"];
+  const baseTags = Object.keys(swaggerSpec.components.schemas || {}).map(getTagFromPath);
+  const allTagNames = Array.from(new Set([...baseTags, ...extraTags]));
 
+  // Top-level tag objects
+  swaggerSpec.tags = allTagNames.map((tag) => ({
+    name: tag,
+    description: `Auto-generated tag group for ${tag}`
+  }));
+
+  // Group tags for sidebar grouping
   swaggerSpec["x-tagGroups"] = [
     {
       name: "Solr Collections",
-      tags: allTags
+      tags: baseTags
     },
     {
       name: "Internal API",
@@ -275,6 +274,6 @@ const injectSolrSchemas = async () => {
       tags: ["General"]
     }
   ];
-
   fs.writeFileSync("./swagger-output.yaml", yaml.stringify(swaggerSpec));
+  fs.writeFileSync("./swagger-output.json", JSON.stringify(swaggerSpec, null, 2));
 })();

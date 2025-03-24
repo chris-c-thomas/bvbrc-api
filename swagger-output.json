@@ -57,7 +57,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -87,7 +87,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -136,7 +136,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -174,7 +174,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -223,7 +223,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -261,7 +261,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -308,7 +308,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -346,7 +346,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -367,8 +367,8 @@
     },
     "/data": {
       "post": {
-        "summary": "Submit a data payload",
-        "description": "Ingests and stores user-supplied data into the system.",
+        "summary": "Add a new dataset entry",
+        "description": "Creates a new dataset entry in the API.",
         "requestBody": {
           "required": true,
           "content": {
@@ -377,50 +377,87 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "New dataset"
                   },
                   "type": {
-                    "type": "string"
-                  },
-                  "payload": {
-                    "type": "object"
+                    "type": "string",
+                    "example": "genome"
                   }
-                },
-                "required": [
-                  "name",
-                  "type"
-                ]
-              },
-              "example": {
-                "name": "Example Dataset",
-                "type": "genome",
-                "payload": {
-                  "genome_id": "123456.7",
-                  "genome_name": "Test Genome"
                 }
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Success",
+          "201": {
+            "description": "Successfully created dataset"
+          },
+          "400": {
+            "description": "Invalid data format"
+          },
+          "401": {
+            "description": "Unauthorized - Authentication is required and has failed or has not yet been provided.",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string"
-                    },
-                    "id": {
-                      "type": "string"
-                    }
-                  }
-                },
                 "example": {
-                  "status": "success",
-                  "id": "abc123"
+                  "error": "Unauthorized",
+                  "message": "Authentication token is missing or invalid."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access is denied.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Forbidden",
+                  "message": "You do not have permission to access this resource."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - The resource could not be found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Not Found",
+                  "message": "The requested resource was not found."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error - An unexpected condition was encountered.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal Server Error",
+                  "message": "Something went wrong on the server."
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway - The server received an invalid response from an upstream server.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Bad Gateway",
+                  "message": "Upstream service failed to respond properly."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Service Unavailable",
+                  "message": "Server is temporarily unavailable. Please try again later."
                 }
               }
             }
@@ -458,7 +495,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -496,7 +533,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -545,7 +582,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -583,7 +620,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -632,7 +669,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -670,7 +707,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -719,7 +756,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -757,7 +794,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -806,7 +843,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -844,7 +881,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -893,7 +930,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -931,7 +968,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -992,7 +1029,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1030,7 +1067,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1079,7 +1116,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1117,7 +1154,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1166,7 +1203,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1204,7 +1241,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1253,7 +1290,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1291,7 +1328,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1338,7 +1375,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1376,7 +1413,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1426,7 +1463,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1464,7 +1501,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1513,7 +1550,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1551,7 +1588,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1600,7 +1637,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1638,7 +1675,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1686,7 +1723,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1724,7 +1761,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1773,7 +1810,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1811,7 +1848,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1872,7 +1909,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -1902,7 +1939,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -1993,7 +2030,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2042,7 +2079,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2080,7 +2117,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2166,7 +2203,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2204,7 +2241,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2253,7 +2290,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2291,7 +2328,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2315,52 +2352,7 @@
         "summary": "Auto-generated summary for GET /experiment",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/experiment"
-                },
-                "example": {
-                  "exp_id": "exp_id_example",
-                  "study_name": "study_name_example",
-                  "study_title": "study_title_example",
-                  "study_description": "study_description_example",
-                  "study_pi": "study_pi_example",
-                  "study_institution": "study_institution_example",
-                  "exp_name": "exp_name_example",
-                  "exp_title": "exp_title_example",
-                  "exp_description": "exp_description_example",
-                  "exp_poc": "exp_poc_example",
-                  "experimenters": "experimenters_example",
-                  "public_repository": "public_repository_example",
-                  "public_identifier": "public_identifier_example",
-                  "pmid": "pmid_example",
-                  "doi": "doi_example",
-                  "exp_type": "exp_type_example",
-                  "measurement_technique": "measurement_technique_example",
-                  "detection_instrument": "detection_instrument_example",
-                  "exp_protocol": "exp_protocol_example",
-                  "organism": "organism_example",
-                  "strain": "strain_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "genome_id": "genome_id_example",
-                  "treatment_type": "treatment_type_example",
-                  "treatment_name": "treatment_name_example",
-                  "treatment_amount": "treatment_amount_example",
-                  "treatment_duration": "treatment_duration_example",
-                  "samples": 42,
-                  "biosets": 42,
-                  "additional_metadata": "additional_metadata_example",
-                  "additional_data": "additional_data_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -2385,7 +2377,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2423,7 +2415,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2447,52 +2439,7 @@
         "summary": "Auto-generated summary for GET /experiment/:id",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/experiment"
-                },
-                "example": {
-                  "exp_id": "exp_id_example",
-                  "study_name": "study_name_example",
-                  "study_title": "study_title_example",
-                  "study_description": "study_description_example",
-                  "study_pi": "study_pi_example",
-                  "study_institution": "study_institution_example",
-                  "exp_name": "exp_name_example",
-                  "exp_title": "exp_title_example",
-                  "exp_description": "exp_description_example",
-                  "exp_poc": "exp_poc_example",
-                  "experimenters": "experimenters_example",
-                  "public_repository": "public_repository_example",
-                  "public_identifier": "public_identifier_example",
-                  "pmid": "pmid_example",
-                  "doi": "doi_example",
-                  "exp_type": "exp_type_example",
-                  "measurement_technique": "measurement_technique_example",
-                  "detection_instrument": "detection_instrument_example",
-                  "exp_protocol": "exp_protocol_example",
-                  "organism": "organism_example",
-                  "strain": "strain_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "genome_id": "genome_id_example",
-                  "treatment_type": "treatment_type_example",
-                  "treatment_name": "treatment_name_example",
-                  "treatment_amount": "treatment_amount_example",
-                  "treatment_duration": "treatment_duration_example",
-                  "samples": 42,
-                  "biosets": 42,
-                  "additional_metadata": "additional_metadata_example",
-                  "additional_data": "additional_data_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -2517,7 +2464,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2555,7 +2502,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2579,52 +2526,7 @@
         "summary": "Auto-generated summary for GET /experiment/:id/id-list/:id_list",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/experiment"
-                },
-                "example": {
-                  "exp_id": "exp_id_example",
-                  "study_name": "study_name_example",
-                  "study_title": "study_title_example",
-                  "study_description": "study_description_example",
-                  "study_pi": "study_pi_example",
-                  "study_institution": "study_institution_example",
-                  "exp_name": "exp_name_example",
-                  "exp_title": "exp_title_example",
-                  "exp_description": "exp_description_example",
-                  "exp_poc": "exp_poc_example",
-                  "experimenters": "experimenters_example",
-                  "public_repository": "public_repository_example",
-                  "public_identifier": "public_identifier_example",
-                  "pmid": "pmid_example",
-                  "doi": "doi_example",
-                  "exp_type": "exp_type_example",
-                  "measurement_technique": "measurement_technique_example",
-                  "detection_instrument": "detection_instrument_example",
-                  "exp_protocol": "exp_protocol_example",
-                  "organism": "organism_example",
-                  "strain": "strain_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "genome_id": "genome_id_example",
-                  "treatment_type": "treatment_type_example",
-                  "treatment_name": "treatment_name_example",
-                  "treatment_amount": "treatment_amount_example",
-                  "treatment_duration": "treatment_duration_example",
-                  "samples": 42,
-                  "biosets": 42,
-                  "additional_metadata": "additional_metadata_example",
-                  "additional_data": "additional_data_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -2649,7 +2551,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2687,7 +2589,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2711,52 +2613,7 @@
         "summary": "Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/experiment"
-                },
-                "example": {
-                  "exp_id": "exp_id_example",
-                  "study_name": "study_name_example",
-                  "study_title": "study_title_example",
-                  "study_description": "study_description_example",
-                  "study_pi": "study_pi_example",
-                  "study_institution": "study_institution_example",
-                  "exp_name": "exp_name_example",
-                  "exp_title": "exp_title_example",
-                  "exp_description": "exp_description_example",
-                  "exp_poc": "exp_poc_example",
-                  "experimenters": "experimenters_example",
-                  "public_repository": "public_repository_example",
-                  "public_identifier": "public_identifier_example",
-                  "pmid": "pmid_example",
-                  "doi": "doi_example",
-                  "exp_type": "exp_type_example",
-                  "measurement_technique": "measurement_technique_example",
-                  "detection_instrument": "detection_instrument_example",
-                  "exp_protocol": "exp_protocol_example",
-                  "organism": "organism_example",
-                  "strain": "strain_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "genome_id": "genome_id_example",
-                  "treatment_type": "treatment_type_example",
-                  "treatment_name": "treatment_name_example",
-                  "treatment_amount": "treatment_amount_example",
-                  "treatment_duration": "treatment_duration_example",
-                  "samples": 42,
-                  "biosets": 42,
-                  "additional_metadata": "additional_metadata_example",
-                  "additional_data": "additional_data_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -2781,7 +2638,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2819,7 +2676,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2868,7 +2725,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2906,7 +2763,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -2956,7 +2813,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -2986,7 +2843,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3035,7 +2892,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3073,7 +2930,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3122,7 +2979,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3160,7 +3017,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3209,7 +3066,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3247,7 +3104,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3308,7 +3165,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3346,7 +3203,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3395,7 +3252,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3433,7 +3290,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3482,7 +3339,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3520,7 +3377,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3569,7 +3426,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3607,7 +3464,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3631,153 +3488,7 @@
         "summary": "Auto-generated summary for GET /genome/2697049.107626/trackList",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -3802,7 +3513,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -3840,7 +3551,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -3864,153 +3575,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/trackList",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -4035,7 +3600,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -4073,7 +3638,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -4097,153 +3662,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/tracks",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -4268,7 +3687,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -4306,7 +3725,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -4330,153 +3749,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/stats/global",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -4501,7 +3774,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -4539,7 +3812,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -4563,153 +3836,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/stats/region/:sequence_id",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -4734,7 +3861,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -4772,7 +3899,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -4796,153 +3923,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/stats/regionFeatureDensities/:sequence_id",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -4967,7 +3948,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -5005,7 +3986,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -5029,153 +4010,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/features/:seq_accession",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -5200,7 +4035,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -5238,7 +4073,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -5262,153 +4097,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/refseqs",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -5433,7 +4122,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -5471,7 +4160,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -5495,153 +4184,7 @@
         "summary": "Auto-generated summary for GET /genome/:id/names/",
         "responses": {
           "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/genome"
-                },
-                "example": {
-                  "genome_id": "genome_id_example",
-                  "p2_genome_id": 42,
-                  "genome_name": "genome_name_example",
-                  "common_name": "common_name_example",
-                  "organism_name": "organism_name_example",
-                  "other_names": "other_names_example",
-                  "taxon_id": 42,
-                  "taxon_lineage_ids": "taxon_lineage_ids_example",
-                  "taxon_lineage_names": "taxon_lineage_names_example",
-                  "superkingdom": "superkingdom_example",
-                  "kingdom": "kingdom_example",
-                  "phylum": "phylum_example",
-                  "class": "class_example",
-                  "order": "order_example",
-                  "family": "family_example",
-                  "genus": "genus_example",
-                  "species": "species_example",
-                  "genome_status": "genome_status_example",
-                  "strain": "strain_example",
-                  "serovar": "serovar_example",
-                  "biovar": "biovar_example",
-                  "pathovar": "pathovar_example",
-                  "mlst": "mlst_example",
-                  "segment": "segment_example",
-                  "subtype": "subtype_example",
-                  "h_type": 42,
-                  "n_type": 42,
-                  "h1_clade_global": "h1_clade_global_example",
-                  "h1_clade_us": "h1_clade_us_example",
-                  "h3_clade": "h3_clade_example",
-                  "h5_clade": "h5_clade_example",
-                  "ph1n1_like": "ph1n1_like_example",
-                  "lineage": "lineage_example",
-                  "clade": "clade_example",
-                  "subclade": "subclade_example",
-                  "other_typing": "other_typing_example",
-                  "culture_collection": "culture_collection_example",
-                  "type_strain": "type_strain_example",
-                  "reference_genome": "reference_genome_example",
-                  "completion_date": "completion_date_example",
-                  "publication": "publication_example",
-                  "authors": "authors_example",
-                  "bioproject_accession": "bioproject_accession_example",
-                  "biosample_accession": "biosample_accession_example",
-                  "assembly_accession": "assembly_accession_example",
-                  "sra_accession": "sra_accession_example",
-                  "ncbi_project_id": "ncbi_project_id_example",
-                  "refseq_project_id": "refseq_project_id_example",
-                  "genbank_accessions": "genbank_accessions_example",
-                  "refseq_accessions": "refseq_accessions_example",
-                  "sequencing_centers": "sequencing_centers_example",
-                  "sequencing_status": "sequencing_status_example",
-                  "sequencing_platform": "sequencing_platform_example",
-                  "sequencing_depth": "sequencing_depth_example",
-                  "assembly_method": "assembly_method_example",
-                  "chromosomes": 42,
-                  "plasmids": 42,
-                  "segments": 42,
-                  "contigs": 42,
-                  "genome_length": 42,
-                  "gc_content": 3.14,
-                  "contig_l50": 42,
-                  "contig_n50": 42,
-                  "patric_cds": 42,
-                  "refseq_cds": 42,
-                  "trna": 42,
-                  "rrna": 42,
-                  "mat_peptide": 42,
-                  "cds": 42,
-                  "cds_ratio": 3.14,
-                  "hypothetical_cds": 42,
-                  "hypothetical_cds_ratio": 3.14,
-                  "partial_cds": 42,
-                  "partial_cds_ratio": 3.14,
-                  "plfam_cds": 42,
-                  "plfam_cds_ratio": 3.14,
-                  "core_families": 42,
-                  "core_family_ratio": 3.14,
-                  "missing_core_family_ids": "missing_core_family_ids_example",
-                  "coarse_consistency": 3.14,
-                  "fine_consistency": 3.14,
-                  "checkm_completeness": 3.14,
-                  "checkm_contamination": 3.14,
-                  "genome_quality_flags": "genome_quality_flags_example",
-                  "genome_quality": "genome_quality_example",
-                  "nearest_genomes": "nearest_genomes_example",
-                  "outgroup_genomes": "outgroup_genomes_example",
-                  "isolation_site": "isolation_site_example",
-                  "isolation_source": "isolation_source_example",
-                  "isolation_comments": "isolation_comments_example",
-                  "collection_date": "collection_date_example",
-                  "collection_year": 42,
-                  "season": "season_example",
-                  "isolation_country": "isolation_country_example",
-                  "state_province": "state_province_example",
-                  "geographic_group": "geographic_group_example",
-                  "geographic_location": "geographic_location_example",
-                  "latitude": "latitude_example",
-                  "longitude": "longitude_example",
-                  "altitude": "altitude_example",
-                  "depth": "depth_example",
-                  "other_environmental": "other_environmental_example",
-                  "host_name": "host_name_example",
-                  "host_common_name": "host_common_name_example",
-                  "host_scientific_name": "host_scientific_name_example",
-                  "host_gender": "host_gender_example",
-                  "host_age": "host_age_example",
-                  "host_health": "host_health_example",
-                  "host_group": "host_group_example",
-                  "lab_host": "lab_host_example",
-                  "passage": "passage_example",
-                  "body_sample_site": "body_sample_site_example",
-                  "body_sample_subsite": "body_sample_subsite_example",
-                  "other_clinical": "other_clinical_example",
-                  "antimicrobial_resistance": "antimicrobial_resistance_example",
-                  "antimicrobial_resistance_evidence": "antimicrobial_resistance_evidence_example",
-                  "phenotype": "phenotype_example",
-                  "gram_stain": "gram_stain_example",
-                  "cell_shape": "cell_shape_example",
-                  "motility": "motility_example",
-                  "sporulation": "sporulation_example",
-                  "temperature_range": "temperature_range_example",
-                  "optimal_temperature": "optimal_temperature_example",
-                  "salinity": "salinity_example",
-                  "oxygen_requirement": "oxygen_requirement_example",
-                  "habitat": "habitat_example",
-                  "disease": "disease_example",
-                  "additional_metadata": "additional_metadata_example",
-                  "comments": "comments_example",
-                  "text": "text_example",
-                  "_version_": 42,
-                  "date_inserted": "date_inserted_example",
-                  "date_modified": "date_modified_example",
-                  "public": true,
-                  "owner": "owner_example",
-                  "user_read": "user_read_example",
-                  "user_write": "user_write_example"
-                }
-              }
-            }
+            "description": "Successful response"
           },
           "400": {
             "description": "Bad Request - The request could not be understood or was missing required parameters.",
@@ -5666,7 +4209,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -5704,7 +4247,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -5726,7 +4269,7 @@
     "/query/multi": {
       "post": {
         "summary": "Execute multiple queries",
-        "description": "Executes a batch of queries and returns their combined results.",
+        "description": "Submits multiple queries to the API and returns combined results.",
         "requestBody": {
           "required": true,
           "content": {
@@ -5749,53 +4292,79 @@
                     }
                   }
                 }
-              },
-              "example": {
-                "queries": [
-                  {
-                    "query": "genome_id:123456.7",
-                    "filters": {
-                      "public": true
-                    }
-                  },
-                  {
-                    "query": "taxon_id:2697049",
-                    "filters": {
-                      "genome_status": "Complete"
-                    }
-                  }
-                ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully executed queries"
+          },
+          "400": {
+            "description": "Invalid query format"
+          },
+          "401": {
+            "description": "Unauthorized - Authentication is required and has failed or has not yet been provided.",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "results": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                },
                 "example": {
-                  "results": [
-                    {
-                      "genome_id": "123456.7",
-                      "taxon_id": 2697049
-                    },
-                    {
-                      "genome_id": "765432.1",
-                      "taxon_id": 12345
-                    }
-                  ]
+                  "error": "Unauthorized",
+                  "message": "Authentication token is missing or invalid."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access is denied.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Forbidden",
+                  "message": "You do not have permission to access this resource."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - The resource could not be found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Not Found",
+                  "message": "The requested resource was not found."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error - An unexpected condition was encountered.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal Server Error",
+                  "message": "Something went wrong on the server."
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway - The server received an invalid response from an upstream server.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Bad Gateway",
+                  "message": "Upstream service failed to respond properly."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Service Unavailable",
+                  "message": "Server is temporarily unavailable. Please try again later."
                 }
               }
             }
@@ -5805,8 +4374,8 @@
     },
     "/rpc": {
       "post": {
-        "summary": "Execute RPC",
-        "description": "Executes a remote procedure call using the specified method and parameters.",
+        "summary": "Execute an RPC request",
+        "description": "Handles remote procedure calls (RPC) for various API functions.",
         "requestBody": {
           "required": true,
           "content": {
@@ -5820,16 +4389,6 @@
                   "params": {
                     "type": "object"
                   }
-                },
-                "required": [
-                  "method"
-                ]
-              },
-              "example": {
-                "method": "user.login",
-                "params": {
-                  "username": "user1",
-                  "password": "secret"
                 }
               }
             }
@@ -5837,25 +4396,73 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully executed RPC call"
+          },
+          "400": {
+            "description": "Invalid request format"
+          },
+          "401": {
+            "description": "Unauthorized - Authentication is required and has failed or has not yet been provided.",
             "content": {
               "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {
-                      "type": "object"
-                    },
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                },
                 "example": {
-                  "result": {
-                    "userId": "abc123",
-                    "token": "jwt.token.here"
-                  }
+                  "error": "Unauthorized",
+                  "message": "Authentication token is missing or invalid."
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access is denied.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Forbidden",
+                  "message": "You do not have permission to access this resource."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found - The resource could not be found.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Not Found",
+                  "message": "The requested resource was not found."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error - An unexpected condition was encountered.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Internal Server Error",
+                  "message": "Something went wrong on the server."
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway - The server received an invalid response from an upstream server.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Bad Gateway",
+                  "message": "Upstream service failed to respond properly."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Service Unavailable",
+                  "message": "Server is temporarily unavailable. Please try again later."
                 }
               }
             }
@@ -5954,7 +4561,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -5992,7 +4599,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -6098,7 +4705,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -6136,7 +4743,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -6244,7 +4851,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -6282,7 +4889,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -6393,7 +5000,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -6431,7 +5038,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -6622,7 +5229,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -6660,7 +5267,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -6758,7 +5365,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -6796,7 +5403,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -6904,7 +5511,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -6942,7 +5549,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -7044,7 +5651,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -7082,7 +5689,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -7210,7 +5817,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -7248,7 +5855,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -7345,7 +5952,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -7383,7 +5990,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -7481,7 +6088,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -7519,7 +6126,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -7624,7 +6231,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -7662,7 +6269,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -7758,7 +6365,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -7796,7 +6403,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -7916,7 +6523,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -7954,7 +6561,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -8073,7 +6680,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -8111,7 +6718,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -8212,7 +6819,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -8250,7 +6857,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -8371,7 +6978,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -8409,7 +7016,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -8518,7 +7125,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -8556,7 +7163,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -8670,7 +7277,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -8708,7 +7315,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -8798,7 +7405,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -8836,7 +7443,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -8952,7 +7559,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -8990,7 +7597,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -9087,7 +7694,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -9125,7 +7732,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -9236,7 +7843,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -9274,7 +7881,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -9370,7 +7977,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -9408,7 +8015,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -9499,7 +8106,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -9537,7 +8144,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -9649,7 +8256,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -9687,7 +8294,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -9817,7 +8424,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -9855,7 +8462,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -9968,7 +8575,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -10006,7 +8613,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -10226,7 +8833,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -10264,7 +8871,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -10355,7 +8962,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -10393,7 +9000,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -10483,7 +9090,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -10521,7 +9128,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -10640,7 +9247,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -10678,7 +9285,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -10792,7 +9399,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -10830,7 +9437,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -10936,7 +9543,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -10974,7 +9581,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -11064,7 +9671,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -11102,7 +9709,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -11226,7 +9833,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -11264,7 +9871,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -11384,7 +9991,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -11422,7 +10029,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -11525,7 +10132,7 @@
             }
           },
           "403": {
-            "description": "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+            "description": "Forbidden - Access is denied.",
             "content": {
               "application/json": {
                 "example": {
@@ -11563,7 +10170,7 @@
               "application/json": {
                 "example": {
                   "error": "Bad Gateway",
-                  "message": "Invalid response from upstream service."
+                  "message": "Upstream service failed to respond properly."
                 }
               }
             }
@@ -15142,200 +13749,64 @@
   },
   "tags": [
     {
-      "name": "Transcriptomics Sample",
-      "description": "Auto-generated tag group for Transcriptomics Sample"
+      "name": "General",
+      "description": "Auto-generated tag group for General"
     },
     {
-      "name": "Transcriptomics Gene",
-      "description": "Auto-generated tag group for Transcriptomics Gene"
+      "name": "Admin",
+      "description": "Auto-generated tag group for Admin"
     },
     {
-      "name": "Transcriptomics Experiment",
-      "description": "Auto-generated tag group for Transcriptomics Experiment"
+      "name": "Auth",
+      "description": "Auto-generated tag group for Auth"
     },
     {
-      "name": "Taxonomy",
-      "description": "Auto-generated tag group for Taxonomy"
-    },
-    {
-      "name": "Surveillance",
-      "description": "Auto-generated tag group for Surveillance"
-    },
-    {
-      "name": "Subsystem Ref",
-      "description": "Auto-generated tag group for Subsystem Ref"
-    },
-    {
-      "name": "Subsystem",
-      "description": "Auto-generated tag group for Subsystem"
-    },
-    {
-      "name": "Structured Assertion",
-      "description": "Auto-generated tag group for Structured Assertion"
-    },
-    {
-      "name": "Strain",
-      "description": "Auto-generated tag group for Strain"
-    },
-    {
-      "name": "Spike Variant",
-      "description": "Auto-generated tag group for Spike Variant"
-    },
-    {
-      "name": "Spike Lineage",
-      "description": "Auto-generated tag group for Spike Lineage"
-    },
-    {
-      "name": "Sp Gene Ref",
-      "description": "Auto-generated tag group for Sp Gene Ref"
-    },
-    {
-      "name": "Sp Gene Evidence",
-      "description": "Auto-generated tag group for Sp Gene Evidence"
-    },
-    {
-      "name": "Sp Gene",
-      "description": "Auto-generated tag group for Sp Gene"
-    },
-    {
-      "name": "Serology",
-      "description": "Auto-generated tag group for Serology"
-    },
-    {
-      "name": "Sequence Feature Vt",
-      "description": "Auto-generated tag group for Sequence Feature Vt"
-    },
-    {
-      "name": "Sequence Feature",
-      "description": "Auto-generated tag group for Sequence Feature"
-    },
-    {
-      "name": "Protein Structure",
-      "description": "Auto-generated tag group for Protein Structure"
-    },
-    {
-      "name": "Protein Feature",
-      "description": "Auto-generated tag group for Protein Feature"
-    },
-    {
-      "name": "Protein Family Ref",
-      "description": "Auto-generated tag group for Protein Family Ref"
-    },
-    {
-      "name": "Ppi",
-      "description": "Auto-generated tag group for Ppi"
-    },
-    {
-      "name": "Pathway Ref",
-      "description": "Auto-generated tag group for Pathway Ref"
-    },
-    {
-      "name": "Pathway",
-      "description": "Auto-generated tag group for Pathway"
-    },
-    {
-      "name": "Misc Niaid Sgc",
-      "description": "Auto-generated tag group for Misc Niaid Sgc"
-    },
-    {
-      "name": "Id Ref",
-      "description": "Auto-generated tag group for Id Ref"
-    },
-    {
-      "name": "Genome Sequence",
-      "description": "Auto-generated tag group for Genome Sequence"
-    },
-    {
-      "name": "Genome Feature",
-      "description": "Auto-generated tag group for Genome Feature"
-    },
-    {
-      "name": "Genome Amr",
-      "description": "Auto-generated tag group for Genome Amr"
-    },
-    {
-      "name": "Genome",
-      "description": "Auto-generated tag group for Genome"
-    },
-    {
-      "name": "Gene Ontology Ref",
-      "description": "Auto-generated tag group for Gene Ontology Ref"
-    },
-    {
-      "name": "Feature Sequence",
-      "description": "Auto-generated tag group for Feature Sequence"
-    },
-    {
-      "name": "Experiment",
-      "description": "Auto-generated tag group for Experiment"
-    },
-    {
-      "name": "Epitope Assay",
-      "description": "Auto-generated tag group for Epitope Assay"
-    },
-    {
-      "name": "Epitope",
-      "description": "Auto-generated tag group for Epitope"
-    },
-    {
-      "name": "Enzyme Class Ref",
-      "description": "Auto-generated tag group for Enzyme Class Ref"
-    },
-    {
-      "name": "Bioset Result",
-      "description": "Auto-generated tag group for Bioset Result"
-    },
-    {
-      "name": "Bioset",
-      "description": "Auto-generated tag group for Bioset"
-    },
-    {
-      "name": "Antibiotics",
-      "description": "Auto-generated tag group for Antibiotics"
+      "name": "Metrics",
+      "description": "Auto-generated tag group for Metrics"
     }
   ],
   "x-tagGroups": [
     {
       "name": "Solr Collections",
       "tags": [
-        "Transcriptomics Sample",
-        "Transcriptomics Gene",
-        "Transcriptomics Experiment",
-        "Taxonomy",
-        "Surveillance",
-        "Subsystem Ref",
-        "Subsystem",
-        "Structured Assertion",
-        "Strain",
-        "Spike Variant",
-        "Spike Lineage",
-        "Sp Gene Ref",
-        "Sp Gene Evidence",
-        "Sp Gene",
-        "Serology",
-        "Sequence Feature Vt",
-        "Sequence Feature",
-        "Protein Structure",
-        "Protein Feature",
-        "Protein Family Ref",
-        "Ppi",
-        "Pathway Ref",
-        "Pathway",
-        "Misc Niaid Sgc",
-        "Id Ref",
-        "Genome Sequence",
-        "Genome Feature",
-        "Genome Amr",
-        "Genome",
-        "Gene Ontology Ref",
-        "Feature Sequence",
-        "Experiment",
-        "Epitope Assay",
-        "Epitope",
-        "Enzyme Class Ref",
-        "Bioset Result",
-        "Bioset",
-        "Antibiotics"
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General",
+        "General"
       ]
     },
     {
