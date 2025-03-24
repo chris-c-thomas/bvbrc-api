@@ -239,25 +239,81 @@ const injectSolrSchemas = async () => {
   // Inject standard error responses across all paths and methods
   const standardErrors = {
     "400": {
-      description: "Bad Request - The request could not be understood or was missing required parameters."
+      description: "Bad Request - The request could not be understood or was missing required parameters.",
+      content: {
+        "application/json": {
+          example: {
+            error: "Bad Request",
+            message: "The provided input is invalid or incomplete."
+          }
+        }
+      }
     },
     "401": {
-      description: "Unauthorized - Authentication is required and has failed or has not yet been provided."
+      description: "Unauthorized - Authentication is required and has failed or has not yet been provided.",
+      content: {
+        "application/json": {
+          example: {
+            error: "Unauthorized",
+            message: "Authentication token is missing or invalid."
+          }
+        }
+      }
     },
     "403": {
-      description: "Forbidden - The request is understood, but it has been refused or access is not allowed."
+      description: "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+      content: {
+        "application/json": {
+          example: {
+            error: "Forbidden",
+            message: "You do not have permission to access this resource."
+          }
+        }
+      }
     },
     "404": {
-      description: "Not Found - The resource could not be found."
+      description: "Not Found - The resource could not be found.",
+      content: {
+        "application/json": {
+          example: {
+            error: "Not Found",
+            message: "The requested resource was not found."
+          }
+        }
+      }
     },
     "500": {
-      description: "Internal Server Error - An unexpected condition was encountered."
+      description: "Internal Server Error - An unexpected condition was encountered.",
+      content: {
+        "application/json": {
+          example: {
+            error: "Internal Server Error",
+            message: "Something went wrong on the server."
+          }
+        }
+      }
     },
     "502": {
-      description: "Bad Gateway - The server received an invalid response from an upstream server."
+      description: "Bad Gateway - The server received an invalid response from an upstream server.",
+      content: {
+        "application/json": {
+          example: {
+            error: "Bad Gateway",
+            message: "Invalid response from upstream service."
+          }
+        }
+      }
     },
     "503": {
-      description: "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance."
+      description: "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance.",
+      content: {
+        "application/json": {
+          example: {
+            error: "Service Unavailable",
+            message: "Server is temporarily unavailable. Please try again later."
+          }
+        }
+      }
     }
   };
 
