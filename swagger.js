@@ -1,13 +1,23 @@
-const swaggerJSDoc = require("swagger-jsdoc");
 const fs = require("fs");
+const path = require("path");
 const yaml = require("yaml");
-const xml2js = require('xml2js');
-const glob = require('glob');
-const path = require('path');
+const swaggerJSDoc = require("swagger-jsdoc");
+const xml2js = require("xml2js");
+const glob = require("glob");
 
-const getTagFromPath = (routePath) => {
-  const segments = routePath.split('/');
-  return segments[1] ? segments[1].replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'General';
+const SOLR_DIR = path.join(__dirname, "..", "bvbrc-solr");
+const schemaFiles = glob.sync(`${SOLR_DIR}/*/managed-schema`);
+const parser = new xml2js.Parser();
+
+const solrTypeToOpenAPI = {
+  string: "string",
+  boolean: "boolean",
+  int: "integer",
+  float: "number",
+  double: "number",
+  long: "integer",
+  tdate: "string",
+  text_general: "string"
 };
 
 const options = {
@@ -17,85 +27,57 @@ const options = {
       title: "BV-BRC API",
       version: "1.0.0",
       description: "API documentation for BV-BRC",
+      "x-logo": {
+        url: "https://yourdomain.com/logo.svg",
+        altText: "BV-BRC API"
+      }
     },
     servers: [
       {
-        url: "https://alpha.bv-brc.org/api",
-      },
-    ],
+        url: "https://alpha.bv-brc.org/api"
+      }
+    ]
   },
-  apis: ["./app.js", "./routes/**/*.js"],
-};
-
-const generateJsDoc = (method, routePath) => {
-  const tag = getTagFromPath(routePath);
-  const model = getTagFromPath(routePath).toLowerCase(); // e.g., Genome -> genome
-  return `
-    /**
-     * @swagger
-     * /${routePath}:
-     *   ${method}:
-     *     tags:
-     *       - ${tag}
-     *     summary: Auto-generated summary for ${method.toUpperCase()} ${routePath}
-     *     description: This endpoint is auto-documented based on the route declaration.
-     *     responses:
-     *       200:
-     *         description: Successful response
-     *         content:
-     *           application/json:
-     *             schema:
-     *               $ref: '#/components/schemas/${model}'
-     */
-    `.trim();
+  apis: ["./routes/**/*.js", "./app.js"]
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
-const SOLR_DIR = path.join(__dirname, '..', 'bvbrc-solr');
-const schemaFiles = glob.sync(`${SOLR_DIR}/*/managed-schema`);
-const parser = new xml2js.Parser();
-
-swaggerSpec.components = swaggerSpec.components || {};
-swaggerSpec.components.schemas = swaggerSpec.components.schemas || {};
-
-const solrTypeToOpenAPI = {
-  string: 'string',
-  boolean: 'boolean',
-  int: 'integer',
-  float: 'number',
-  double: 'number',
-  long: 'integer',
-  tdate: 'string',
-  text_general: 'string'
+// Util to normalize tag names
+const getTagFromPath = (routePath) => {
+  const segments = routePath.split("/");
+  return segments[1]
+    ? segments[1].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : "General";
 };
 
+// Parse a Solr schema.xml or managed-schema into OpenAPI properties
 const parseFields = async (filePath) => {
-  const xml = fs.readFileSync(filePath, 'utf8');
+  const xml = fs.readFileSync(filePath, "utf8");
   const result = await parser.parseStringPromise(xml);
-
-  // Correct Solr structure: result.schema.fields[0].field
   const fields = result?.schema?.fields?.[0]?.field || [];
   const properties = {};
 
-  fields.forEach(f => {
+  fields.forEach((f) => {
     const name = f.$.name;
-    const type = solrTypeToOpenAPI[f.$.type] || 'string';
+    const type = solrTypeToOpenAPI[f.$.type] || "string";
     properties[name] = { type };
   });
 
   return properties;
 };
 
+// Inject Solr schemas into components.schemas
 const injectSolrSchemas = async () => {
-  for (const file of schemaFiles) {
-    const name = path.basename(path.dirname(file));
-    const properties = await parseFields(file);
+  swaggerSpec.components = swaggerSpec.components || {};
+  swaggerSpec.components.schemas = swaggerSpec.components.schemas || {};
 
-    // Check if properties are valid before assigning
+  for (const file of schemaFiles) {
+    const collection = path.basename(path.dirname(file));
+    const properties = await parseFields(file);
     if (Object.keys(properties).length > 0) {
-      swaggerSpec.components.schemas[name] = {
-        type: 'object',
+      swaggerSpec.components.schemas[collection] = {
+        type: "object",
         properties
       };
     }
@@ -105,21 +87,21 @@ const injectSolrSchemas = async () => {
 (async () => {
   await injectSolrSchemas();
 
-  // Generate example objects from Solr field types
+  // Generate example objects from schemas
   const generateExample = (properties) => {
     const example = {};
     for (const [key, val] of Object.entries(properties)) {
       switch (val.type) {
-        case 'string':
+        case "string":
           example[key] = `${key}_example`;
           break;
-        case 'integer':
+        case "integer":
           example[key] = 42;
           break;
-        case 'boolean':
+        case "boolean":
           example[key] = true;
           break;
-        case 'number':
+        case "number":
           example[key] = 3.14;
           break;
         default:
@@ -129,7 +111,6 @@ const injectSolrSchemas = async () => {
     return example;
   };
 
-  // Create example map from schemas
   const schemaExamples = {};
   for (const [name, schema] of Object.entries(swaggerSpec.components.schemas)) {
     if (schema.properties && Object.keys(schema.properties).length > 0) {
@@ -137,11 +118,10 @@ const injectSolrSchemas = async () => {
     }
   }
 
-  // Inject explicit paths for each Solr collection
+  // Inject /solr/{collection} paths
   for (const [collection, example] of Object.entries(schemaExamples)) {
     const path = `/solr/${collection}`;
     const tag = getTagFromPath(path);
-
     swaggerSpec.paths[path] = {
       get: {
         tags: [tag],
@@ -180,63 +160,7 @@ const injectSolrSchemas = async () => {
     };
   }
 
-  // Inject inline examples into matching paths
-  for (const path in swaggerSpec.paths) {
-    for (const method of Object.keys(swaggerSpec.paths[path])) {
-      const tag = getTagFromPath(path).toLowerCase();
-      if (
-        schemaExamples[tag] &&
-        swaggerSpec.paths[path][method].responses &&
-        swaggerSpec.paths[path][method].responses["200"]
-      ) {
-        swaggerSpec.paths[path][method].responses["200"].content = {
-          "application/json": {
-            schema: {
-              $ref: `#/components/schemas/${tag}`
-            },
-            example: schemaExamples[tag]
-          }
-        };
-      }
-    }
-  }
-  
-  // Normalize collection names for tags
-  const normalizeTagName = (name) =>
-    name.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-  
-  const solrCollections = schemaFiles.map((file) =>
-    normalizeTagName(path.basename(path.dirname(file)))
-  );
-  
-  // Inject dynamic tag groups
-  swaggerSpec['x-tagGroups'] = [
-    {
-      name: 'Solr Collections',
-      tags: solrCollections
-    },
-    {
-      name: 'Internal API',
-      tags: ['Admin', 'Auth', 'Metrics']
-    },
-    {
-      name: 'Misc',
-      tags: ['General']
-    }
-  ];
-  
-  // Inject top-level tag metadata
-  swaggerSpec.tags = solrCollections.map((tag) => ({
-    name: tag,
-    description: `Auto-generated tag group for ${tag}`
-  }));
-  
-  swaggerSpec.info['x-logo'] = {
-    url: 'https://yourdomain.com/logo.svg',
-    altText: 'BV-BRC API'
-  };
-
-  // Inject standard error responses across all paths and methods
+  // Inject default error responses for all paths/methods
   const standardErrors = {
     "400": {
       description: "Bad Request - The request could not be understood or was missing required parameters.",
@@ -261,7 +185,7 @@ const injectSolrSchemas = async () => {
       }
     },
     "403": {
-      description: "Forbidden - The request is understood, but it has been refused or access is not allowed.",
+      description: "Forbidden - Access is denied.",
       content: {
         "application/json": {
           example: {
@@ -283,34 +207,34 @@ const injectSolrSchemas = async () => {
       }
     },
     "500": {
-      description: "Internal Server Error - An unexpected condition was encountered.",
+      description: "Internal Server Error - Something went wrong on the server.",
       content: {
         "application/json": {
           example: {
             error: "Internal Server Error",
-            message: "Something went wrong on the server."
+            message: "An unexpected error occurred."
           }
         }
       }
     },
     "502": {
-      description: "Bad Gateway - The server received an invalid response from an upstream server.",
+      description: "Bad Gateway - Invalid response from upstream.",
       content: {
         "application/json": {
           example: {
             error: "Bad Gateway",
-            message: "Invalid response from upstream service."
+            message: "Upstream service failed to respond properly."
           }
         }
       }
     },
     "503": {
-      description: "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance.",
+      description: "Service Unavailable - Try again later.",
       content: {
         "application/json": {
           example: {
             error: "Service Unavailable",
-            message: "Server is temporarily unavailable. Please try again later."
+            message: "Server is overloaded or under maintenance."
           }
         }
       }
@@ -328,160 +252,28 @@ const injectSolrSchemas = async () => {
       }
     }
   }
-  
-  // Enrich core dynamic endpoints
-  const enrichPath = (pathKey, method, config) => {
-    if (!swaggerSpec.paths[pathKey]) swaggerSpec.paths[pathKey] = {};
-    swaggerSpec.paths[pathKey][method] = {
-      summary: config.summary,
-      description: config.description,
-      requestBody: config.requestBody,
-      responses: {
-        "200": {
-          description: config.success || "Success",
-          content: {
-            "application/json": {
-              schema: config.responseSchema,
-              example: config.example
-            }
-          }
-        }
-      }
-    };
-  };
-  
-  // Enrich /rpc
-  enrichPath("/rpc", "post", {
-    summary: "Execute RPC",
-    description: "Executes a remote procedure call using the specified method and parameters.",
-    requestBody: {
-      required: true,
-      content: {
-        "application/json": {
-          schema: {
-            type: "object",
-            properties: {
-              method: { type: "string" },
-              params: { type: "object" }
-            },
-            required: ["method"]
-          },
-          example: {
-            method: "user.login",
-            params: {
-              username: "user1",
-              password: "secret"
-            }
-          }
-        }
-      }
+
+  // Inject tag metadata
+  const allTags = Object.keys(schemaExamples).map(getTagFromPath);
+  swaggerSpec.tags = allTags.map((tag) => ({
+    name: tag,
+    description: `Auto-generated tag group for ${tag}`
+  }));
+
+  swaggerSpec["x-tagGroups"] = [
+    {
+      name: "Solr Collections",
+      tags: allTags
     },
-    responseSchema: {
-      type: "object",
-      properties: {
-        result: { type: "object" },
-        error: { type: "string" }
-      }
+    {
+      name: "Internal API",
+      tags: ["Admin", "Auth", "Metrics"]
     },
-    example: {
-      result: {
-        userId: "abc123",
-        token: "jwt.token.here"
-      }
+    {
+      name: "Misc",
+      tags: ["General"]
     }
-  });
-  
-  // Enrich /query/multi
-  enrichPath("/query/multi", "post", {
-    summary: "Execute multiple queries",
-    description: "Executes a batch of queries and returns their combined results.",
-    requestBody: {
-      required: true,
-      content: {
-        "application/json": {
-          schema: {
-            type: "object",
-            properties: {
-              queries: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    query: { type: "string" },
-                    filters: { type: "object" }
-                  }
-                }
-              }
-            }
-          },
-          example: {
-            queries: [
-              { query: "genome_id:123456.7", filters: { public: true } },
-              { query: "taxon_id:2697049", filters: { genome_status: "Complete" } }
-            ]
-          }
-        }
-      }
-    },
-    responseSchema: {
-      type: "object",
-      properties: {
-        results: {
-          type: "array",
-          items: { type: "object" }
-        }
-      }
-    },
-    example: {
-      results: [
-        { genome_id: "123456.7", taxon_id: 2697049 },
-        { genome_id: "765432.1", taxon_id: 12345 }
-      ]
-    }
-  });
-  
-  // Enrich /data
-  enrichPath("/data", "post", {
-    summary: "Submit a data payload",
-    description: "Ingests and stores user-supplied data into the system.",
-    requestBody: {
-      required: true,
-      content: {
-        "application/json": {
-          schema: {
-            type: "object",
-            properties: {
-              name: { type: "string" },
-              type: { type: "string" },
-              payload: { type: "object" }
-            },
-            required: ["name", "type"]
-          },
-          example: {
-            name: "Example Dataset",
-            type: "genome",
-            payload: {
-              genome_id: "123456.7",
-              genome_name: "Test Genome"
-            }
-          }
-        }
-      }
-    },
-    responseSchema: {
-      type: "object",
-      properties: {
-        status: { type: "string" },
-        id: { type: "string" }
-      }
-    },
-    example: {
-      status: "success",
-      id: "abc123"
-    }
-  });
+  ];
 
   fs.writeFileSync("./swagger-output.yaml", yaml.stringify(swaggerSpec));
 })();
-
-module.exports = swaggerSpec;

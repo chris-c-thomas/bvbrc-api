@@ -22,3 +22,5 @@ reqeusts_per_min.log
 *.sif
 
 request_per_min.log
+
+Docs/bvbrc-api.pdf
