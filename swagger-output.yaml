@@ -23,25 +23,71 @@ paths:
       responses:
         "200":
           description: Successfully retrieved content
+        "400":
+          &a1
+          description: Bad Request - The request could not be understood or was missing
+            required parameters.
+        "401":
+          &a2
+          description: Unauthorized - Authentication is required and has failed or has not
+            yet been provided.
+        "403":
+          &a3
+          description: Forbidden - The request is understood, but it has been refused or
+            access is not allowed.
         "404":
           description: Content not found
+        "500":
+          &a4
+          description: Internal Server Error - An unexpected condition was encountered.
+        "502":
+          &a5
+          description: Bad Gateway - The server received an invalid response from an
+            upstream server.
+        "503":
+          &a6
+          description: Service Unavailable - The server is currently unable to handle the
+            request due to temporary overload or maintenance.
   /contentDirectory:
     get:
       summary: Auto-generated summary for GET contentDirectory
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404":
+          &a7
+          description: Not Found - The resource could not be found.
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /*:
     get:
       summary: Auto-generated summary for GET *
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
     post:
       summary: Auto-generated summary for POST *
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /data:
     post:
       summary: Add a new dataset entry
@@ -64,42 +110,90 @@ paths:
           description: Successfully created dataset
         "400":
           description: Invalid data format
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /redis:
     get:
       summary: Auto-generated summary for GET redis
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /http_port:
     get:
       summary: Auto-generated summary for GET http_port
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /summary_by_taxon/:taxon_id:
     get:
       summary: Auto-generated summary for GET /summary_by_taxon/:taxon_id
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /distinct/:collection/:field:
     get:
       summary: Auto-generated summary for GET /distinct/:collection/:field
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /taxon_category/:
     get:
       summary: Auto-generated summary for GET /taxon_category/
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /subsystem_summary/:genome_id:
     get:
       summary: Auto-generated summary for GET /subsystem_summary/:genome_id
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /data/type:
     get:
       summary: Retrieve available data types
@@ -114,29 +208,64 @@ paths:
                 items:
                   type: string
                   example: genome
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /content-type:
     get:
       summary: Auto-generated summary for GET content-type
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /accept:
     get:
       summary: Auto-generated summary for GET accept
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /:target_id:
     patch:
       summary: Auto-generated summary for PATCH /:target_id
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
     post:
       summary: Auto-generated summary for POST /:target_id
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /doc:
     get:
       summary: Retrieve API documentation
@@ -144,30 +273,65 @@ paths:
       responses:
         "200":
           description: Successfully retrieved documentation
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /publicURL:
     get:
       summary: Auto-generated summary for GET publicURL
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /:
     get:
       summary: Auto-generated summary for GET /
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
       description: Returns general information about the API.
     post:
       summary: Auto-generated summary for POST /
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /:collection:
     get:
       summary: Auto-generated summary for GET /:collection
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /download:
     get:
       summary: Download a file
@@ -182,8 +346,14 @@ paths:
       responses:
         "200":
           description: File downloaded successfully
+        "400": *a1
+        "401": *a2
+        "403": *a3
         "404":
           description: File not found
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /permissions/genome:
     get:
       summary: Check genome permissions
@@ -198,14 +368,27 @@ paths:
       responses:
         "200":
           description: Successfully retrieved permissions
+        "400": *a1
+        "401": *a2
         "403":
           description: Access denied
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr:
     get:
       summary: Auto-generated summary for GET solr
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /hpi/search:
     get:
       summary: Search HPI data
@@ -236,12 +419,26 @@ paths:
                         name:
                           type: string
                           example: Example HPI Entry
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /distributeURL:
     get:
       summary: Auto-generated summary for GET distributeURL
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /experiment:
     get:
       summary: Auto-generated summary for GET /experiment
@@ -253,7 +450,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/experiment"
               example:
-                &a1
+                &a8
                 exp_id: exp_id_example
                 study_name: study_name_example
                 study_title: study_title_example
@@ -290,6 +487,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /experiment/:id:
     get:
       summary: Auto-generated summary for GET /experiment/:id
@@ -300,7 +504,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/experiment"
-              example: *a1
+              example: *a8
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /experiment/:id/id-list/:id_list:
     get:
       summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list
@@ -311,7 +522,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/experiment"
-              example: *a1
+              example: *a8
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /experiment/:id/id-list/:id_list/ids:
     get:
       summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids
@@ -322,13 +540,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/experiment"
-              example: *a1
+              example: *a8
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /api:
     get:
       summary: Auto-generated summary for GET /api
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /indexer:
     post:
       summary: Trigger data indexing
@@ -336,26 +568,53 @@ paths:
       responses:
         "200":
           description: Indexing started successfully
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
         "500":
           description: Error starting indexing
+        "502": *a5
+        "503": *a6
   /queueDirectory:
     get:
       summary: Auto-generated summary for GET queueDirectory
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /:id:
     get:
       summary: Auto-generated summary for GET /:id
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /:type:
     post:
       summary: Auto-generated summary for POST /:type
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /jbrowse:
     get:
       summary: Retrieve JBrowse data
@@ -370,24 +629,52 @@ paths:
       responses:
         "200":
           description: Successfully retrieved JBrowse data
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /jbrowseAPIRoot:
     get:
       summary: Auto-generated summary for GET jbrowseAPIRoot
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /type:
     get:
       summary: Auto-generated summary for GET type
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /feature_type:
     get:
       summary: Auto-generated summary for GET feature_type
       responses:
         "200":
           description: Successful response
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/2697049.107626/trackList:
     get:
       summary: Auto-generated summary for GET /genome/2697049.107626/trackList
@@ -399,7 +686,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/genome"
               example:
-                &a2
+                &a9
                 genome_id: genome_id_example
                 p2_genome_id: 42
                 genome_name: genome_name_example
@@ -537,6 +824,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/trackList:
     get:
       summary: Auto-generated summary for GET /genome/:id/trackList
@@ -547,7 +841,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/tracks:
     get:
       summary: Auto-generated summary for GET /genome/:id/tracks
@@ -558,7 +859,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/stats/global:
     get:
       summary: Auto-generated summary for GET /genome/:id/stats/global
@@ -569,7 +877,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/stats/region/:sequence_id:
     get:
       summary: Auto-generated summary for GET /genome/:id/stats/region/:sequence_id
@@ -580,7 +895,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/stats/regionFeatureDensities/:sequence_id:
     get:
       summary: Auto-generated summary for GET
@@ -592,7 +914,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/features/:seq_accession:
     get:
       summary: Auto-generated summary for GET /genome/:id/features/:seq_accession
@@ -603,7 +932,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/refseqs:
     get:
       summary: Auto-generated summary for GET /genome/:id/refseqs
@@ -614,7 +950,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /genome/:id/names/:
     get:
       summary: Auto-generated summary for GET /genome/:id/names/
@@ -625,7 +968,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /query/multi:
     post:
       summary: Execute multiple queries
@@ -651,6 +1001,12 @@ paths:
           description: Successfully executed queries
         "400":
           description: Invalid query format
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /rpc:
     post:
       summary: Execute an RPC request
@@ -671,6 +1027,12 @@ paths:
           description: Successfully executed RPC call
         "400":
           description: Invalid request format
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/transcriptomics_sample:
     get:
       tags:
@@ -726,6 +1088,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/transcriptomics_gene:
     get:
       tags:
@@ -777,6 +1146,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/transcriptomics_experiment:
     get:
       tags:
@@ -830,6 +1206,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/taxonomy:
     get:
       tags:
@@ -886,6 +1269,13 @@ paths:
                 core_family_ids: core_family_ids_example
                 text: text_example
                 _version_: 42
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/surveillance:
     get:
       tags:
@@ -1022,6 +1412,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/subsystem_ref:
     get:
       tags:
@@ -1065,6 +1462,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/subsystem:
     get:
       tags:
@@ -1118,6 +1522,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/structured_assertion:
     get:
       tags:
@@ -1165,6 +1576,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/strain:
     get:
       tags:
@@ -1238,6 +1656,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/spike_variant:
     get:
       tags:
@@ -1280,6 +1705,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/spike_lineage:
     get:
       tags:
@@ -1323,6 +1755,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/sp_gene_ref:
     get:
       tags:
@@ -1373,6 +1812,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/sp_gene_evidence:
     get:
       tags:
@@ -1414,6 +1860,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/sp_gene:
     get:
       tags:
@@ -1479,6 +1932,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/serology:
     get:
       tags:
@@ -1543,6 +2003,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/sequence_feature_vt:
     get:
       tags:
@@ -1589,6 +2056,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/sequence_feature:
     get:
       tags:
@@ -1655,6 +2129,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/protein_structure:
     get:
       tags:
@@ -1709,6 +2190,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/protein_feature:
     get:
       tags:
@@ -1768,6 +2256,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/protein_family_ref:
     get:
       tags:
@@ -1803,6 +2298,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/ppi:
     get:
       tags:
@@ -1864,6 +2366,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/pathway_ref:
     get:
       tags:
@@ -1906,6 +2415,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/pathway:
     get:
       tags:
@@ -1962,6 +2478,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/misc_niaid_sgc:
     get:
       tags:
@@ -2003,6 +2526,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/id_ref:
     get:
       tags:
@@ -2039,6 +2569,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/genome_sequence:
     get:
       tags:
@@ -2096,6 +2633,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/genome_feature:
     get:
       tags:
@@ -2171,6 +2715,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/genome_amr:
     get:
       tags:
@@ -2229,6 +2780,13 @@ paths:
                 owner: owner_example
                 user_read: user_read_example
                 user_write: user_write_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/genome:
     get:
       tags:
@@ -2256,7 +2814,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/genome"
-              example: *a2
+              example: *a9
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/gene_ontology_ref:
     get:
       tags:
@@ -2293,6 +2858,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/feature_sequence:
     get:
       tags:
@@ -2328,6 +2900,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/experiment:
     get:
       tags:
@@ -2355,7 +2934,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/experiment"
-              example: *a1
+              example: *a8
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/epitope_assay:
     get:
       tags:
@@ -2415,6 +3001,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/epitope:
     get:
       tags:
@@ -2466,6 +3059,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/enzyme_class_ref:
     get:
       tags:
@@ -2501,6 +3101,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/bioset_result:
     get:
       tags:
@@ -2570,6 +3177,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/bioset:
     get:
       tags:
@@ -2635,6 +3249,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
   /solr/antibiotics:
     get:
       tags:
@@ -2683,6 +3304,13 @@ paths:
                 _version_: 42
                 date_inserted: date_inserted_example
                 date_modified: date_modified_example
+        "400": *a1
+        "401": *a2
+        "403": *a3
+        "404": *a7
+        "500": *a4
+        "502": *a5
+        "503": *a6
 components:
   schemas:
     transcriptomics_sample:

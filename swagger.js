@@ -235,7 +235,44 @@ const injectSolrSchemas = async () => {
     url: 'https://yourdomain.com/logo.svg',
     altText: 'BV-BRC API'
   };
-  
+
+  // Inject standard error responses across all paths and methods
+  const standardErrors = {
+    "400": {
+      description: "Bad Request - The request could not be understood or was missing required parameters."
+    },
+    "401": {
+      description: "Unauthorized - Authentication is required and has failed or has not yet been provided."
+    },
+    "403": {
+      description: "Forbidden - The request is understood, but it has been refused or access is not allowed."
+    },
+    "404": {
+      description: "Not Found - The resource could not be found."
+    },
+    "500": {
+      description: "Internal Server Error - An unexpected condition was encountered."
+    },
+    "502": {
+      description: "Bad Gateway - The server received an invalid response from an upstream server."
+    },
+    "503": {
+      description: "Service Unavailable - The server is currently unable to handle the request due to temporary overload or maintenance."
+    }
+  };
+
+  for (const path in swaggerSpec.paths) {
+    for (const method of Object.keys(swaggerSpec.paths[path])) {
+      const op = swaggerSpec.paths[path][method];
+      op.responses = op.responses || {};
+      for (const code in standardErrors) {
+        if (!op.responses[code]) {
+          op.responses[code] = standardErrors[code];
+        }
+      }
+    }
+  }
+
   fs.writeFileSync("./swagger-output.yaml", yaml.stringify(swaggerSpec));
 })();
 
