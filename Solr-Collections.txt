@@ -1,0 +1,39 @@
+Solr Collections
+├── Antibiotics
+├── Bioset
+├── Bioset Result
+├── Enzyme Class Ref
+├── Epitope
+├── Epitope Assay
+├── Experiment
+├── Feature Sequence
+├── Gene Ontology Ref
+├── Genome
+├── Genome Amr
+├── Genome Feature
+├── Genome Sequence
+├── ID Ref
+├── Misc Niaid Sgc
+├── Pathway
+├── Pathway Ref
+├── PPI
+├── Protein Family Ref
+├── Protein Feature
+├── Protein Structure
+├── Sequence Feature
+├── Sequence Feature Vt
+├── Serology
+├── Specialty Genes
+├── Specialty Gene Evidence
+├── Specialty Gene Ref
+├── Spike Lineage
+├── Spike Variant
+├── Strain
+├── Structured Assertion
+├── Subsystem
+├── Subsystem Ref
+├── Surveillance
+├── Taxonomy
+├── Transcriptomics Experiment
+├── Transcriptomics Gene
+└── Transcriptomics Sample

@@ -80,7 +80,7 @@ const getTagFromPath = (routePath) => {
   const segments = routePath.split("/");
   // If the path starts with /solr/, use the collection name as the tag
   if (segments[1] === "solr" && segments.length > 2) {
-    return `Solr - ${segments[2].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`;
+    return segments[2].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   }
   return segments[1]
     ? segments[1].replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
@@ -154,7 +154,7 @@ const injectSolrSchemas = async () => {
   for (const [collection, example] of Object.entries(schemaExamples)) {
     const pathKey = `/solr/${collection}`;
     const collectionName = collection.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    const tag = `Solr - ${collectionName}`;
+    const tag = collectionName;
     
     swaggerSpec.paths[pathKey] = {
       get: {
@@ -332,7 +332,7 @@ const injectSolrSchemas = async () => {
   
   // Create tags for each Solr collection
   const solrTags = Object.keys(swaggerSpec.components.schemas || {}).map(collection => 
-    `Solr - ${collection.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}`
+    collection.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
   );
   
   // Get non-solr route tags
@@ -354,8 +354,8 @@ const injectSolrSchemas = async () => {
   // Top-level tag objects
   swaggerSpec.tags = allTagNames.map((tag) => ({
     name: tag,
-    description: tag.startsWith('Solr - ') 
-      ? `Solr collection for ${tag.substring(7)}`
+    description: solrTags.includes(tag)
+      ? `Solr collection for ${tag}`
       : `API endpoints for ${tag}`
   }));
 

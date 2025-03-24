@@ -2,8 +2,7 @@ openapi: 3.0.0
 info:
   title: BV-BRC API
   version: 1.0.0
-  description: API documentation for the Bacterial and Viral Bioinformatics
-    Resource Center (BV-BRC)
+  description: API documentation for the Bacterial and Viral Bioinformatics Resource Center (BV-BRC)
   x-logo:
     url: https://yourdomain.com/logo.svg
     altText: BV-BRC API
@@ -2389,7 +2388,7 @@ components:
 security:
   - bearerAuth: []
 paths:
-  "/content/{id}":
+  /content/{id}:
     get:
       summary: Retrieve content by ID
       description: Fetches content details based on a given ID.
@@ -2401,57 +2400,49 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successfully retrieved content
-        "400":
-          &a1
-          description: Bad Request - The request could not be understood or was missing
-            required parameters.
+        '400': &ref_0
+          description: Bad Request - The request could not be understood or was missing required parameters.
           content:
             application/json:
               example:
                 error: Bad Request
                 message: The provided input is invalid or incomplete.
-        "401":
-          &a2
-          description: Unauthorized - Authentication is required and has failed or has not
-            yet been provided.
+        '401': &ref_1
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
           content:
             application/json:
               example:
                 error: Unauthorized
                 message: Authentication token is missing or invalid.
-        "403":
-          &a3
+        '403': &ref_2
           description: Forbidden - Access is denied.
           content:
             application/json:
               example:
                 error: Forbidden
                 message: You do not have permission to access this resource.
-        "404":
+        '404':
           description: Content not found
-        "500":
-          &a4
+        '500': &ref_3
           description: Internal Server Error - An unexpected condition was encountered.
           content:
             application/json:
               example:
                 error: Internal Server Error
                 message: Something went wrong on the server.
-        "502":
-          &a5
-          description: Bad Gateway - The server received an invalid response from an
-            upstream server.
+        '502': &ref_4
+          description: Bad Gateway - The server received an invalid response from an upstream server.
           content:
             application/json:
               example:
                 error: Bad Gateway
                 message: Upstream service failed to respond properly.
-        "503":
-          &a6
-          description: Service Unavailable - The server is currently unable to handle the
-            request due to temporary overload or maintenance.
+        '503': &ref_5
+          description: >-
+            Service Unavailable - The server is currently unable to handle the request due to temporary overload or
+            maintenance.
           content:
             application/json:
               example:
@@ -2461,47 +2452,46 @@ paths:
     get:
       summary: Auto-generated summary for GET contentDirectory
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404":
-          &a7
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': &ref_6
           description: Not Found - The resource could not be found.
           content:
             application/json:
               example:
                 error: Not Found
                 message: The requested resource was not found.
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /*:
     get:
       summary: Auto-generated summary for GET *
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
     post:
       summary: Auto-generated summary for POST *
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /data:
     post:
       summary: Add a new dataset entry
@@ -2520,100 +2510,100 @@ paths:
                   type: string
                   example: genome
       responses:
-        "201":
+        '201':
           description: Successfully created dataset
-        "400":
+        '400':
           description: Invalid data format
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /redis:
     get:
       summary: Auto-generated summary for GET redis
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /http_port:
     get:
       summary: Auto-generated summary for GET http_port
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /summary_by_taxon/:taxon_id:
     get:
       summary: Auto-generated summary for GET /summary_by_taxon/:taxon_id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /distinct/:collection/:field:
     get:
       summary: Auto-generated summary for GET /distinct/:collection/:field
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /taxon_category/:
     get:
       summary: Auto-generated summary for GET /taxon_category/
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /subsystem_summary/:genome_id:
     get:
       summary: Auto-generated summary for GET /subsystem_summary/:genome_id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /data/type:
     get:
       summary: Retrieve available data types
       description: Returns a list of all data types available in the API.
       responses:
-        "200":
+        '200':
           description: Successfully retrieved data types
           content:
             application/json:
@@ -2622,130 +2612,130 @@ paths:
                 items:
                   type: string
                   example: genome
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /content-type:
     get:
       summary: Auto-generated summary for GET content-type
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /accept:
     get:
       summary: Auto-generated summary for GET accept
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /:target_id:
     patch:
       summary: Auto-generated summary for PATCH /:target_id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
     post:
       summary: Auto-generated summary for POST /:target_id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /doc:
     get:
       summary: Retrieve API documentation
       description: Serves API documentation in JSON format.
       responses:
-        "200":
+        '200':
           description: Successfully retrieved documentation
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /publicURL:
     get:
       summary: Auto-generated summary for GET publicURL
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /:
     get:
       summary: Auto-generated summary for GET /
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
       description: Returns general information about the API.
     post:
       summary: Auto-generated summary for POST /
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /:collection:
     get:
       summary: Auto-generated summary for GET /:collection
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /download:
     get:
       summary: Download a file
@@ -2758,16 +2748,16 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: File downloaded successfully
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404":
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404':
           description: File not found
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /permissions/genome:
     get:
       summary: Check genome permissions
@@ -2780,29 +2770,29 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successfully retrieved permissions
-        "400": *a1
-        "401": *a2
-        "403":
+        '400': *ref_0
+        '401': *ref_1
+        '403':
           description: Access denied
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr:
     get:
       summary: Auto-generated summary for GET solr
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /hpi/search:
     get:
       summary: Search HPI data
@@ -2815,7 +2805,7 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successfully retrieved HPI search results
           content:
             application/json:
@@ -2829,149 +2819,149 @@ paths:
                       properties:
                         id:
                           type: string
-                          example: "12345"
+                          example: '12345'
                         name:
                           type: string
                           example: Example HPI Entry
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /distributeURL:
     get:
       summary: Auto-generated summary for GET distributeURL
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /experiment:
     get:
       summary: Auto-generated summary for GET /experiment
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /experiment/:id:
     get:
       summary: Auto-generated summary for GET /experiment/:id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /experiment/:id/id-list/:id_list:
     get:
       summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /experiment/:id/id-list/:id_list/ids:
     get:
       summary: Auto-generated summary for GET /experiment/:id/id-list/:id_list/ids
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /api:
     get:
       summary: Auto-generated summary for GET /api
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /indexer:
     post:
       summary: Trigger data indexing
       description: Initiates the indexing process for the API database.
       responses:
-        "200":
+        '200':
           description: Indexing started successfully
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500":
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500':
           description: Error starting indexing
-        "502": *a5
-        "503": *a6
+        '502': *ref_4
+        '503': *ref_5
   /queueDirectory:
     get:
       summary: Auto-generated summary for GET queueDirectory
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /:id:
     get:
       summary: Auto-generated summary for GET /:id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /:type:
     post:
       summary: Auto-generated summary for POST /:type
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /jbrowse:
     get:
       summary: Retrieve JBrowse data
@@ -2984,172 +2974,171 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: Successfully retrieved JBrowse data
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /jbrowseAPIRoot:
     get:
       summary: Auto-generated summary for GET jbrowseAPIRoot
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /type:
     get:
       summary: Auto-generated summary for GET type
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /feature_type:
     get:
       summary: Auto-generated summary for GET feature_type
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/2697049.107626/trackList:
     get:
       summary: Auto-generated summary for GET /genome/2697049.107626/trackList
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/trackList:
     get:
       summary: Auto-generated summary for GET /genome/:id/trackList
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/tracks:
     get:
       summary: Auto-generated summary for GET /genome/:id/tracks
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/stats/global:
     get:
       summary: Auto-generated summary for GET /genome/:id/stats/global
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/stats/region/:sequence_id:
     get:
       summary: Auto-generated summary for GET /genome/:id/stats/region/:sequence_id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/stats/regionFeatureDensities/:sequence_id:
     get:
-      summary: Auto-generated summary for GET
-        /genome/:id/stats/regionFeatureDensities/:sequence_id
+      summary: Auto-generated summary for GET /genome/:id/stats/regionFeatureDensities/:sequence_id
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/features/:seq_accession:
     get:
       summary: Auto-generated summary for GET /genome/:id/features/:seq_accession
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/refseqs:
     get:
       summary: Auto-generated summary for GET /genome/:id/refseqs
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /genome/:id/names/:
     get:
       summary: Auto-generated summary for GET /genome/:id/names/
       responses:
-        "200":
+        '200':
           description: Successful response
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /query/multi:
     post:
       summary: Execute multiple queries
@@ -3171,16 +3160,16 @@ paths:
                       filters:
                         type: object
       responses:
-        "200":
+        '200':
           description: Successfully executed queries
-        "400":
+        '400':
           description: Invalid query format
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /rpc:
     post:
       summary: Execute an RPC request
@@ -3197,16 +3186,16 @@ paths:
                 params:
                   type: object
       responses:
-        "200":
+        '200':
           description: Successfully executed RPC call
-        "400":
+        '400':
           description: Invalid request format
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/transcriptomics_sample:
     get:
       tags:
@@ -3246,7 +3235,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3263,7 +3252,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/transcriptomics_sample"
+                          $ref: '#/components/schemas/transcriptomics_sample'
               example:
                 response:
                   numFound: 10
@@ -3296,13 +3285,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/transcriptomics_gene:
     get:
       tags:
@@ -3342,7 +3331,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3359,7 +3348,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/transcriptomics_gene"
+                          $ref: '#/components/schemas/transcriptomics_gene'
               example:
                 response:
                   numFound: 10
@@ -3388,13 +3377,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/transcriptomics_experiment:
     get:
       tags:
@@ -3434,7 +3423,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3451,7 +3440,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/transcriptomics_experiment"
+                          $ref: '#/components/schemas/transcriptomics_experiment'
               example:
                 response:
                   numFound: 10
@@ -3482,13 +3471,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/taxonomy:
     get:
       tags:
@@ -3528,7 +3517,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3545,7 +3534,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/taxonomy"
+                          $ref: '#/components/schemas/taxonomy'
               example:
                 response:
                   numFound: 10
@@ -3579,13 +3568,13 @@ paths:
                       core_family_ids: core_family_ids_example
                       text: text_example
                       _version_: 42
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/surveillance:
     get:
       tags:
@@ -3625,7 +3614,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3642,7 +3631,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/surveillance"
+                          $ref: '#/components/schemas/surveillance'
               example:
                 response:
                   numFound: 10
@@ -3756,13 +3745,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/subsystem_ref:
     get:
       tags:
@@ -3802,7 +3791,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3819,7 +3808,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/subsystem_ref"
+                          $ref: '#/components/schemas/subsystem_ref'
               example:
                 response:
                   numFound: 10
@@ -3840,13 +3829,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/subsystem:
     get:
       tags:
@@ -3886,7 +3875,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3903,7 +3892,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/subsystem"
+                          $ref: '#/components/schemas/subsystem'
               example:
                 response:
                   numFound: 10
@@ -3934,13 +3923,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/structured_assertion:
     get:
       tags:
@@ -3980,7 +3969,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -3997,7 +3986,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/structured_assertion"
+                          $ref: '#/components/schemas/structured_assertion'
               example:
                 response:
                   numFound: 10
@@ -4022,13 +4011,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/strain:
     get:
       tags:
@@ -4068,7 +4057,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4085,7 +4074,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/strain"
+                          $ref: '#/components/schemas/strain'
               example:
                 response:
                   numFound: 10
@@ -4136,13 +4125,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/spike_variant:
     get:
       tags:
@@ -4182,7 +4171,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4199,7 +4188,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/spike_variant"
+                          $ref: '#/components/schemas/spike_variant'
               example:
                 response:
                   numFound: 10
@@ -4219,13 +4208,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/spike_lineage:
     get:
       tags:
@@ -4265,7 +4254,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4282,7 +4271,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/spike_lineage"
+                          $ref: '#/components/schemas/spike_lineage'
               example:
                 response:
                   numFound: 10
@@ -4303,13 +4292,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/sp_gene_ref:
     get:
       tags:
@@ -4349,7 +4338,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4366,7 +4355,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/sp_gene_ref"
+                          $ref: '#/components/schemas/sp_gene_ref'
               example:
                 response:
                   numFound: 10
@@ -4394,13 +4383,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/sp_gene_evidence:
     get:
       tags:
@@ -4440,7 +4429,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4457,7 +4446,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/sp_gene_evidence"
+                          $ref: '#/components/schemas/sp_gene_evidence'
               example:
                 response:
                   numFound: 10
@@ -4476,13 +4465,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/sp_gene:
     get:
       tags:
@@ -4522,7 +4511,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4539,7 +4528,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/sp_gene"
+                          $ref: '#/components/schemas/sp_gene'
               example:
                 response:
                   numFound: 10
@@ -4582,13 +4571,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/serology:
     get:
       tags:
@@ -4628,7 +4617,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4645,7 +4634,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/serology"
+                          $ref: '#/components/schemas/serology'
               example:
                 response:
                   numFound: 10
@@ -4687,13 +4676,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/sequence_feature_vt:
     get:
       tags:
@@ -4733,7 +4722,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4750,7 +4739,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/sequence_feature_vt"
+                          $ref: '#/components/schemas/sequence_feature_vt'
               example:
                 response:
                   numFound: 10
@@ -4774,13 +4763,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/sequence_feature:
     get:
       tags:
@@ -4820,7 +4809,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4837,7 +4826,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/sequence_feature"
+                          $ref: '#/components/schemas/sequence_feature'
               example:
                 response:
                   numFound: 10
@@ -4881,13 +4870,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/protein_structure:
     get:
       tags:
@@ -4927,7 +4916,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -4944,7 +4933,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/protein_structure"
+                          $ref: '#/components/schemas/protein_structure'
               example:
                 response:
                   numFound: 10
@@ -4976,13 +4965,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/protein_feature:
     get:
       tags:
@@ -5022,7 +5011,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5039,7 +5028,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/protein_feature"
+                          $ref: '#/components/schemas/protein_feature'
               example:
                 response:
                   numFound: 10
@@ -5076,13 +5065,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/protein_family_ref:
     get:
       tags:
@@ -5122,7 +5111,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5139,7 +5128,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/protein_family_ref"
+                          $ref: '#/components/schemas/protein_family_ref'
               example:
                 response:
                   numFound: 10
@@ -5152,13 +5141,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/ppi:
     get:
       tags:
@@ -5198,7 +5187,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5215,7 +5204,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/ppi"
+                          $ref: '#/components/schemas/ppi'
               example:
                 response:
                   numFound: 10
@@ -5254,13 +5243,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/pathway_ref:
     get:
       tags:
@@ -5300,7 +5289,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5317,7 +5306,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/pathway_ref"
+                          $ref: '#/components/schemas/pathway_ref'
               example:
                 response:
                   numFound: 10
@@ -5337,13 +5326,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/pathway:
     get:
       tags:
@@ -5383,7 +5372,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5400,7 +5389,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/pathway"
+                          $ref: '#/components/schemas/pathway'
               example:
                 response:
                   numFound: 10
@@ -5434,13 +5423,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/misc_niaid_sgc:
     get:
       tags:
@@ -5480,7 +5469,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5497,7 +5486,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/misc_niaid_sgc"
+                          $ref: '#/components/schemas/misc_niaid_sgc'
               example:
                 response:
                   numFound: 10
@@ -5516,13 +5505,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/id_ref:
     get:
       tags:
@@ -5562,7 +5551,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5579,7 +5568,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/id_ref"
+                          $ref: '#/components/schemas/id_ref'
               example:
                 response:
                   numFound: 10
@@ -5593,13 +5582,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/genome_sequence:
     get:
       tags:
@@ -5639,7 +5628,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5656,7 +5645,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/genome_sequence"
+                          $ref: '#/components/schemas/genome_sequence'
               example:
                 response:
                   numFound: 10
@@ -5691,13 +5680,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/genome_feature:
     get:
       tags:
@@ -5737,7 +5726,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5754,7 +5743,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/genome_feature"
+                          $ref: '#/components/schemas/genome_feature'
               example:
                 response:
                   numFound: 10
@@ -5807,13 +5796,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/genome_amr:
     get:
       tags:
@@ -5853,7 +5842,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5870,7 +5859,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/genome_amr"
+                          $ref: '#/components/schemas/genome_amr'
               example:
                 response:
                   numFound: 10
@@ -5906,13 +5895,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/genome:
     get:
       tags:
@@ -5952,7 +5941,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -5969,7 +5958,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/genome"
+                          $ref: '#/components/schemas/genome'
               example:
                 response:
                   numFound: 10
@@ -6112,13 +6101,13 @@ paths:
                       owner: owner_example
                       user_read: user_read_example
                       user_write: user_write_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/gene_ontology_ref:
     get:
       tags:
@@ -6158,7 +6147,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6175,7 +6164,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/gene_ontology_ref"
+                          $ref: '#/components/schemas/gene_ontology_ref'
               example:
                 response:
                   numFound: 10
@@ -6189,13 +6178,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/feature_sequence:
     get:
       tags:
@@ -6235,7 +6224,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6252,7 +6241,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/feature_sequence"
+                          $ref: '#/components/schemas/feature_sequence'
               example:
                 response:
                   numFound: 10
@@ -6265,13 +6254,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/experiment:
     get:
       tags:
@@ -6311,7 +6300,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6328,7 +6317,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/experiment"
+                          $ref: '#/components/schemas/experiment'
               example:
                 response:
                   numFound: 10
@@ -6370,13 +6359,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/epitope_assay:
     get:
       tags:
@@ -6416,7 +6405,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6433,7 +6422,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/epitope_assay"
+                          $ref: '#/components/schemas/epitope_assay'
               example:
                 response:
                   numFound: 10
@@ -6470,13 +6459,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/epitope:
     get:
       tags:
@@ -6516,7 +6505,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6533,7 +6522,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/epitope"
+                          $ref: '#/components/schemas/epitope'
               example:
                 response:
                   numFound: 10
@@ -6562,13 +6551,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/enzyme_class_ref:
     get:
       tags:
@@ -6608,7 +6597,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6625,7 +6614,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/enzyme_class_ref"
+                          $ref: '#/components/schemas/enzyme_class_ref'
               example:
                 response:
                   numFound: 10
@@ -6638,13 +6627,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/bioset_result:
     get:
       tags:
@@ -6684,7 +6673,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6701,7 +6690,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/bioset_result"
+                          $ref: '#/components/schemas/bioset_result'
               example:
                 response:
                   numFound: 10
@@ -6748,13 +6737,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/bioset:
     get:
       tags:
@@ -6794,7 +6783,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6811,7 +6800,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/bioset"
+                          $ref: '#/components/schemas/bioset'
               example:
                 response:
                   numFound: 10
@@ -6854,13 +6843,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
   /solr/antibiotics:
     get:
       tags:
@@ -6900,7 +6889,7 @@ paths:
           required: false
           description: Enable faceting
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -6917,7 +6906,7 @@ paths:
                       docs:
                         type: array
                         items:
-                          $ref: "#/components/schemas/antibiotics"
+                          $ref: '#/components/schemas/antibiotics'
               example:
                 response:
                   numFound: 10
@@ -6943,13 +6932,13 @@ paths:
                       _version_: 42
                       date_inserted: date_inserted_example
                       date_modified: date_modified_example
-        "400": *a1
-        "401": *a2
-        "403": *a3
-        "404": *a7
-        "500": *a4
-        "502": *a5
-        "503": *a6
+        '400': *ref_0
+        '401': *ref_1
+        '403': *ref_2
+        '404': *ref_6
+        '500': *ref_3
+        '502': *ref_4
+        '503': *ref_5
 tags:
   - name: Transcriptomics Sample
     description: Solr collection for Transcriptomics Sample
